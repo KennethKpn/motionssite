@@ -1,6 +1,6 @@
 {
-  "name": "Haldoren — Motion Design Portfolio",
-  "description": "Single-file interactive portfolio hero for fictional motion designer Haldoren featuring a camera dive into portfolio case videos.",
+  "name": "Personalized Cinematic Portfolio Hero",
+  "description": "Single-file interactive cinematic portfolio hero with configurable personal branding, layered portrait cutout, 3D laptop dive transition, and case study viewer.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

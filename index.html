@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Haldoren — Motion Design Portfolio</title>
-  <meta name="description" content="Single-file interactive portfolio hero for fictional motion designer Haldoren featuring a camera dive into portfolio case videos." />
-  <meta property="og:title" content="Haldoren — Motion Design Portfolio" />
-  <meta property="og:description" content="Single-file interactive portfolio hero for fictional motion designer Haldoren featuring a camera dive into portfolio case videos." />
+  <title>Portfolio Hero — Cinematic Showcase</title>
+  <meta name="description" content="Single-file interactive cinematic portfolio hero with configurable personal branding, layered portrait cutout, 3D laptop dive transition, and case study viewer." />
+  <meta property="og:title" content="Portfolio Hero — Cinematic Showcase" />
+  <meta property="og:description" content="Single-file interactive cinematic portfolio hero with configurable personal branding, layered portrait cutout, 3D laptop dive transition, and case study viewer." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <script>document.documentElement.classList.add('js');</script>
@@ -88,20 +88,6 @@
       --m0: 0px;
       --mb: 0px;
       --ms: 0px;
-      transition:
-        --mt var(--glide) cubic-bezier(.65,0,.35,1),
-        --m0 var(--glide) cubic-bezier(.65,0,.35,1),
-        --mb var(--glide) cubic-bezier(.65,0,.35,1),
-        --ms var(--glide) cubic-bezier(.65,0,.35,1);
-    }
-
-    .frame.glide {
-      transition:
-        transform var(--glide) cubic-bezier(.65,0,.35,1),
-        --mt var(--glide) cubic-bezier(.65,0,.35,1),
-        --m0 var(--glide) cubic-bezier(.65,0,.35,1),
-        --mb var(--glide) cubic-bezier(.65,0,.35,1),
-        --ms var(--glide) cubic-bezier(.65,0,.35,1);
     }
 
     .frame.d-fade {
@@ -111,24 +97,10 @@
       --ms: 0px;
     }
 
-    .frame.d-fade.m-case {
-      --m0: 0px;
-      --mt: 110px;
-      --mb: 60px;
-      --ms: 170px;
-    }
-
     .frame.m-fade {
       --m0: 0px;
       --mt: 190px;
       --mb: 0px;
-      --ms: 140px;
-    }
-
-    .frame.m-fade.m-case {
-      --m0: 48px;
-      --mt: 40px;
-      --mb: 70px;
       --ms: 140px;
     }
 
@@ -161,17 +133,41 @@
       mask-composite: intersect;
     }
 
-    .plate {
+    /* Continuous green studio radial gradient always visible underneath during dive & case */
+    .studio-backdrop {
+      position: absolute;
+      inset: -120px;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 68% 58% at 50% 42%, rgba(28, 108, 76, 0.92) 0%, rgba(16, 70, 49, 0.96) 52%, rgba(9, 44, 30, 1) 100%),
+        linear-gradient(180deg, #0b3322 0%, #16573e 54%, #9ed8bd 100%);
+    }
+
+    .studio-backdrop::after {
+      content: '';
       position: absolute;
       left: 0;
-      top: -73.125px;
+      right: 0;
+      bottom: 0;
+      height: 36%;
+      background: linear-gradient(180deg, rgba(158, 216, 189, 0) 0%, rgba(173, 226, 200, 0.72) 56%, rgba(212, 245, 229, 0.92) 100%);
+    }
+
+    /* Studio background layer (desk, chair, green backdrop — NO person or laptop) */
+    .studio-bg {
+      position: absolute;
+      left: 0;
+      top: 0;
       width: 1440px;
-      height: 956.25px;
+      height: 836.86px;
       display: block;
+      z-index: 1;
       pointer-events: none;
-      --o: 73.125px;
-      --ob: 73.125px;
-      transform-origin: center center;
+      --o: 0px;
+      --ob: 26.86px;
+      transform-origin: 956px 522px;
+      will-change: transform, opacity;
     }
 
     .wm {
@@ -181,19 +177,57 @@
       width: 1440px;
       height: 260px;
       overflow: visible;
-      z-index: 3;
+      z-index: 2;
       pointer-events: none;
     }
 
-    .cut {
+    /* Articulated personal identity rig sitting in front of wordmark */
+    .hero-char {
       position: absolute;
       left: 0;
-      top: -73.125px;
+      top: 0;
       width: 1440px;
-      height: 956.25px;
-      display: block;
+      height: 836.86px;
       z-index: 4;
       pointer-events: none;
+      transform-origin: 760px 640px;
+      will-change: transform, opacity;
+    }
+
+    .hero-char img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1440px;
+      height: 836.86px;
+      display: block;
+      pointer-events: none;
+    }
+
+    .char-torso { z-index: 1; }
+    .char-head {
+      z-index: 2;
+      transform-origin: 740px 254px;
+      will-change: transform;
+    }
+    .char-larm {
+      z-index: 3;
+      transform-origin: 902px 595px;
+      will-change: transform;
+    }
+
+    /* Held silver laptop cutout at p=0..0.06, handing off smoothly to 3D Canvas laptop */
+    .laptop-held {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1440px;
+      height: 836.86px;
+      display: block;
+      z-index: 5;
+      pointer-events: none;
+      transform-origin: 956px 522px;
+      will-change: transform, opacity;
     }
 
     .badge {
@@ -203,7 +237,7 @@
       width: 582px;
       height: 1030px;
       transform-origin: 288px 0;
-      z-index: 5;
+      z-index: 6;
       pointer-events: none;
     }
 
@@ -251,6 +285,9 @@
       font-size: 9.5px;
       font-weight: 700;
       letter-spacing: .2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .badge .card .ph {
@@ -260,8 +297,8 @@
       border-radius: 6px;
       background-color: #dfe4e1;
       background-repeat: no-repeat;
-      background-size: 471px 313px;
-      background-position: -212px -16px;
+      background-size: 460px 267px;
+      background-position: -175px -2px;
       box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
     }
 
@@ -269,6 +306,7 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
+      gap: 8px;
       font-size: 9px;
       font-weight: 700;
       padding: 6px 0 3px;
@@ -277,6 +315,10 @@
 
     .badge .card .row b {
       font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-align: right;
     }
 
     .badge .hit {
@@ -301,7 +343,7 @@
       transform: rotate(-8deg);
       transform-origin: 0 50%;
       text-shadow: 0 2px 14px rgba(0,0,0,.18);
-      z-index: 6;
+      z-index: 3;
       pointer-events: none;
       white-space: nowrap;
     }
@@ -327,10 +369,22 @@
       height: 956.25px;
       display: block;
       opacity: 0;
-      z-index: 7;
+      z-index: 8;
       pointer-events: none;
       --o: 105.47px;
       --ob: 40.78px;
+    }
+
+    /* Physically coherent 3D Canvas open silver laptop renderer */
+    .dive-canvas {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1440px;
+      height: 810px;
+      z-index: 7;
+      pointer-events: none;
+      opacity: 0;
     }
 
     .screen {
@@ -343,7 +397,7 @@
       background: #000;
       overflow: hidden;
       opacity: 0;
-      z-index: 8;
+      z-index: 9;
       pointer-events: none;
     }
 
@@ -356,6 +410,48 @@
       background: #000;
       opacity: 0;
       pointer-events: none;
+    }
+
+    .screen-status {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 48px;
+      text-align: center;
+      background: radial-gradient(circle at 50% 42%, #11241c 0%, #060908 75%);
+      color: rgba(255,255,255,.88);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .screen-status.show {
+      display: flex;
+    }
+
+    .screen-status .st-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 56px;
+      line-height: 1;
+      letter-spacing: .02em;
+      color: #fff;
+    }
+
+    .screen-status .st-msg {
+      max-width: 520px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: rgba(207,238,224,.82);
+    }
+
+    .screen-status .st-code {
+      font-size: 13px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.5);
     }
 
     .screen::after {
@@ -387,7 +483,7 @@
       padding: 0;
       cursor: pointer;
       display: none;
-      z-index: 9;
+      z-index: 10;
       pointer-events: auto;
     }
 
@@ -465,6 +561,7 @@
       cursor: pointer;
       opacity: 0;
       pointer-events: none;
+      white-space: nowrap;
       transition: opacity .4s ease;
     }
 
@@ -516,8 +613,14 @@
     }
 
     body.is-case .hint,
+    body.is-diving .hint,
     body.busy .hint {
       visibility: hidden;
+    }
+
+    body.is-case .hint-line::after,
+    body.is-diving .hint-line::after {
+      animation: none;
     }
 
     .ticket {
@@ -764,7 +867,7 @@
         right: 6vw;
         top: calc(12px + 96 * var(--n) + 14vw);
         font-family: 'Caveat Brush', cursive;
-        font-size: 15vw;
+        font-size: 14vw;
         line-height: 1;
         color: #fff;
         letter-spacing: -.5px;
@@ -899,10 +1002,11 @@
     }
   </style>
 </head>
-<body data-mode="hero" data-case="0">
+<body data-mode="hero" data-case="0" data-progress="0.00">
   <main class="stage">
     <div class="frame d-fade">
-      <img class="plate masked" alt="Haldoren in a green motion design studio holding a retro phone and an open silver laptop" referrerpolicy="no-referrer" />
+      <div class="studio-backdrop" aria-hidden="true"></div>
+      <img class="studio-bg masked" alt="Green studio desk and black office chair backdrop" />
       <svg class="wm pre" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true">
         <defs>
           <linearGradient id="wmGrad" x1="0" y1="0" x2="0" y2="1">
@@ -911,27 +1015,38 @@
             <stop offset="1" stop-color="#d7e6de" stop-opacity=".28" />
           </linearGradient>
         </defs>
-        <text x="14" y="214" textLength="1412" lengthAdjust="spacingAndGlyphs" fill="url(#wmGrad)" font-family="'Inter Tight', sans-serif" font-weight="900" font-size="268" letter-spacing="-6">HALDOREN</text>
+        <text id="wmText" x="14" y="214" textLength="1412" lengthAdjust="spacingAndGlyphs" fill="url(#wmGrad)" font-family="'Inter Tight', sans-serif" font-weight="900" font-size="268" letter-spacing="-6">[MY BRAND NAME]</text>
       </svg>
-      <img class="cut" alt="" aria-hidden="true" referrerpolicy="no-referrer" />
+      <div class="script pre" id="scriptText">[MY CREATIVE SPECIALTY]</div>
+      <div class="hero-char" aria-hidden="true">
+        <img class="char-torso" alt="" />
+        <img class="char-head" alt="Portrait holding retro brick phone" />
+        <img class="char-larm" alt="" />
+      </div>
+      <img class="laptop-held" alt="" aria-hidden="true" />
       <div class="badge pre">
         <img alt="Lanyard ID badge" referrerpolicy="no-referrer" />
         <div class="card">
           <h4>DESIGNER<br>CARD</h4>
-          <span class="yr">2026</span>
-          <div class="role">ART DIRECTOR // DESIGNER</div>
+          <span class="yr" id="cardYear">2026</span>
+          <div class="role" id="cardRole">[MY PROFESSIONAL TITLE]</div>
           <div class="ph"></div>
-          <div class="row"><span>NAME</span><b>E. HALDOREN</b></div>
-          <div class="row"><span>FOCUS</span><b>MOTION DESIGN</b></div>
-          <div class="row"><span>TG</span><b>@HALDOREN.MOTION</b></div>
-          <div class="row"><span>EMAIL</span><b>HI@HALDOREN.STUDIO</b></div>
+          <div class="row"><span>NAME</span><b id="cardName">[MY NAME]</b></div>
+          <div class="row"><span>FOCUS</span><b id="cardFocus">[MY CREATIVE SPECIALTY]</b></div>
+          <div class="row"><span>SOCIAL</span><b id="cardSocial">[MY SOCIAL HANDLE]</b></div>
+          <div class="row"><span>EMAIL</span><b id="cardEmail">[MY EMAIL]</b></div>
         </div>
         <div class="hit" aria-hidden="true"></div>
       </div>
-      <div class="script pre">motion-design</div>
       <video class="trans masked" muted playsinline preload="auto" aria-hidden="true"></video>
+      <canvas class="dive-canvas" width="1440" height="810" data-testid="dive-canvas" aria-hidden="true"></canvas>
       <img class="caseplate masked" alt="Open silver laptop centered on a green studio backdrop" referrerpolicy="no-referrer" />
       <div class="screen">
+        <div class="screen-status" id="screenStatus">
+          <div class="st-title" id="screenStatusTitle"></div>
+          <div class="st-msg" id="screenStatusMsg"></div>
+          <div class="st-code" id="screenStatusCode"></div>
+        </div>
         <div class="flash"></div>
       </div>
       <button class="screen-hit" type="button" aria-label="Advance to next case"></button>
@@ -946,7 +1061,7 @@
       <a class="tag t4 pre" href="#discuss">discuss a project</a>
     </nav>
 
-    <button class="logo" type="button" aria-label="HALDOREN — return to studio">HALDOREN</button>
+    <button class="logo" type="button" id="centerLogo">[MY BRAND NAME]</button>
 
     <svg class="m-only m-wm pre" viewBox="0 0 1440 240" preserveAspectRatio="none" aria-hidden="true">
       <defs>
@@ -956,9 +1071,9 @@
           <stop offset="1" stop-color="#d7e6de" stop-opacity=".3" />
         </linearGradient>
       </defs>
-      <text x="10" y="210" textLength="1420" lengthAdjust="spacingAndGlyphs" fill="url(#mWmGrad)" font-family="'Inter Tight', sans-serif" font-weight="900" font-size="254" letter-spacing="-6">HALDOREN</text>
+      <text id="mWmText" x="10" y="210" textLength="1420" lengthAdjust="spacingAndGlyphs" fill="url(#mWmGrad)" font-family="'Inter Tight', sans-serif" font-weight="900" font-size="254" letter-spacing="-6">[MY BRAND NAME]</text>
     </svg>
-    <div class="m-only m-script pre" aria-hidden="true">motion-design</div>
+    <div class="m-only m-script pre" id="mScriptText" aria-hidden="true">[MY CREATIVE SPECIALTY]</div>
     <div class="m-only m-badge pre" aria-hidden="true"></div>
 
     <div class="hint pre" aria-hidden="true">
@@ -1002,60 +1117,198 @@
 
   <script>
     (() => {
-      const HX = u => 'https://images.higgs.ai/?default=1&output=webp&url=' + encodeURIComponent(u) + '&w=2048&q=85';
-      const CF = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/';
-      const ASSETS = {
-        plate: HX(CF + 'hf_20261111_001031_a09dc558-2c69-4e05-83a4-5f01ebdd1363.png'),
-        casePlate: HX(CF + 'hf_20261111_001031_4a7c3fd9-2168-4219-9736-096a17bbb0e2.png'),
-        cut: HX(CF + 'hf_20261111_001143_ec356b1a-50a2-4b50-82fc-e346c914a406.png'),
-        badge: 'https://images.higgs.ai/?default=1&output=webp&url=' + encodeURIComponent(CF + 'hf_20261111_001143_65c037e6-0768-4b12-9f17-17be132ce16b.png') + '&w=1200&q=85',
-        trans: CF + 'hf_20261111_001144_2b054228-95af-41d5-922d-b02979fe485b.mp4'
+      // =====================================================================
+      // 1. PERSONAL BRANDING CONFIGURATION — EDIT THESE VALUES
+      // =====================================================================
+      const BRAND_CONFIG = {
+        BRAND_NAME: '[MY BRAND NAME]',
+        DISPLAY_NAME: '[MY NAME]',
+        PROFESSIONAL_ROLE: '[MY PROFESSIONAL TITLE]',
+        SIGNATURE: '[MY CREATIVE SPECIALTY]',
+        EMAIL: '[MY EMAIL]',
+        SOCIAL_HANDLE: '[MY SOCIAL HANDLE]',
+        YEAR: '2026'
       };
 
+      // =====================================================================
+      // 2. ASSET & PORTFOLIO CONFIGURATION — EDIT MEDIA URLS & CASES HERE
+      // =====================================================================
+      const HX = u => 'https://images.higgs.ai/?default=1&output=webp&url=' + encodeURIComponent(u) + '&w=2048&q=85';
+      const CF = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/';
       const R2 = 'https://pub-86dc5b5484314368ac5436a674b0d199.r2.dev/aaaf/';
-      const CASES = [
-        {
-          video: R2 + 'vell-lookbook.mp4',
-          title: 'VELL LOOKBOOK',
-          rows: ['STUDIO VELL', 'E-COMMERCE', '2026'],
-          key: '// vell lookbook',
-          text: '\u2014 a runway lookbook where every look steps forward on scroll and the cart follows along.'
+
+      const PORTFOLIO_CONFIG = {
+        assets: {
+          // Personalized hero photograph & pixel-aligned transparent cutout (no fictional character)
+          heroPlate: '/assets/aistudio/image_ec512d7d.png',
+          heroCutout: '/assets/personalized/hero-cutout.png',
+
+          // Set to your personalized 16:9 ~5s 24fps MP4 URL when generated (never reuse the fictional character's video).
+          // When null, a synchronized 3D perspective laptop dive animation runs instead.
+          personalizedTransitionVideo: null,
+
+          // Reusable prop-only assets (no person in frame)
+          casePlate: HX(CF + 'hf_20261111_001031_4a7c3fd9-2168-4219-9736-096a17bbb0e2.png'),
+          badge: 'https://images.higgs.ai/?default=1&output=webp&url=' + encodeURIComponent(CF + 'hf_20261111_001143_65c037e6-0768-4b12-9f17-17be132ce16b.png') + '&w=1200&q=85'
         },
-        {
-          video: R2 + 'vasari-vhs-hero.mp4',
-          title: 'VASARI SHELF',
-          rows: ['VASARI ARCHIVE', 'PORTFOLIO', '2026'],
-          key: '// vasari shelf',
-          text: '\u2014 a director\u2019s archive told as a shelf of tapes: pull one out and its story plays.'
-        },
-        {
-          video: R2 + 'living-portrait-hero.mp4',
-          title: 'MINA PORTRAIT',
-          rows: ['MINA 3D', 'PERSONAL SITE', '2025'],
-          key: '// mina portrait',
-          text: '\u2014 a 3D creator\u2019s homepage where the portrait follows your cursor and pulls faces.'
-        }
-      ];
+
+        // Provisional demonstration projects (replace video URLs, titles, and copy with your own work).
+        // Note: the upstream R2 URLs currently return HTTP 401 Unauthorized; replace with project-owned MP4s under /public/assets/.
+        cases: [
+          {
+            video: R2 + 'vell-lookbook.mp4',
+            title: 'VELL LOOKBOOK',
+            rows: ['PROVISIONAL DEMO // VELL', 'E-COMMERCE', '2026'],
+            key: '// vell lookbook (demo)',
+            text: '\u2014 provisional demo: a runway lookbook where every look steps forward on scroll and the cart follows along.'
+          },
+          {
+            video: R2 + 'vasari-vhs-hero.mp4',
+            title: 'VASARI SHELF',
+            rows: ['PROVISIONAL DEMO // VASARI', 'PORTFOLIO', '2026'],
+            key: '// vasari shelf (demo)',
+            text: '\u2014 provisional demo: a director\u2019s archive told as a shelf of tapes: pull one out and its story plays.'
+          },
+          {
+            video: R2 + 'living-portrait-hero.mp4',
+            title: 'MINA PORTRAIT',
+            rows: ['PROVISIONAL DEMO // MINA', 'PERSONAL SITE', '2025'],
+            key: '// mina portrait (demo)',
+            text: '\u2014 provisional demo: a 3D creator\u2019s homepage where the portrait follows your cursor and pulls faces.'
+          }
+        ]
+      };
+
+      const CASES = PORTFOLIO_CONFIG.cases;
+      const ASSETS = PORTFOLIO_CONFIG.assets;
 
       const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const dur = ms => (RM ? 0 : ms);
       const wait = ms => new Promise(r => setTimeout(r, ms));
-      const twoRAF = () => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
       const EASE_DEFAULT = 'cubic-bezier(.2,.8,.2,1)';
+
+      const clamp01 = v => (v < 0 ? 0 : v > 1 ? 1 : v);
+      const smoothstep = (e0, e1, x) => {
+        const t = clamp01((x - e0) / (e1 - e0));
+        return t * t * (3 - 2 * t);
+      };
+      const easeInOutCubic = t => {
+        const x = clamp01(t);
+        return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+      };
+      const easeOutCubic = t => 1 - Math.pow(1 - clamp01(t), 3);
+      const lerp = (a, b, t) => a + (b - a) * t;
+
+      // Exact mirror of src/haldorenLogic.ts -> computeDiveChoreography
+      function computeDiveChoreography(rawProgress) {
+        const p = clamp01(rawProgress);
+
+        const uiOut = smoothstep(0.0, 0.16, p);
+        const framePoseBlend = easeInOutCubic(smoothstep(0.08, 0.90, p));
+
+        const charGesture = smoothstep(0.02, 0.28, p);
+        const headTurnDeg = lerp(0, 6.5, charGesture);
+        const headShiftX = lerp(0, 4.5, charGesture);
+        const torsoLeanDeg = lerp(0, 1.8, smoothstep(0.04, 0.30, p));
+        const armLiftDeg = lerp(0, -14, smoothstep(0.02, 0.26, p));
+        const armShiftX = lerp(0, 16, smoothstep(0.02, 0.26, p));
+        const armShiftY = lerp(0, -22, smoothstep(0.02, 0.26, p));
+
+        const charOpacity = 1 - smoothstep(0.28, 0.48, p);
+        const studioScale = lerp(1.0, 1.38, easeInOutCubic(smoothstep(0.04, 0.50, p)));
+        const studioBgOpacity = 1 - smoothstep(0.45, 0.88, p);
+
+        const heldLaptopOpacity = 1 - smoothstep(0.03, 0.075, p);
+        const laptop3dOpacity = smoothstep(0.02, 0.065, p) * (1 - smoothstep(0.86, 0.93, p));
+
+        const liftT = easeOutCubic(smoothstep(0.04, 0.28, p));
+        const rotT = easeInOutCubic(smoothstep(0.28, 0.86, p));
+
+        let laptopX;
+        let laptopY;
+        let laptopScale;
+        let laptopYawDeg;
+        let laptopPitchDeg;
+        let laptopRollDeg;
+
+        if (p <= 0.28) {
+          laptopX = lerp(956, 862, liftT);
+          laptopY = lerp(522, 502, liftT);
+          laptopScale = lerp(0.245, 0.44, liftT);
+          laptopYawDeg = lerp(-114, -76, liftT);
+          laptopPitchDeg = lerp(11, 7.5, liftT);
+          laptopRollDeg = lerp(-7, -2, liftT);
+        } else {
+          laptopX = lerp(862, 720, rotT);
+          laptopY = lerp(502, 446, rotT);
+          laptopScale = lerp(0.44, 1.0, rotT);
+          laptopYawDeg = lerp(-76, 0, rotT);
+          laptopPitchDeg = lerp(7.5, 2.0, smoothstep(0.48, 0.86, p));
+          laptopRollDeg = lerp(-2, 0, rotT);
+        }
+
+        const specularPhase = clamp01((p - 0.34) / 0.48);
+        const shadowAlpha = smoothstep(0.10, 0.26, p) * (1 - smoothstep(0.86, 0.93, p));
+
+        const casePlateOpacity = smoothstep(0.84, 0.92, p);
+        const screenOpacity = smoothstep(0.88, 0.96, p);
+        const caseUiOpacity = smoothstep(0.92, 1.0, p);
+
+        return {
+          progress: p,
+          uiOut,
+          framePoseBlend,
+          charGesture,
+          headTurnDeg,
+          headShiftX,
+          torsoLeanDeg,
+          armLiftDeg,
+          armShiftX,
+          armShiftY,
+          charOpacity,
+          studioScale,
+          studioBgOpacity,
+          heldLaptopOpacity,
+          laptop3dOpacity,
+          laptopX,
+          laptopY,
+          laptopScale,
+          laptopYawDeg,
+          laptopPitchDeg,
+          laptopRollDeg,
+          specularPhase,
+          shadowAlpha,
+          casePlateOpacity,
+          screenOpacity,
+          caseUiOpacity,
+          isCaseActive: p >= 0.985
+        };
+      }
 
       const stage = document.querySelector('.stage');
       const frame = document.querySelector('.frame');
-      const plate = document.querySelector('.plate');
+      const studioBg = document.querySelector('.studio-bg');
       const wm = document.querySelector('.wm');
-      const cut = document.querySelector('.cut');
+      const wmText = document.getElementById('wmText');
+      const heroChar = document.querySelector('.hero-char');
+      const charTorso = document.querySelector('.char-torso');
+      const charHead = document.querySelector('.char-head');
+      const charLarm = document.querySelector('.char-larm');
+      const laptopHeld = document.querySelector('.laptop-held');
       const badge = document.querySelector('.badge');
       const badgeImg = badge.querySelector('img');
       const badgePhoto = badge.querySelector('.ph');
       const hit = badge.querySelector('.hit');
       const scriptEl = document.querySelector('.script');
       const trans = document.querySelector('.trans');
+      const diveCanvas = document.querySelector('.dive-canvas');
+      const diveCtx = diveCanvas.getContext('2d');
       const caseplate = document.querySelector('.caseplate');
       const screen = document.querySelector('.screen');
+      const screenStatus = document.getElementById('screenStatus');
+      const screenStatusTitle = document.getElementById('screenStatusTitle');
+      const screenStatusMsg = document.getElementById('screenStatusMsg');
+      const screenStatusCode = document.getElementById('screenStatusCode');
       const flash = screen.querySelector('.flash');
       const screenHit = document.querySelector('.screen-hit');
 
@@ -1065,9 +1318,10 @@
         document.querySelector('.t3'),
         document.querySelector('.t4')
       ];
-      const logo = document.querySelector('.logo');
+      const logo = document.getElementById('centerLogo');
       const mWm = document.querySelector('.m-wm');
-      const mScript = document.querySelector('.m-script');
+      const mWmText = document.getElementById('mWmText');
+      const mScript = document.getElementById('mScriptText');
       const mBadge = document.querySelector('.m-badge');
       const hint = document.querySelector('.hint');
       const ticket = document.querySelector('.ticket');
@@ -1080,53 +1334,88 @@
       const prevBtn = document.querySelector('.nav-case.prev');
       const nextBtn = document.querySelector('.nav-case.next');
 
-      plate.src = ASSETS.plate;
-      cut.src = ASSETS.cut;
+      function applyBrandConfig() {
+        document.title = `${BRAND_CONFIG.BRAND_NAME} — ${BRAND_CONFIG.SIGNATURE} Portfolio`;
+        wmText.textContent = BRAND_CONFIG.BRAND_NAME;
+        mWmText.textContent = BRAND_CONFIG.BRAND_NAME;
+        logo.textContent = BRAND_CONFIG.BRAND_NAME;
+        logo.setAttribute('aria-label', `${BRAND_CONFIG.BRAND_NAME} — return to studio`);
+        const sig = BRAND_CONFIG.SIGNATURE || '';
+        scriptEl.textContent = sig;
+        mScript.textContent = sig;
+        const sigScale = 13 / Math.max(13, sig.length);
+        scriptEl.style.fontSize = `${Math.max(36, Math.min(82, Math.round(82 * sigScale)))}px`;
+        mScript.style.fontSize = `${Math.max(6.5, Math.min(14, +(14 * sigScale).toFixed(2)))}vw`;
+        document.getElementById('cardYear').textContent = BRAND_CONFIG.YEAR;
+        document.getElementById('cardRole').textContent = BRAND_CONFIG.PROFESSIONAL_ROLE;
+        document.getElementById('cardName').textContent = BRAND_CONFIG.DISPLAY_NAME;
+        document.getElementById('cardFocus').textContent = sig;
+        document.getElementById('cardSocial').textContent = BRAND_CONFIG.SOCIAL_HANDLE;
+        document.getElementById('cardEmail').textContent = BRAND_CONFIG.EMAIL;
+      }
+
+      applyBrandConfig();
+
+      // Bind personalized separated portrait & prop layers
+      studioBg.src = '/assets/personalized/hero-studio-bg.png';
+      charTorso.src = '/assets/personalized/hero-torso.png';
+      charHead.src = '/assets/personalized/hero-head-phone.png';
+      charLarm.src = '/assets/personalized/hero-left-arm.png';
+      laptopHeld.src = '/assets/personalized/hero-laptop-held.png';
       caseplate.src = ASSETS.casePlate;
       badgeImg.src = ASSETS.badge;
-      badgePhoto.style.backgroundImage = `url("${ASSETS.cut}")`;
+      badgePhoto.style.backgroundImage = `url("${ASSETS.heroCutout}")`;
 
       const mBadgeClone = badge.cloneNode(true);
       mBadgeClone.classList.remove('pre');
       mBadge.appendChild(mBadgeClone);
 
+      // Case preview videos
+      const vidErrors = CASES.map(() => false);
       const vids = CASES.map((c, idx) => {
         const v = document.createElement('video');
         v.src = c.video;
-        v.crossOrigin = 'anonymous';
         v.muted = true;
         v.loop = true;
         v.playsInline = true;
-        v.preload = idx === 0 ? 'auto' : 'metadata';
+        v.preload = 'none';
         v.setAttribute('aria-hidden', 'true');
-        screen.insertBefore(v, flash);
+        v.addEventListener('error', () => {
+          vidErrors[idx] = true;
+          if (mode === 'case' && cur === idx) updateScreenStatus(idx);
+        });
+        v.addEventListener('loadeddata', () => {
+          vidErrors[idx] = false;
+          if (mode === 'case' && cur === idx) updateScreenStatus(idx);
+        });
+        screen.insertBefore(v, screenStatus);
         return v;
       });
 
-      let transReady = false;
-      trans.addEventListener('loadeddata', () => {
-        transReady = true;
-      }, { once: true });
-
-      fetch(ASSETS.trans)
-        .then(res => {
-          if (!res.ok) throw new Error('fetch failed');
-          return res.blob();
-        })
-        .then(blob => {
-          trans.src = URL.createObjectURL(blob);
-          trans.load();
-        })
-        .catch(() => {
-          trans.src = ASSETS.trans;
-          trans.load();
-        });
+      function updateScreenStatus(i) {
+        if (vidErrors[i]) {
+          screenStatusTitle.textContent = CASES[i].title;
+          screenStatusMsg.textContent = 'Provisional demo video could not load from the external R2 source (HTTP 401 Unauthorized). Replace the video URL in PORTFOLIO_CONFIG.cases with an accessible project-owned MP4.';
+          screenStatusCode.textContent = 'PROVISIONAL DEMO // VIDEO UNAVAILABLE';
+          screenStatus.classList.add('show');
+        } else {
+          screenStatus.classList.remove('show');
+        }
+      }
 
       let mode = 'hero';
       let cur = 0;
       let busy = false;
+      let introEntered = false;
+      let introAnims = [];
       let swayAnims = [];
       let swingAnim = null;
+
+      let progress = 0;
+      let targetProgress = 0;
+      let rafId = null;
+      let glideAnim = null;
+      let prevCaseActive = false;
 
       function pose(m) {
         const W = window.innerWidth;
@@ -1159,7 +1448,7 @@
           const s = Math.min(W / 650, (0.62 * H) / 810);
           return {
             s,
-            x: W / 2 - 805 * s,
+            x: W / 2 - 725 * s,
             y: H - 790 * s
           };
         }
@@ -1191,28 +1480,6 @@
         scriptEl.style.left = (vl + pad + 70) + 'px';
       }
 
-      function place(m) {
-        const W = window.innerWidth;
-        const mob = W <= 820;
-
-        frame.classList.toggle('d-fade', !mob);
-        frame.classList.toggle('m-fade', mob);
-        frame.classList.toggle('m-case', m === 'case');
-        stage.classList.toggle('m-case', m === 'case');
-
-        if (mob) {
-          document.documentElement.style.setProperty('--mbs', String((mBadge.offsetWidth || W * 0.27) / 582));
-          document.documentElement.style.setProperty('--th', (ticket.offsetHeight || 140) + 'px');
-        }
-
-        const p = pose(m);
-        frame.style.transform = `translate(${p.x}px, ${p.y}px) scale(${p.s})`;
-
-        if (!mob && m === 'hero') {
-          fitHero(p);
-        }
-      }
-
       function fillCase(i) {
         const c = CASES[i];
         ticketTitle.textContent = c.title;
@@ -1237,7 +1504,7 @@
 
       function startSway() {
         stopSway();
-        if (RM || mode !== 'hero') return;
+        if (RM || progress > 0.02 || mode !== 'hero') return;
         const opts = {
           duration: 3200,
           iterations: Infinity,
@@ -1251,7 +1518,7 @@
       }
 
       hit.addEventListener('pointerenter', () => {
-        if (mode !== 'hero' || busy || RM) return;
+        if (mode !== 'hero' || progress > 0.02 || busy || RM) return;
         if (swingAnim) swingAnim.cancel();
         swingAnim = badge.animate(
           [
@@ -1269,45 +1536,632 @@
         els.forEach(el => el.getAnimations().forEach(a => a.cancel()));
       }
 
+      function cancelIntroHeroAnims() {
+        if (!introAnims.length) return;
+        introAnims.forEach(a => a.cancel());
+        introAnims = [];
+        [wm, mWm, scriptEl, mScript, badge, mBadge, hint, ...tags].forEach(el => el.classList.remove('pre'));
+      }
+
+      // =====================================================================
+      // 3D CANVAS OPEN SILVER ALUMINUM LAPTOP RENDERER
+      // Connected unibody base + cylindrical hinge + solid aluminum lid
+      // =====================================================================
+      function renderLaptop3D(ctx, ch) {
+        const W = 1440;
+        const H = 810;
+        ctx.clearRect(0, 0, W, H);
+        if (ch.laptop3dOpacity <= 0.005) return;
+
+        const cx = ch.laptopX;
+        const cy = ch.laptopY;
+        const sc = ch.laptopScale;
+
+        ctx.save();
+        ctx.globalAlpha = ch.laptop3dOpacity;
+
+        // Soft studio shadow underneath the floating aluminum laptop
+        if (ch.shadowAlpha > 0.01) {
+          const sy = cy + 318 * sc;
+          const rxShadow = 420 * sc * (0.48 + 0.52 * Math.abs(Math.cos(ch.laptopYawDeg * Math.PI / 180)));
+          const ryShadow = 44 * sc;
+          ctx.save();
+          ctx.translate(cx, sy);
+          ctx.scale(1, ryShadow / Math.max(1, rxShadow));
+          const sg = ctx.createRadialGradient(0, 0, 0, 0, 0, Math.max(8, rxShadow));
+          sg.addColorStop(0, `rgba(6, 26, 18, ${(0.34 * ch.shadowAlpha).toFixed(3)})`);
+          sg.addColorStop(0.55, `rgba(10, 42, 30, ${(0.16 * ch.shadowAlpha).toFixed(3)})`);
+          sg.addColorStop(1, 'rgba(10, 42, 30, 0)');
+          ctx.fillStyle = sg;
+          ctx.beginPath();
+          ctx.arc(0, 0, Math.max(8, rxShadow), 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        const fov = 2600;
+        const ry = ch.laptopYawDeg * Math.PI / 180;
+        const rx = ch.laptopPitchDeg * Math.PI / 180;
+        const rz = ch.laptopRollDeg * Math.PI / 180;
+        const cosy = Math.cos(ry), siny = Math.sin(ry);
+        const cosx = Math.cos(rx), sinx = Math.sin(rx);
+        const cosz = Math.cos(rz), sinz = Math.sin(rz);
+
+        // Laptop physical proportions calibrated to match casePlate pixel-for-pixel at landing
+        const hw = 466;
+        const H_lid = 633;
+        const hingeY = 259;
+        const baseD = 375;
+        const rearT = 21;
+        const frontT = 13;
+        const lidT = 11;
+        // Opens slightly backward at hinge (11deg when held -> 2deg at case landing)
+        const openRad = lerp(11, 2.0, smoothstep(0.28, 0.86, ch.progress)) * Math.PI / 180;
+        const sinO = Math.sin(openRad);
+        const cosO = Math.cos(openRad);
+
+        function toWorld(vx, vy, vz) {
+          // 1. Yaw (Y)
+          const x1 = vx * cosy + vz * siny;
+          const y1 = vy;
+          const z1 = -vx * siny + vz * cosy;
+          // 2. Pitch (X, positive pitches front +Z downward toward floor)
+          const x2 = x1;
+          const y2 = y1 * cosx + z1 * sinx;
+          const z2 = -y1 * sinx + z1 * cosx;
+          // 3. Roll (Z)
+          const x3 = x2 * cosz - y2 * sinz;
+          const y3 = x2 * sinz + y2 * cosz;
+          const z3 = z2;
+          return [x3, y3, z3];
+        }
+
+        function projectWorld(wx, wy, wz) {
+          const k = (fov / (fov - wz)) * sc;
+          return [cx + wx * k, cy + wy * k, wz];
+        }
+
+        function vtx(vx, vy, vz) {
+          const w = toWorld(vx, vy, vz);
+          return projectWorld(w[0], w[1], w[2]);
+        }
+
+        // Transform a point on the tilted lid local frame (lx in [-hw, hw], ly up from hinge 0..H_lid, lz thickness 0..-lidT)
+        function lidVtx(lx, ly, lz) {
+          const vy = hingeY - ly * cosO + lz * sinO;
+          const vz = -ly * sinO - lz * cosO;
+          return vtx(lx, vy, vz);
+        }
+
+        function polyNormalZ(pts) {
+          const ax = pts[1][0] - pts[0][0];
+          const ay = pts[1][1] - pts[0][1];
+          const bx = pts[2][0] - pts[0][0];
+          const by = pts[2][1] - pts[0][1];
+          return ax * by - ay * bx;
+        }
+
+        function fillPoly(pts, fillStyle, strokeStyle, lineWidth) {
+          ctx.beginPath();
+          ctx.moveTo(pts[0][0], pts[0][1]);
+          for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+          ctx.closePath();
+          ctx.fillStyle = fillStyle;
+          ctx.fill();
+          if (strokeStyle) {
+            ctx.strokeStyle = strokeStyle;
+            ctx.lineWidth = lineWidth || 1;
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+          }
+        }
+
+        const faces = [];
+        function addFace(pts, drawFn, zBias = 0, alwaysVisible = false) {
+          let zAvg = 0;
+          for (let i = 0; i < pts.length; i++) zAvg += pts[i][2];
+          zAvg = zAvg / pts.length + zBias;
+          faces.push({ pts, z: zAvg, draw: drawFn, alwaysVisible });
+        }
+
+        // --- 1. BASE CHASSIS VERTICES ---
+        const B_TLB = vtx(-hw, hingeY, 0);
+        const B_TRB = vtx(hw, hingeY, 0);
+        const B_TRF = vtx(hw, hingeY, baseD);
+        const B_TLF = vtx(-hw, hingeY, baseD);
+
+        const B_BLB = vtx(-hw, hingeY + rearT, 0);
+        const B_BRB = vtx(hw, hingeY + rearT, 0);
+        const B_BRF = vtx(hw, hingeY + frontT, baseD);
+        const B_BLF = vtx(-hw, hingeY + frontT, baseD);
+
+        // Base Top (Palmrest + Keyboard Well + Trackpad)
+        addFace([B_TLB, B_TRB, B_TRF, B_TLF], () => {
+          const g = ctx.createLinearGradient(B_TLB[0], B_TLB[1], B_TLF[0], B_TLF[1]);
+          g.addColorStop(0, '#c2cac6');
+          g.addColorStop(0.45, '#d8dfdb');
+          g.addColorStop(1, '#e6ece9');
+          fillPoly([B_TLB, B_TRB, B_TRF, B_TLF], g, 'rgba(255,255,255,0.35)', 0.9);
+
+          // Recessed keyboard well
+          const kwL = -hw * 0.80, kwR = hw * 0.80;
+          const kwB = 22, kwF = baseD * 0.60;
+          const K_TL = vtx(kwL, hingeY + 0.8, kwB);
+          const K_TR = vtx(kwR, hingeY + 0.8, kwB);
+          const K_BR = vtx(kwR, hingeY + 0.8, kwF);
+          const K_BL = vtx(kwL, hingeY + 0.8, kwF);
+          fillPoly([K_TL, K_TR, K_BR, K_BL], '#181b19', 'rgba(255,255,255,0.16)', 0.8);
+
+          // 5 crisp rows of keycaps inside keyboard well
+          const rows = 5;
+          const cols = 13;
+          for (let r = 0; r < rows; r++) {
+            const z0 = lerp(kwB + 7, kwF - 7, r / rows) + 2.5;
+            const z1 = lerp(kwB + 7, kwF - 7, (r + 1) / rows) - 2.5;
+            const rowCols = r === 4 ? 7 : cols;
+            for (let c = 0; c < rowCols; c++) {
+              const x0 = lerp(kwL + 8, kwR - 8, c / rowCols) + 2;
+              const x1 = lerp(kwL + 8, kwR - 8, (c + 1) / rowCols) - 2;
+              const kp = [
+                vtx(x0, hingeY + 0.5, z0),
+                vtx(x1, hingeY + 0.5, z0),
+                vtx(x1, hingeY + 0.5, z1),
+                vtx(x0, hingeY + 0.5, z1)
+              ];
+              fillPoly(kp, '#232725', 'rgba(255,255,255,0.08)', 0.5);
+            }
+          }
+
+          // Aluminum Trackpad
+          const tpW = hw * 0.36;
+          const tpB = baseD * 0.65, tpF = baseD * 0.945;
+          const TP_TL = vtx(-tpW, hingeY + 0.5, tpB);
+          const TP_TR = vtx(tpW, hingeY + 0.5, tpB);
+          const TP_BR = vtx(tpW, hingeY + 0.5, tpF);
+          const TP_BL = vtx(-tpW, hingeY + 0.5, tpF);
+          fillPoly([TP_TL, TP_TR, TP_BR, TP_BL], '#cbd3cf', 'rgba(70,82,76,0.42)', 1.0);
+        }, -2);
+
+        // Base Bottom
+        addFace([B_BLF, B_BRF, B_BRB, B_BLB], () => {
+          fillPoly([B_BLF, B_BRF, B_BRB, B_BLB], '#78827d', 'rgba(30,40,35,0.35)', 0.8);
+        }, -2);
+
+        // Base Front Lip + Machined Thumb Notch
+        addFace([B_TLF, B_TRF, B_BRF, B_BLF], () => {
+          const g = ctx.createLinearGradient(B_TLF[0], 0, B_TRF[0], 0);
+          g.addColorStop(0, '#9ba49f');
+          g.addColorStop(0.18, '#dce2de');
+          g.addColorStop(0.5, '#edf2ef');
+          g.addColorStop(0.82, '#dce2de');
+          g.addColorStop(1, '#9ba49f');
+          fillPoly([B_TLF, B_TRF, B_BRF, B_BLF], g, 'rgba(255,255,255,0.28)', 0.8);
+
+          // Center thumb notch recess
+          const nW = hw * 0.14;
+          const N_TL = vtx(-nW, hingeY + 1.5, baseD + 0.5);
+          const N_TR = vtx(nW, hingeY + 1.5, baseD + 0.5);
+          const N_BR = vtx(nW * 0.88, hingeY + frontT * 0.58, baseD + 0.5);
+          const N_BL = vtx(-nW * 0.88, hingeY + frontT * 0.58, baseD + 0.5);
+          fillPoly([N_TL, N_TR, N_BR, N_BL], '#7b8480', 'rgba(255,255,255,0.22)', 0.6);
+        }, 1);
+
+        // Base Rear
+        addFace([B_TRB, B_TLB, B_BLB, B_BRB], () => {
+          fillPoly([B_TRB, B_TLB, B_BLB, B_BRB], '#8f9893', 'rgba(40,50,45,0.35)', 0.8);
+        });
+
+        // Base Left Side (with MagSafe & dual Thunderbolt USB-C recesses visible at -114..-60deg)
+        addFace([B_TLF, B_TLB, B_BLB, B_BLF], () => {
+          const g = ctx.createLinearGradient(B_TLB[0], B_TLB[1], B_TLF[0], B_TLF[1]);
+          g.addColorStop(0, '#aeb6b2');
+          g.addColorStop(0.5, '#ccd3cf');
+          g.addColorStop(1, '#dce2df');
+          fillPoly([B_TLF, B_TLB, B_BLB, B_BLF], g, 'rgba(255,255,255,0.25)', 0.8);
+
+          // Precision dark port slots
+          const ports = [
+            [38, 66, 5.5, 11],
+            [82, 100, 6.2, 10],
+            [112, 130, 6.2, 10],
+            [152, 162, 6.8, 10.5]
+          ];
+          for (const [z0, z1, y0, y1] of ports) {
+            const P = [
+              vtx(-hw - 0.3, hingeY + y0, z0),
+              vtx(-hw - 0.3, hingeY + y0, z1),
+              vtx(-hw - 0.3, hingeY + y1, z1),
+              vtx(-hw - 0.3, hingeY + y1, z0)
+            ];
+            fillPoly(P, '#191d1b', 'rgba(255,255,255,0.2)', 0.5);
+          }
+        });
+
+        // Base Right Side
+        addFace([B_TRB, B_TRF, B_BRF, B_BRB], () => {
+          const g = ctx.createLinearGradient(B_TRB[0], B_TRB[1], B_TRF[0], B_TRF[1]);
+          g.addColorStop(0, '#969f9a');
+          g.addColorStop(1, '#bcc4c0');
+          fillPoly([B_TRB, B_TRF, B_BRF, B_BRB], g, 'rgba(255,255,255,0.2)', 0.8);
+        });
+
+        // --- 2. CONNECTED CYLINDRICAL HINGE BARREL ---
+        const hW = hw * 0.82;
+        const H_TL = vtx(-hW, hingeY - 5, -9);
+        const H_TR = vtx(hW, hingeY - 5, -9);
+        const H_BR = vtx(hW, hingeY + 8, 2);
+        const H_BL = vtx(-hW, hingeY + 8, 2);
+        addFace([H_TL, H_TR, H_BR, H_BL], () => {
+          const g = ctx.createLinearGradient(H_TL[0], H_TL[1], H_BL[0], H_BL[1]);
+          g.addColorStop(0, '#121514');
+          g.addColorStop(0.5, '#2d3330');
+          g.addColorStop(1, '#101312');
+          fillPoly([H_TL, H_TR, H_BR, H_BL], g);
+        }, 0.5, true);
+
+        // --- 3. DISPLAY LID SOLID BOX ---
+        const L_FTL = lidVtx(-hw, H_lid, 0);
+        const L_FTR = lidVtx(hw, H_lid, 0);
+        const L_FBR = lidVtx(hw, 0, 0);
+        const L_FBL = lidVtx(-hw, 0, 0);
+
+        const L_BTL = lidVtx(-hw, H_lid, lidT);
+        const L_BTR = lidVtx(hw, H_lid, lidT);
+        const L_BBR = lidVtx(hw, 0, lidT);
+        const L_BBL = lidVtx(-hw, 0, lidT);
+
+        // Lid Front Face (Silver rim + Glossy black bezel + Inner display + Specular glass sweep)
+        addFace([L_FTL, L_FTR, L_FBR, L_FBL], () => {
+          // Outer machined silver edge
+          fillPoly([L_FTL, L_FTR, L_FBR, L_FBL], '#d4dbd7', 'rgba(255,255,255,0.45)', 1.0);
+
+          // Black glass bezel inset (~3px)
+          const bz = 3.2;
+          const B_TL = lidVtx(-hw + bz, H_lid - bz, 0.2);
+          const B_TR = lidVtx(hw - bz, H_lid - bz, 0.2);
+          const B_BR = lidVtx(hw - bz, bz, 0.2);
+          const B_BL = lidVtx(-hw + bz, bz, 0.2);
+          fillPoly([B_TL, B_TR, B_BR, B_BL], '#0b0e0d', 'rgba(255,255,255,0.1)', 0.6);
+
+          // Inner display panel matching .screen (272.8..1167.2, 102.7..707.4 at landing)
+          const S_TL = lidVtx(-447.2, 603.3, 0.4);
+          const S_TR = lidVtx(447.2, 603.3, 0.4);
+          const S_BR = lidVtx(447.2, -1.5, 0.4);
+          const S_BL = lidVtx(-447.2, -1.5, 0.4);
+
+          fillPoly([S_TL, S_TR, S_BR, S_BL], '#040605');
+
+          // Dynamic diagonal specular light sweep across screen glass
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(S_TL[0], S_TL[1]);
+          ctx.lineTo(S_TR[0], S_TR[1]);
+          ctx.lineTo(S_BR[0], S_BR[1]);
+          ctx.lineTo(S_BL[0], S_BL[1]);
+          ctx.closePath();
+          ctx.clip();
+
+          const sweepCenter = lerp(-0.35, 1.35, ch.specularPhase);
+          const sx0 = lerp(S_TL[0], S_TR[0], sweepCenter - 0.35);
+          const sy0 = S_TL[1];
+          const sx1 = lerp(S_BL[0], S_BR[0], sweepCenter + 0.35);
+          const sy1 = S_BR[1];
+          const sg = ctx.createLinearGradient(sx0, sy0, sx1, sy1);
+          sg.addColorStop(0, 'rgba(255,255,255,0)');
+          sg.addColorStop(0.42, 'rgba(220,248,236,0.08)');
+          sg.addColorStop(0.5, 'rgba(255,255,255,0.22)');
+          sg.addColorStop(0.58, 'rgba(210,244,228,0.07)');
+          sg.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.fillStyle = sg;
+          ctx.fillRect(0, 0, W, H);
+          ctx.restore();
+
+          // Tiny webcam dot centered in top bezel
+          const cam = lidVtx(0, H_lid - 15, 0.4);
+          ctx.beginPath();
+          ctx.arc(cam[0], cam[1], Math.max(1.2, 2.4 * sc), 0, Math.PI * 2);
+          ctx.fillStyle = '#252b28';
+          ctx.fill();
+        }, 2);
+
+        // Lid Back Aluminum Shell (visible when yaw < -90deg as laptop pivots off hand)
+        addFace([L_BTR, L_BTL, L_BBL, L_BBR], () => {
+          const g = ctx.createLinearGradient(L_BTL[0], L_BTL[1], L_BBR[0], L_BBR[1]);
+          g.addColorStop(0, '#c2cac6');
+          g.addColorStop(0.35, '#a8b1ac');
+          g.addColorStop(0.7, '#959f9a');
+          g.addColorStop(1, '#7f8984');
+          fillPoly([L_BTR, L_BTL, L_BBL, L_BBR], g, 'rgba(255,255,255,0.3)', 0.9);
+
+          // Subtle soft specular band across back of aluminum lid
+          const sheen = ctx.createLinearGradient(L_BTL[0], L_BTL[1], L_BTR[0], L_BTR[1]);
+          sheen.addColorStop(0, 'rgba(255,255,255,0)');
+          sheen.addColorStop(0.45, 'rgba(255,255,255,0.12)');
+          sheen.addColorStop(1, 'rgba(255,255,255,0)');
+          fillPoly([L_BTR, L_BTL, L_BBL, L_BBR], sheen);
+        }, 2);
+
+        // Lid Left Aluminum Rim (connects front & back seamlessly at profile)
+        addFace([L_FTL, L_BTL, L_BBL, L_FBL], () => {
+          const g = ctx.createLinearGradient(L_FTL[0], L_FTL[1], L_FBL[0], L_FBL[1]);
+          g.addColorStop(0, '#eef3f0');
+          g.addColorStop(0.5, '#c8d0cc');
+          g.addColorStop(1, '#9ca5a0');
+          fillPoly([L_FTL, L_BTL, L_BBL, L_FBL], g, 'rgba(255,255,255,0.35)', 0.7);
+        }, 2.2);
+
+        // Lid Right Aluminum Rim
+        addFace([L_BTR, L_FTR, L_FBR, L_BBR], () => {
+          const g = ctx.createLinearGradient(L_FTR[0], L_FTR[1], L_FBR[0], L_FBR[1]);
+          g.addColorStop(0, '#d8dfdb');
+          g.addColorStop(1, '#8d9691');
+          fillPoly([L_BTR, L_FTR, L_FBR, L_BBR], g, 'rgba(255,255,255,0.28)', 0.7);
+        }, 2.2);
+
+        // Lid Top Aluminum Rim
+        addFace([L_BTL, L_BTR, L_FTR, L_FTL], () => {
+          fillPoly([L_BTL, L_BTR, L_FTR, L_FTL], '#dfe5e2', 'rgba(255,255,255,0.4)', 0.7);
+        }, 2.2);
+
+        // Backface cull & Painter's sort back-to-front
+        const visibleFaces = [];
+        for (const f of faces) {
+          if (f.alwaysVisible || polyNormalZ(f.pts) > 0) {
+            visibleFaces.push(f);
+          }
+        }
+        visibleFaces.sort((a, b) => a.z - b.z);
+        for (const f of visibleFaces) {
+          f.draw();
+        }
+
+        ctx.restore();
+      }
+
+      function onEnterCaseState() {
+        mode = 'case';
+        document.body.classList.add('is-case');
+        document.body.dataset.mode = 'case';
+        screenHit.style.display = 'block';
+        fillCase(cur);
+
+        if (!RM) {
+          clearAnims([flash]);
+          flash.animate(
+            [{ opacity: 0 }, { opacity: 0.48, offset: 0.25 }, { opacity: 0 }],
+            { duration: 550, easing: 'ease-out' }
+          );
+        }
+
+        clearAnims([vids[cur]]);
+        vids[cur].style.opacity = '1';
+        vids[cur].style.transform = 'none';
+        playOnly(cur);
+        preloadCase((cur + 1) % CASES.length);
+      }
+
+      function onLeaveCaseState() {
+        mode = 'hero';
+        document.body.classList.remove('is-case');
+        document.body.dataset.mode = 'hero';
+        screenHit.style.display = 'none';
+        screenStatus.classList.remove('show');
+        vids.forEach(v => v.pause());
+      }
+
+      function renderAtProgress(rawP) {
+        const ch = computeDiveChoreography(rawP);
+        progress = ch.progress;
+        document.body.dataset.progress = progress.toFixed(2);
+
+        if (progress > 0.005) {
+          cancelIntroHeroAnims();
+          stopSway();
+        }
+
+        const W = window.innerWidth;
+        const mob = W <= 820;
+
+        frame.classList.toggle('d-fade', !mob);
+        frame.classList.toggle('m-fade', mob);
+        frame.classList.toggle('m-case', ch.framePoseBlend > 0.5);
+        stage.classList.toggle('m-case', ch.framePoseBlend > 0.5);
+
+        if (mob) {
+          document.documentElement.style.setProperty('--mbs', String((mBadge.offsetWidth || W * 0.27) / 582));
+          document.documentElement.style.setProperty('--th', (ticket.offsetHeight || 140) + 'px');
+          frame.style.setProperty('--m0', '0px');
+          frame.style.setProperty('--mt', lerp(190, 0, ch.framePoseBlend).toFixed(1) + 'px');
+          frame.style.setProperty('--mb', lerp(0, 60, ch.framePoseBlend).toFixed(1) + 'px');
+          frame.style.setProperty('--ms', lerp(140, 0, ch.framePoseBlend).toFixed(1) + 'px');
+        } else {
+          frame.style.setProperty('--m0', '0px');
+          frame.style.setProperty('--mt', '0px');
+          frame.style.setProperty('--mb', '0px');
+          frame.style.setProperty('--ms', '0px');
+        }
+
+        // Smooth camera frame interpolation between Hero and Case poses
+        const pHero = pose('hero');
+        const pCase = pose('case');
+        const b = ch.framePoseBlend;
+        const curPose = {
+          s: lerp(pHero.s, pCase.s, b),
+          x: lerp(pHero.x, pCase.x, b),
+          y: lerp(pHero.y, pCase.y, b)
+        };
+        frame.style.transform = `translate(${curPose.x.toFixed(2)}px, ${curPose.y.toFixed(2)}px) scale(${curPose.s.toFixed(5)})`;
+
+        if (!mob && b < 0.35) {
+          fitHero(pHero);
+        }
+
+        document.body.classList.toggle('is-diving', progress > 0.02 && !ch.isCaseActive);
+
+        // 1. Hero Typography & Badge Exit / Re-entry
+        const uiAlpha = Math.max(0, 1 - ch.uiOut);
+        if (introEntered) {
+          wm.style.opacity = String(uiAlpha);
+          wm.style.transform = `translateY(${(-40 * ch.uiOut).toFixed(2)}px)`;
+          mWm.style.opacity = String(uiAlpha);
+          mWm.style.transform = `translateY(${(-40 * ch.uiOut).toFixed(2)}px)`;
+
+          scriptEl.style.opacity = String(uiAlpha);
+          mScript.style.opacity = String(uiAlpha);
+
+          badge.style.opacity = String(uiAlpha);
+          badge.style.transform = `translateY(${(-110 * ch.uiOut).toFixed(2)}%) rotate(${(-6 * ch.uiOut).toFixed(2)}deg)`;
+          mBadge.style.opacity = String(uiAlpha);
+          mBadge.style.transform = `translateY(${(-110 * ch.uiOut).toFixed(2)}%) rotate(${(-6 * ch.uiOut).toFixed(2)}deg)`;
+
+          hint.style.opacity = String((0.85 * uiAlpha).toFixed(3));
+        }
+
+        // 2. Studio Backdrop Zoom & Fade (no ghosting, continuous studio-backdrop remains behind)
+        studioBg.style.transform = `scale(${ch.studioScale.toFixed(4)})`;
+        studioBg.style.opacity = String(ch.studioBgOpacity.toFixed(3));
+
+        // 3. Articulated Personal Identity Gestures (head turn + torso lean + left forearm presentation)
+        heroChar.style.opacity = String(ch.charOpacity.toFixed(3));
+        heroChar.style.transform = `scale(${ch.studioScale.toFixed(4)}) rotate(${ch.torsoLeanDeg.toFixed(2)}deg)`;
+        charHead.style.transform = `translateX(${ch.headShiftX.toFixed(2)}px) rotate(${ch.headTurnDeg.toFixed(2)}deg)`;
+        charLarm.style.transform = `translate(${ch.armShiftX.toFixed(2)}px, ${ch.armShiftY.toFixed(2)}px) rotate(${ch.armLiftDeg.toFixed(2)}deg)`;
+
+        // 4. Held Laptop -> 3D Canvas Laptop Handoff
+        laptopHeld.style.opacity = String(ch.heldLaptopOpacity.toFixed(3));
+        laptopHeld.style.transform = `scale(${ch.studioScale.toFixed(4)}) translate(${(ch.armShiftX * 0.45).toFixed(2)}px, ${(ch.armShiftY * 0.45).toFixed(2)}px) rotate(${(ch.armLiftDeg * 0.25).toFixed(2)}deg)`;
+
+        diveCanvas.style.opacity = String(ch.laptop3dOpacity > 0.005 ? 1 : 0);
+        renderLaptop3D(diveCtx, ch);
+
+        // 5. Case Plate & Screen & Case UI
+        caseplate.style.opacity = String(ch.casePlateOpacity.toFixed(3));
+        screen.style.opacity = String(ch.screenOpacity.toFixed(3));
+
+        if (!ch.isCaseActive) {
+          const uiY = (1 - ch.caseUiOpacity) * -28;
+          ticket.style.opacity = String(ch.caseUiOpacity.toFixed(3));
+          ticket.style.transform = `translateY(${uiY.toFixed(2)}px) rotate(${((1 - ch.caseUiOpacity) * -4).toFixed(2)}deg)`;
+          [descKey, descText, descNum].forEach(el => {
+            el.style.opacity = String(ch.caseUiOpacity.toFixed(3));
+            el.style.transform = `translateY(${((1 - ch.caseUiOpacity) * 14).toFixed(2)}px)`;
+          });
+        } else {
+          ticket.style.opacity = '1';
+          ticket.style.transform = 'none';
+          [descKey, descText, descNum].forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+          });
+        }
+
+        // Handle Case <-> Hero boundary transitions cleanly
+        if (ch.isCaseActive && !prevCaseActive) {
+          prevCaseActive = true;
+          onEnterCaseState();
+        } else if (!ch.isCaseActive && prevCaseActive) {
+          prevCaseActive = false;
+          onLeaveCaseState();
+        }
+
+        if (progress < 0.004 && targetProgress === 0 && !busy && introEntered && swayAnims.length === 0) {
+          startSway();
+        }
+      }
+
+      function scheduleTick() {
+        if (rafId !== null) return;
+        rafId = requestAnimationFrame(tickProgress);
+      }
+
+      function tickProgress() {
+        rafId = null;
+
+        if (glideAnim) {
+          const now = performance.now();
+          const t = Math.min(1, (now - glideAnim.start) / Math.max(1, glideAnim.duration));
+          const eased = easeInOutCubic(t);
+          const p = lerp(glideAnim.from, glideAnim.to, eased);
+          targetProgress = p;
+          renderAtProgress(p);
+          if (t < 1) {
+            scheduleTick();
+          } else {
+            glideAnim = null;
+            renderAtProgress(targetProgress);
+          }
+          return;
+        }
+
+        const diff = targetProgress - progress;
+        if (Math.abs(diff) < 0.0004) {
+          renderAtProgress(targetProgress);
+          return;
+        }
+
+        const nextP = clamp01(progress + diff * 0.24);
+        renderAtProgress(nextP);
+        scheduleTick();
+      }
+
+      function autoGlideTo(goal, durationMs) {
+        cancelIntroHeroAnims();
+        const dist = Math.abs(goal - progress);
+        if (RM || dist < 0.001) {
+          glideAnim = null;
+          targetProgress = goal;
+          renderAtProgress(goal);
+          return;
+        }
+        glideAnim = {
+          from: progress,
+          to: goal,
+          start: performance.now(),
+          duration: Math.max(260, Math.round((durationMs || 1550) * Math.max(0.35, dist)))
+        };
+        scheduleTick();
+      }
+
       function enter() {
         if (document.documentElement.dataset.in === '1') return;
         document.documentElement.dataset.in = '1';
 
-        if (RM) {
+        if (RM || targetProgress > 0.005) {
+          introEntered = true;
           document.querySelectorAll('.pre').forEach(el => el.classList.remove('pre'));
-          hint.style.opacity = '.85';
+          renderAtProgress(progress);
           return;
         }
 
-        tags.forEach((tag, i) => {
+        const dTags = tags.map((tag, i) =>
           tag.animate(
             [
               { opacity: 0, transform: 'translateY(-40px) rotate(-4deg)' },
               { opacity: 1, transform: 'none' }
             ],
             { duration: 700, delay: 120 + i * 80, easing: 'cubic-bezier(.3,1.5,.5,1)', fill: 'both' }
-          );
-        });
+          )
+        );
 
-        [wm, mWm].forEach(el => {
+        const dWm = [wm, mWm].map(el =>
           el.animate(
             [
               { opacity: 0, transform: 'translateY(60px)', clipPath: 'inset(100% 0 0 0)' },
               { opacity: 1, transform: 'none', clipPath: 'inset(0 0 0 0)' }
             ],
             { duration: 1100, delay: 260, easing: EASE_DEFAULT, fill: 'both' }
-          );
-        });
+          )
+        );
 
-        [scriptEl, mScript].forEach(el => {
+        const dScript = [scriptEl, mScript].map(el =>
           el.animate(
             [
               { opacity: 0, clipPath: 'inset(0 100% 0 0)' },
               { opacity: 1, clipPath: 'inset(0 0 0 0)' }
             ],
             { duration: 900, delay: 1050, easing: 'cubic-bezier(.5,0,.3,1)', fill: 'both' }
-          );
-        });
+          )
+        );
 
         const badgeFrames = [
           { opacity: 0, transform: 'translateY(-120%) rotate(8deg)' },
@@ -1316,87 +2170,28 @@
           { opacity: 1, transform: 'rotate(0deg)' }
         ];
         const bAnim = badge.animate(badgeFrames, { duration: 1500, delay: 700, easing: EASE_DEFAULT, fill: 'both' });
-        mBadge.animate(badgeFrames, { duration: 1500, delay: 700, easing: EASE_DEFAULT, fill: 'both' });
+        const mbAnim = mBadge.animate(badgeFrames, { duration: 1500, delay: 700, easing: EASE_DEFAULT, fill: 'both' });
 
-        bAnim.finished.then(() => {
-          if (mode === 'hero' && !busy) startSway();
-        }).catch(() => {});
-
-        hint.animate(
+        const hAnim = hint.animate(
           [{ opacity: 0 }, { opacity: 0.85 }],
           { duration: 600, delay: 1800, easing: EASE_DEFAULT, fill: 'both' }
         );
-      }
 
-      function heroOut() {
-        stopSway();
-        const d = dur(380);
-        const easing = 'cubic-bezier(.5,0,.75,0)';
+        introAnims = [...dTags, ...dWm, ...dScript, bAnim, mbAnim, hAnim];
 
-        clearAnims([wm, mWm, scriptEl, mScript, badge, mBadge]);
-
-        [wm, mWm].forEach(el => {
-          el.animate(
-            [{ opacity: 1, transform: 'translateY(0)' }, { opacity: 0, transform: 'translateY(-40px)' }],
-            { duration: d, easing, fill: 'forwards' }
-          );
+        Promise.allSettled(introAnims.map(a => a.finished)).then(() => {
+          introEntered = true;
+          cancelIntroHeroAnims();
+          renderAtProgress(progress);
         });
-
-        [scriptEl, mScript].forEach(el => {
-          el.animate(
-            [{ opacity: 1 }, { opacity: 0 }],
-            { duration: d, easing, fill: 'forwards' }
-          );
-        });
-
-        [badge, mBadge].forEach(el => {
-          el.animate(
-            [{ opacity: 1, transform: 'translateY(0) rotate(0deg)' }, { opacity: 0, transform: 'translateY(-110%) rotate(-6deg)' }],
-            { duration: d, easing, fill: 'forwards' }
-          );
-        });
-      }
-
-      function heroIn() {
-        const d700 = dur(700);
-        const d1100 = dur(1100);
-
-        clearAnims([wm, mWm, scriptEl, mScript, badge, mBadge]);
-
-        [wm, mWm].forEach(el => {
-          el.animate(
-            [{ opacity: 0, transform: 'translateY(40px)' }, { opacity: 1, transform: 'none' }],
-            { duration: d700, easing: EASE_DEFAULT, fill: 'forwards' }
-          );
-        });
-
-        [scriptEl, mScript].forEach(el => {
-          el.animate(
-            [{ opacity: 0, clipPath: 'inset(0 100% 0 0)' }, { opacity: 1, clipPath: 'inset(0 0 0 0)' }],
-            { duration: d700, delay: dur(250), easing: 'cubic-bezier(.5,0,.3,1)', fill: 'forwards' }
-          );
-        });
-
-        const badgeFrames = [
-          { opacity: 0, transform: 'translateY(-110%) rotate(6deg)' },
-          { opacity: 1, transform: 'translateY(0) rotate(-2deg)', offset: 0.7 },
-          { opacity: 1, transform: 'rotate(0deg)' }
-        ];
-        const bAnim = badge.animate(badgeFrames, { duration: d1100, easing: EASE_DEFAULT, fill: 'forwards' });
-        mBadge.animate(badgeFrames, { duration: d1100, easing: EASE_DEFAULT, fill: 'forwards' });
-
-        bAnim.finished.then(() => {
-          if (mode === 'hero') startSway();
-        }).catch(() => {});
       }
 
       function playOnly(i) {
         vids.forEach((v, idx) => {
-          if (idx !== i) {
-            v.pause();
-          }
+          if (idx !== i) v.pause();
         });
         const v = vids[i];
+        updateScreenStatus(i);
         try {
           v.currentTime = 0;
         } catch (_) {}
@@ -1411,10 +2206,10 @@
         }
       }
 
-      function caseIn(i, first) {
+      function caseIn(i) {
         fillCase(i);
         if (window.innerWidth <= 820) {
-          place('case');
+          renderAtProgress(progress);
         }
 
         const descKids = [descKey, descText, descNum];
@@ -1422,21 +2217,20 @@
 
         ticket.animate(
           [
-            { opacity: 0, transform: 'translateY(-60px) rotate(-6deg)' },
-            { opacity: 1, transform: 'translateY(6px) rotate(1.2deg)', offset: 0.7 },
+            { opacity: 0, transform: 'translateY(-40px) rotate(-4deg)' },
+            { opacity: 1, transform: 'translateY(4px) rotate(1deg)', offset: 0.7 },
             { opacity: 1, transform: 'none' }
           ],
-          { duration: dur(800), delay: first ? dur(150) : 0, easing: EASE_DEFAULT, fill: 'forwards' }
+          { duration: dur(650), easing: EASE_DEFAULT, fill: 'forwards' }
         );
 
-        const baseDelay = first ? 250 : 80;
         descKids.forEach((el, k) => {
           el.animate(
             [
               { opacity: 0, transform: 'translateY(14px)' },
               { opacity: 1, transform: 'none' }
             ],
-            { duration: dur(600), delay: dur(baseDelay + k * 70), easing: EASE_DEFAULT, fill: 'forwards' }
+            { duration: dur(520), delay: dur(60 + k * 60), easing: EASE_DEFAULT, fill: 'forwards' }
           );
         });
       }
@@ -1448,9 +2242,9 @@
         ticket.animate(
           [
             { opacity: 1, transform: 'none' },
-            { opacity: 0, transform: 'translateY(-40px) rotate(4deg)' }
+            { opacity: 0, transform: 'translateY(-36px) rotate(3deg)' }
           ],
-          { duration: dur(380), easing: 'cubic-bezier(.5,0,.75,0)', fill: 'forwards' }
+          { duration: dur(320), easing: 'cubic-bezier(.5,0,.75,0)', fill: 'forwards' }
         );
 
         descKids.forEach((el, k) => {
@@ -1459,132 +2253,9 @@
               { opacity: 1, transform: 'none' },
               { opacity: 0, transform: 'translateY(-10px)' }
             ],
-            { duration: dur(300), delay: dur(k * 40), easing: 'cubic-bezier(.5,0,.75,0)', fill: 'forwards' }
+            { duration: dur(260), delay: dur(k * 35), easing: 'cubic-bezier(.5,0,.75,0)', fill: 'forwards' }
           );
         });
-      }
-
-      async function arriveCase() {
-        mode = 'case';
-        cur = 0;
-        document.body.classList.add('is-case');
-        document.body.dataset.mode = 'case';
-
-        plate.style.visibility = 'hidden';
-        clearAnims([cut, screen, vids[0]]);
-        cut.style.opacity = '0';
-        screen.style.opacity = '1';
-        screenHit.style.display = 'block';
-
-        if (!RM) {
-          flash.animate(
-            [
-              { opacity: 0 },
-              { opacity: 0.55, offset: 0.25 },
-              { opacity: 0 }
-            ],
-            { duration: 600, easing: 'ease-out' }
-          );
-        }
-
-        vids[0].animate(
-          [
-            { opacity: 0, transform: 'scale(1.06)' },
-            { opacity: 1, transform: 'scale(1)' }
-          ],
-          { duration: dur(700), easing: EASE_DEFAULT, fill: 'forwards' }
-        );
-
-        playOnly(0);
-        caseIn(0, true);
-        preloadCase(1);
-
-        await wait(dur(700));
-        frame.classList.remove('glide');
-        busy = false;
-        document.body.classList.remove('busy');
-      }
-
-      async function toCase() {
-        if (busy || mode === 'case') return;
-        busy = true;
-        document.body.classList.add('busy');
-
-        fillCase(0);
-        heroOut();
-        await wait(dur(330));
-
-        if (RM || !transReady) {
-          frame.classList.remove('glide');
-          place('case');
-          plate.style.visibility = 'hidden';
-          clearAnims([cut, caseplate]);
-          cut.style.opacity = '0';
-
-          if (RM) {
-            caseplate.style.opacity = '1';
-          } else {
-            caseplate.animate(
-              [{ opacity: 0 }, { opacity: 1 }],
-              { duration: 500, easing: 'ease-out', fill: 'forwards' }
-            );
-            await wait(500);
-            clearAnims([caseplate]);
-            caseplate.style.opacity = '1';
-          }
-          await arriveCase();
-          return;
-        }
-
-        trans.currentTime = 0;
-        trans.style.opacity = '1';
-        await twoRAF();
-        plate.style.visibility = 'hidden';
-
-        clearAnims([cut]);
-        cut.animate(
-          [{ opacity: 1 }, { opacity: 0 }],
-          { duration: 260, easing: 'ease-out', fill: 'forwards' }
-        );
-
-        frame.style.setProperty('--glide', '1.6s');
-        frame.classList.add('glide');
-        place('case');
-
-        await trans.play().catch(() => {});
-        await new Promise(resolve => {
-          let done = false;
-          const finish = () => {
-            if (!done) {
-              done = true;
-              resolve();
-            }
-          };
-          const onEnd = () => finish();
-          trans.addEventListener('ended', onEnd, { once: true });
-
-          const tick = () => {
-            if (done) return;
-            const d = trans.duration || 5.04;
-            const p = trans.currentTime / d;
-            if (trans.ended || p >= 0.995) {
-              trans.removeEventListener('ended', onEnd);
-              finish();
-              return;
-            }
-            trans.playbackRate = Math.max(1.2, 1.8 + 2.4 * Math.sin(Math.PI * Math.min(p * 1.08, 1)));
-            requestAnimationFrame(tick);
-          };
-          requestAnimationFrame(tick);
-          setTimeout(finish, 3600);
-        });
-
-        trans.pause();
-        clearAnims([caseplate]);
-        caseplate.style.opacity = '1';
-        trans.style.opacity = '0';
-
-        await arriveCase();
       }
 
       async function swapTo(n) {
@@ -1599,148 +2270,150 @@
         clearAnims([vids[old]]);
         vids[old].animate(
           [{ opacity: 1 }, { opacity: 0 }],
-          { duration: dur(350), easing: 'ease-out', fill: 'forwards' }
+          { duration: dur(320), easing: 'ease-out', fill: 'forwards' }
         );
 
-        await wait(dur(380));
+        await wait(dur(340));
         vids[old].pause();
 
         if (!RM) {
           flash.animate(
-            [
-              { opacity: 0 },
-              { opacity: 0.35, offset: 0.25 },
-              { opacity: 0 }
-            ],
+            [{ opacity: 0 }, { opacity: 0.35, offset: 0.25 }, { opacity: 0 }],
             { duration: 420, easing: 'ease-out' }
           );
         }
 
         clearAnims([vids[n]]);
         vids[n].animate(
-          [
-            { opacity: 0, transform: 'scale(1.04)' },
-            { opacity: 1, transform: 'scale(1)' }
-          ],
-          { duration: dur(500), easing: EASE_DEFAULT, fill: 'forwards' }
+          [{ opacity: 0, transform: 'scale(1.04)' }, { opacity: 1, transform: 'scale(1)' }],
+          { duration: dur(480), easing: EASE_DEFAULT, fill: 'forwards' }
         );
 
         playOnly(n);
-        caseIn(n, false);
+        caseIn(n);
         preloadCase((n + 1) % CASES.length);
 
-        await wait(dur(520));
-        busy = false;
-        document.body.classList.remove('busy');
-      }
-
-      async function toHero() {
-        if (busy || mode === 'hero') return;
-        busy = true;
-        document.body.classList.add('busy');
-
-        caseOut();
-        vids.forEach(v => v.pause());
-        screenHit.style.display = 'none';
-        clearAnims([screen]);
-        screen.animate(
-          [{ opacity: 1 }, { opacity: 0 }],
-          { duration: dur(300), easing: 'ease-out', fill: 'forwards' }
-        );
-
-        mode = 'hero';
-        document.body.classList.remove('is-case');
-        document.body.dataset.mode = 'hero';
-
-        frame.style.setProperty('--glide', '.9s');
-        if (!RM) frame.classList.add('glide');
-        place('hero');
-
-        plate.style.visibility = 'visible';
-
-        clearAnims([cut, caseplate, plate]);
-        cut.animate(
-          [{ opacity: 0 }, { opacity: 1 }],
-          { duration: dur(700), delay: dur(150), easing: 'ease-out', fill: 'forwards' }
-        );
-        caseplate.animate(
-          [{ opacity: 1, filter: 'blur(0px)' }, { opacity: 0, filter: 'blur(12px)' }],
-          { duration: dur(800), easing: 'cubic-bezier(.65,0,.35,1)', fill: 'forwards' }
-        );
-        plate.animate(
-          [{ transform: 'scale(1.12)', filter: 'blur(8px)' }, { transform: 'scale(1)', filter: 'blur(0px)' }],
-          { duration: dur(900), easing: EASE_DEFAULT, fill: 'forwards' }
-        );
-
-        await wait(dur(250));
-        heroIn();
-
-        await wait(dur(1000));
-        frame.classList.remove('glide');
+        await wait(dur(500));
         busy = false;
         document.body.classList.remove('busy');
       }
 
       function goNext() {
-        swapTo((cur + 1) % CASES.length);
+        if (progress < 0.985) {
+          autoGlideTo(1.0, 1550);
+        } else {
+          swapTo((cur + 1) % CASES.length);
+        }
       }
 
       function goPrev() {
-        if (cur === 0) toHero();
-        else swapTo(cur - 1);
+        if (progress < 0.985) {
+          autoGlideTo(0.0, 1050);
+        } else if (cur === 0) {
+          autoGlideTo(0.0, 1050);
+        } else {
+          swapTo(cur - 1);
+        }
       }
 
       // Click handlers
       tags[0].addEventListener('click', () => {
-        if (mode === 'case') toHero();
+        if (progress > 0.01) autoGlideTo(0.0, 1050);
       });
       tags[1].addEventListener('click', () => {
-        if (mode === 'hero') toCase();
+        if (progress < 0.985) autoGlideTo(1.0, 1550);
       });
       tags[2].addEventListener('click', e => e.preventDefault());
       tags[3].addEventListener('click', e => e.preventDefault());
 
       logo.addEventListener('click', () => {
-        if (mode === 'case') toHero();
+        if (progress > 0.01) autoGlideTo(0.0, 1050);
       });
       prevBtn.addEventListener('click', goPrev);
       nextBtn.addEventListener('click', goNext);
       screenHit.addEventListener('click', goNext);
 
-      // Wheel
-      let wheelLock = 0;
+      // Continuous scroll-synchronized wheel control
+      let wheelCaseLock = 0;
       window.addEventListener('wheel', e => {
         e.preventDefault();
+        if (busy) return;
+        const dy = e.deltaY;
+        if (Math.abs(dy) < 2) return;
+
         const now = performance.now();
-        if (busy || now < wheelLock) return;
-        if (Math.abs(e.deltaY) < 18) return;
-        wheelLock = now + 900;
-        if (mode === 'hero') {
-          if (e.deltaY > 0) toCase();
-        } else {
-          if (e.deltaY > 0) goNext();
-          else goPrev();
+        if (targetProgress >= 0.985 && progress >= 0.985) {
+          if (dy > 16) {
+            if (now >= wheelCaseLock) {
+              wheelCaseLock = now + 700;
+              goNext();
+            }
+            return;
+          }
+          if (dy < -16) {
+            if (cur > 0) {
+              if (now >= wheelCaseLock) {
+                wheelCaseLock = now + 700;
+                swapTo(cur - 1);
+              }
+              return;
+            }
+            // Scrolling up from case 0 backs smoothly out of the screen into the dive
+            glideAnim = null;
+            targetProgress = clamp01(progress + dy * 0.0011);
+            scheduleTick();
+            return;
+          }
+          return;
         }
+
+        glideAnim = null;
+        targetProgress = clamp01(targetProgress + dy * 0.0011);
+        scheduleTick();
       }, { passive: false });
 
-      // Touch
+      // Continuous touch scrubbing + directional case swipe
       let tx = 0;
       let ty = 0;
+      let lastTy = 0;
+      let touchStartProgress = 0;
+      let touchScrubbed = false;
+
       window.addEventListener('touchstart', e => {
         if (e.touches.length !== 1) return;
         tx = e.touches[0].clientX;
         ty = e.touches[0].clientY;
+        lastTy = ty;
+        touchStartProgress = targetProgress;
+        touchScrubbed = false;
+      }, { passive: true });
+
+      window.addEventListener('touchmove', e => {
+        if (busy || e.touches.length !== 1) return;
+        if (touchStartProgress >= 0.985 && cur > 0) return;
+
+        const curY = e.touches[0].clientY;
+        const curX = e.touches[0].clientX;
+        if (!touchScrubbed && Math.abs(curY - ty) < 8) return;
+        if (Math.abs(curY - ty) >= Math.abs(curX - tx)) {
+          touchScrubbed = true;
+          const stepDy = lastTy - curY;
+          lastTy = curY;
+          if (!(touchStartProgress >= 0.985 && stepDy > 0)) {
+            glideAnim = null;
+            targetProgress = clamp01(targetProgress + stepDy * 0.0022);
+            scheduleTick();
+          }
+        }
       }, { passive: true });
 
       window.addEventListener('touchend', e => {
         if (busy || e.changedTouches.length !== 1) return;
         const dx = e.changedTouches[0].clientX - tx;
         const dy = e.changedTouches[0].clientY - ty;
-        if (Math.abs(dx) < 40 && Math.abs(dy) < 40) return;
 
-        if (mode === 'hero') {
-          if (dy < -40 && Math.abs(dy) >= Math.abs(dx)) toCase();
-        } else {
+        if (touchStartProgress >= 0.985 && progress >= 0.985) {
+          if (Math.abs(dx) < 40 && Math.abs(dy) < 40) return;
           if (Math.abs(dy) >= Math.abs(dx)) {
             if (dy < -40) goNext();
             else if (dy > 40) goPrev();
@@ -1748,16 +2421,28 @@
             if (dx < -40) goNext();
             else if (dx > 40) goPrev();
           }
+          return;
+        }
+
+        if (touchScrubbed) {
+          if (dy < -55 && targetProgress > 0.18 && targetProgress < 0.985) {
+            autoGlideTo(1.0, 1100);
+          } else if (dy > 55 && targetProgress < 0.85) {
+            autoGlideTo(0.0, 900);
+          }
         }
       }, { passive: true });
 
-      // Keyboard
+      // Keyboard navigation
       window.addEventListener('keydown', e => {
         if (busy) return;
-        if (mode === 'hero') {
+        if (progress < 0.985) {
           if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
             e.preventDefault();
-            toCase();
+            autoGlideTo(1.0, 1550);
+          } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+            e.preventDefault();
+            autoGlideTo(0.0, 1050);
           }
         } else {
           if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ' || e.key === 'ArrowRight') {
@@ -1772,21 +2457,23 @@
 
       // Resize
       window.addEventListener('resize', () => {
-        frame.classList.remove('glide');
-        place(mode);
+        renderAtProgress(progress);
       });
 
       // Initial layout + entrance
       fillCase(0);
-      place('hero');
+      renderAtProgress(0);
 
-      const plateReady = new Promise(resolve => {
-        if (plate.complete) resolve();
-        else {
-          plate.addEventListener('load', resolve, { once: true });
-          plate.addEventListener('error', resolve, { once: true });
-        }
-      });
+      const heroImgs = [studioBg, charTorso, charHead, charLarm, laptopHeld];
+      const plateReady = Promise.all(
+        heroImgs.map(img => new Promise(resolve => {
+          if (img.complete) resolve();
+          else {
+            img.addEventListener('load', resolve, { once: true });
+            img.addEventListener('error', resolve, { once: true });
+          }
+        }))
+      );
 
       const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
       Promise.race([Promise.all([fontsReady, plateReady]), wait(2500)]).then(() => {
