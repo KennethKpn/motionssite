@@ -1,6 +1,6 @@
 {
-  "name": "Personalized Cinematic Portfolio Hero",
-  "description": "Single-file interactive cinematic portfolio hero with configurable personal branding, layered portrait cutout, 3D laptop dive transition, and case study viewer.",
+  "name": "Portfolio Hero — Cinematic Showcase",
+  "description": "Interactive cinematic portfolio hero with personal branding, layered portrait cutout, 3D laptop dive transition, and case study viewer.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

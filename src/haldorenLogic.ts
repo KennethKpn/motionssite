@@ -93,9 +93,29 @@ export function nextCaseIndex(cur: number, total: number): number {
   return (cur + 1) % total;
 }
 
+export function advanceCaseOrExit(cur: number, total: number): { action: 'swap' | 'scrollNext'; index: number } {
+  if (cur < total - 1) {
+    return { action: 'swap', index: cur + 1 };
+  }
+  return { action: 'scrollNext', index: cur };
+}
+
 export function prevCaseAction(cur: number): { action: 'toHero' | 'swap'; index: number } {
   if (cur <= 0) return { action: 'toHero', index: 0 };
   return { action: 'swap', index: cur - 1 };
+}
+
+export function shouldHeroInterceptWheel(
+  scrollY: number,
+  heroProgress: number,
+  curCase: number,
+  totalCases: number,
+  deltaY: number
+): boolean {
+  if (scrollY > 12) return false;
+  if (heroProgress <= 0.002 && curCase === 0 && deltaY < 0) return false;
+  if (heroProgress >= 0.985 && curCase >= totalCases - 1 && deltaY > 0) return false;
+  return true;
 }
 
 export function clamp01(v: number): number {
@@ -157,7 +177,6 @@ export function computeDiveChoreography(rawProgress: number): DiveChoreography {
   const uiOut = smoothstep(0.0, 0.16, p);
   const framePoseBlend = easeInOutCubic(smoothstep(0.08, 0.90, p));
 
-  // Character reaction: looks toward laptop, leans slightly, extends left forearm to present it
   const charGesture = smoothstep(0.02, 0.28, p);
   const headTurnDeg = lerp(0, 6.5, charGesture);
   const headShiftX = lerp(0, 4.5, charGesture);
@@ -170,13 +189,9 @@ export function computeDiveChoreography(rawProgress: number): DiveChoreography {
   const studioScale = lerp(1.0, 1.38, easeInOutCubic(smoothstep(0.04, 0.46, p)));
   const studioBgOpacity = 1 - smoothstep(0.24, 0.50, p);
 
-  // Clean handoff from held photographic laptop cutout to 3D Canvas aluminum laptop
   const heldLaptopOpacity = 1 - smoothstep(0.03, 0.075, p);
   const laptop3dOpacity = smoothstep(0.02, 0.065, p) * (1 - smoothstep(0.86, 0.93, p));
 
-  // 2-stage 3D trajectory matching r1-dive.webm:
-  // Stage A (0.04..0.30): lifts gently off palm while retaining silver-back/profile orientation (yaw -114 -> -92)
-  // Stage B (0.30..0.86): sweeps smoothly CCW from side profile to square-on center (yaw -92 -> 0)
   const liftT = smoothstep(0.04, 0.30, p);
   const rotT = smoothstep(0.30, 0.86, p);
 
@@ -240,4 +255,3 @@ export function computeDiveChoreography(rawProgress: number): DiveChoreography {
     isCaseActive: p >= 0.985,
   };
 }
-

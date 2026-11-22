@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Portfolio Hero — Cinematic Showcase</title>
-  <meta name="description" content="Single-file interactive cinematic portfolio hero with configurable personal branding, layered portrait cutout, 3D laptop dive transition, and case study viewer." />
+  <meta name="description" content="Interactive cinematic portfolio hero with personal branding, layered portrait cutout, 3D laptop dive transition, and case study viewer." />
   <meta property="og:title" content="Portfolio Hero — Cinematic Showcase" />
-  <meta property="og:description" content="Single-file interactive cinematic portfolio hero with configurable personal branding, layered portrait cutout, 3D laptop dive transition, and case study viewer." />
+  <meta property="og:description" content="Interactive cinematic portfolio hero with personal branding, layered portrait cutout, 3D laptop dive transition, and case study viewer." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <script>document.documentElement.classList.add('js');</script>
@@ -54,15 +54,26 @@
       box-sizing: border-box;
     }
 
-    html, body {
-      height: 100%;
+    html,
+    body {
       margin: 0;
       padding: 0;
+      height: 100%;
       overflow: hidden;
       background: var(--green-900);
       font-family: 'Inter Tight', sans-serif;
-      color: #fff;
+      color: #f4f1ea;
       -webkit-font-smoothing: antialiased;
+    }
+
+    .hero-shell {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      height: 100svh;
+      overflow: hidden;
+      background: var(--green-900);
+      color: #f4f1ea;
       user-select: none;
     }
 
@@ -70,8 +81,8 @@
       opacity: 0;
     }
 
-    .stage {
-      position: fixed;
+    .hero-shell .stage {
+      position: absolute;
       inset: 0;
       overflow: hidden;
       background: linear-gradient(180deg, #0c3523 0%, #14503a 45%, #9fd8bf 100%);
@@ -492,20 +503,20 @@
       outline-offset: 4px;
     }
 
-    /* Viewport-pinned UI */
-    .ui {
-      position: fixed;
+    /* Viewport-pinned UI inside hero-shell */
+    .hero-shell .ui {
+      position: absolute;
       inset: 0;
       z-index: 20;
       pointer-events: none;
     }
 
-    .tag {
-      position: fixed;
+    .hero-shell .tag {
+      position: absolute;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: #fff;
+      background: #f4f1ea;
       color: var(--ink);
       font-family: 'Inter Tight', sans-serif;
       font-weight: 650;
@@ -520,40 +531,40 @@
       cursor: pointer;
       pointer-events: auto;
       box-shadow: 0 calc(3 * var(--n)) 0 rgba(0,0,0,.18), 0 calc(6 * var(--n)) calc(14 * var(--n)) rgba(0,0,0,.18);
-      transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s cubic-bezier(.2,.8,.2,1);
+      transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s cubic-bezier(.16,1,.3,1);
     }
 
-    .tag:hover {
+    .hero-shell .tag:hover {
       transform: translateY(calc(-2 * var(--n))) rotate(-1.5deg);
       box-shadow: 0 calc(5 * var(--n)) 0 rgba(0,0,0,.22), 0 calc(10 * var(--n)) calc(18 * var(--n)) rgba(0,0,0,.2);
     }
 
-    .tag:active {
-      transform: translateY(calc(1 * var(--n)));
+    .hero-shell .tag:active {
+      transform: translateY(calc(1 * var(--n))) scale(0.97);
       box-shadow: 0 calc(1 * var(--n)) 0 rgba(0,0,0,.18);
     }
 
-    .tag:focus-visible,
-    .logo:focus-visible,
-    .nav-case:focus-visible {
-      outline: 2px solid #fff;
+    .hero-shell .tag:focus-visible,
+    .hero-shell .logo:focus-visible,
+    .hero-shell .nav-case:focus-visible {
+      outline: 2px solid #f4f1ea;
       outline-offset: 3px;
     }
 
-    .t1 { left: calc(30 * var(--n)); top: calc(7 * var(--n)); }
-    .t2 { left: calc(233 * var(--n)); top: calc(7 * var(--n)); }
-    .t3 { right: calc(244 * var(--n)); top: calc(7 * var(--n)); }
-    .t4 { right: calc(32 * var(--n)); top: calc(7 * var(--n)); }
+    .hero-shell .t1 { left: calc(30 * var(--n)); top: calc(7 * var(--n)); }
+    .hero-shell .t2 { left: calc(233 * var(--n)); top: calc(7 * var(--n)); }
+    .hero-shell .t3 { right: calc(244 * var(--n)); top: calc(7 * var(--n)); }
+    .hero-shell .t4 { right: calc(32 * var(--n)); top: calc(7 * var(--n)); }
 
-    .logo {
-      position: fixed;
+    .hero-shell .logo {
+      position: absolute;
       left: 50%;
       top: calc(14 * var(--n));
       transform: translateX(-50%);
       background: transparent;
       border: 0;
       padding: 0;
-      color: #fff;
+      color: #f4f1ea;
       font-family: 'Inter Tight', sans-serif;
       font-weight: 600;
       font-size: calc(19 * var(--n));
@@ -565,13 +576,13 @@
       transition: opacity .4s ease;
     }
 
-    body.is-case .logo {
+    body.is-case .hero-shell .logo {
       opacity: 1;
       pointer-events: auto;
     }
 
-    .hint {
-      position: fixed;
+    .hero-shell .hint {
+      position: absolute;
       left: 50%;
       bottom: calc(22 * var(--n));
       transform: translateX(-50%);
@@ -623,13 +634,13 @@
       animation: none;
     }
 
-    .ticket {
-      position: fixed;
+    .hero-shell .ticket {
+      position: absolute;
       right: calc(32 * var(--n));
       top: calc(98 * var(--n));
       width: calc(348 * var(--n));
       height: calc(182 * var(--n));
-      background: #fff;
+      background: #f4f1ea;
       color: var(--ink);
       border-radius: calc(3 * var(--n));
       box-shadow: 0 calc(18 * var(--n)) calc(40 * var(--n)) rgba(0,0,0,.28);
@@ -678,8 +689,8 @@
       color: var(--ink);
     }
 
-    .desc {
-      position: fixed;
+    .hero-shell .desc {
+      position: absolute;
       left: calc(28 * var(--n));
       top: calc(326 * var(--n));
       width: calc(172 * var(--n));
@@ -690,7 +701,7 @@
       font-weight: 700;
       font-size: calc(17 * var(--n));
       letter-spacing: -.02em;
-      color: #fff;
+      color: #f4f1ea;
       opacity: 0;
     }
 
@@ -699,7 +710,7 @@
       font-size: calc(15 * var(--n));
       line-height: 1.36;
       font-weight: 500;
-      color: rgba(255,255,255,.92);
+      color: rgba(244,241,234,.92);
       opacity: 0;
     }
 
@@ -708,13 +719,13 @@
       font-size: calc(12 * var(--n));
       letter-spacing: .16em;
       font-weight: 700;
-      color: rgba(255,255,255,.7);
+      color: rgba(244,241,234,.72);
       font-variant-numeric: tabular-nums;
       opacity: 0;
     }
 
-    .nav-case {
-      position: fixed;
+    .hero-shell .nav-case {
+      position: absolute;
       bottom: calc(150 * var(--n));
       display: flex;
       flex-direction: column;
@@ -792,11 +803,11 @@
         --n: calc(100vw / 430);
       }
 
-      .stage {
+      .hero-shell .stage {
         background: #0b3b2a;
       }
 
-      .stage::before {
+      .hero-shell .stage::before {
         content: '';
         position: absolute;
         inset: 0;
@@ -806,7 +817,7 @@
         pointer-events: none;
       }
 
-      .stage.m-case::before {
+      .hero-shell .stage.m-case::before {
         opacity: 1;
       }
 
@@ -820,39 +831,39 @@
         display: block;
       }
 
-      .tag {
+      .hero-shell .tag {
         font-size: 13px;
         height: 30px;
         padding: 0 12px;
         box-shadow: 0 3px 0 rgba(0,0,0,.18), 0 6px 14px rgba(0,0,0,.18);
       }
 
-      .tag:hover {
+      .hero-shell .tag:hover {
         transform: translateY(-2px) rotate(-1.5deg);
         box-shadow: 0 5px 0 rgba(0,0,0,.22), 0 10px 18px rgba(0,0,0,.2);
       }
 
-      .tag:active {
+      .hero-shell .tag:active {
         transform: translateY(1px);
         box-shadow: 0 1px 0 rgba(0,0,0,.18);
       }
 
-      .t1 { left: 12px; top: 12px; right: auto; }
-      .t2 { right: 12px; top: 12px; left: auto; }
-      .t3 { left: 12px; top: calc(12px + 44 * var(--n)); right: auto; }
-      .t4 { right: 12px; top: calc(12px + 44 * var(--n)); left: auto; }
+      .hero-shell .t1 { left: 12px; top: 12px; right: auto; }
+      .hero-shell .t2 { right: 12px; top: 12px; left: auto; }
+      .hero-shell .t3 { left: 12px; top: calc(12px + 44 * var(--n)); right: auto; }
+      .hero-shell .t4 { right: 12px; top: calc(12px + 44 * var(--n)); left: auto; }
 
-      body.is-case .t3,
-      body.is-case .t4 {
+      body.is-case .hero-shell .t3,
+      body.is-case .hero-shell .t4 {
         visibility: hidden;
       }
 
-      .logo {
+      .hero-shell .logo {
         display: none;
       }
 
-      .m-wm {
-        position: fixed;
+      .hero-shell .m-wm {
+        position: absolute;
         left: 3vw;
         width: 94vw;
         top: calc(12px + 96 * var(--n));
@@ -862,14 +873,14 @@
         z-index: 1;
       }
 
-      .m-script {
-        position: fixed;
+      .hero-shell .m-script {
+        position: absolute;
         right: 6vw;
         top: calc(12px + 96 * var(--n) + 14vw);
         font-family: 'Caveat Brush', cursive;
         font-size: 14vw;
         line-height: 1;
-        color: #fff;
+        color: #f4f1ea;
         letter-spacing: -.5px;
         transform: rotate(-7deg);
         transform-origin: 100% 50%;
@@ -879,8 +890,8 @@
         z-index: 2;
       }
 
-      .m-badge {
-        position: fixed;
+      .hero-shell .m-badge {
+        position: absolute;
         right: 2vw;
         top: calc(12px + 96 * var(--n) + 9vw);
         width: 27vw;
@@ -902,7 +913,7 @@
         pointer-events: none;
       }
 
-      .ticket {
+      .hero-shell .ticket {
         left: 0;
         right: 0;
         margin-inline: auto;
@@ -914,31 +925,31 @@
         box-shadow: 0 18px 40px rgba(0,0,0,.28);
       }
 
-      .ticket .hole {
+      .hero-shell .ticket .hole {
         width: 15px;
         height: 15px;
         box-shadow: inset 0 2px 3px rgba(0,0,0,.35);
       }
 
-      .ticket .h1 { left: 12px; top: 12px; }
-      .ticket .h2 { right: 12px; top: 12px; }
-      .ticket .h3 { left: 12px; bottom: 12px; }
-      .ticket .h4 { right: 12px; bottom: 12px; }
+      .hero-shell .ticket .h1 { left: 12px; top: 12px; }
+      .hero-shell .ticket .h2 { right: 12px; top: 12px; }
+      .hero-shell .ticket .h3 { left: 12px; bottom: 12px; }
+      .hero-shell .ticket .h4 { right: 12px; bottom: 12px; }
 
-      .ticket h2 {
+      .hero-shell .ticket h2 {
         font-size: 38px;
       }
 
-      .ticket .rows {
+      .hero-shell .ticket .rows {
         margin-top: 8px;
       }
 
-      .ticket .rows div {
+      .hero-shell .ticket .rows div {
         font-size: 11px;
         padding: 4px 0 3px;
       }
 
-      .desc {
+      .hero-shell .desc {
         left: 0;
         right: 0;
         margin-inline: auto;
@@ -947,20 +958,20 @@
         text-align: center;
       }
 
-      .desc .k {
+      .hero-shell .desc .k {
         font-size: 15px;
       }
 
-      .desc p {
+      .hero-shell .desc p {
         margin-top: 8px;
         font-size: 13.5px;
       }
 
-      .desc .num {
+      .hero-shell .desc .num {
         display: none;
       }
 
-      .nav-case {
+      .hero-shell .nav-case {
         bottom: calc(env(safe-area-inset-bottom, 0px) + 2.2vh);
         flex-direction: row;
         gap: 10px;
@@ -968,30 +979,166 @@
         line-height: 1;
       }
 
-      .nav-case.prev { left: 6vw; }
-      .nav-case.next { right: 6vw; flex-direction: row-reverse; }
-      .nav-case br { display: none; }
+      .hero-shell .nav-case.prev { left: 6vw; }
+      .hero-shell .nav-case.next { right: 6vw; flex-direction: row-reverse; }
+      .hero-shell .nav-case br { display: none; }
 
-      .nav-case .c {
+      .hero-shell .nav-case .c {
         width: 42px;
         height: 42px;
       }
 
-      .nav-case svg {
+      .hero-shell .nav-case svg {
         width: 20px;
         height: 20px;
       }
 
-      .hint {
+      .hero-shell .hint {
         bottom: 18px;
         font-size: 11px;
         gap: 6px;
       }
 
-      .hint-line {
+      .hero-shell .hint-line {
         width: 1.5px;
         height: 20px;
       }
+    }
+
+    .about-backdrop {
+      position: absolute;
+      inset: 0;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(7, 26, 18, 0.62);
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .28s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .about-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .about-card {
+      position: relative;
+      width: min(92vw, 460px);
+      background: #f4f1ea;
+      color: var(--ink);
+      border-radius: 4px;
+      padding: 28px 28px 24px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, .42);
+      transform: translateY(14px) scale(.98);
+      transition: transform .32s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .about-backdrop.open .about-card {
+      transform: translateY(0) scale(1);
+    }
+
+    .about-card .about-k {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--green-700);
+    }
+
+    .about-card h3 {
+      margin: 6px 0 12px;
+      font-family: 'Anton', sans-serif;
+      font-weight: 400;
+      font-size: 38px;
+      line-height: 1;
+      letter-spacing: -.01em;
+      color: var(--ink);
+    }
+
+    .about-card p {
+      margin: 0 0 14px;
+      font-size: 14.5px;
+      line-height: 1.5;
+      color: #252927;
+    }
+
+    .about-card .about-rows {
+      margin-top: 10px;
+      border-top: 1px solid rgba(20, 22, 21, .14);
+    }
+
+    .about-card .about-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1.5px dotted rgba(20, 22, 21, .28);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .about-card .about-row span {
+      color: #5a5e5c;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .about-card .about-row b {
+      text-align: right;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .about-card .about-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .about-card .about-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 34px;
+      padding: 0 14px;
+      background: var(--green-900);
+      color: #f4f1ea;
+      font-size: 12.5px;
+      font-weight: 650;
+      text-decoration: none;
+      transition: background-color .2s ease, transform .2s ease;
+    }
+
+    .about-card .about-link:hover {
+      background: var(--green-700);
+      transform: translateY(-1px);
+    }
+
+    .about-card .about-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 34px;
+      height: 34px;
+      border: 1.5px solid rgba(13, 15, 14, .2);
+      background: transparent;
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+    }
+
+    .about-card .about-close:hover {
+      background: var(--ink);
+      color: #f4f1ea;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1003,6 +1150,7 @@
   </style>
 </head>
 <body data-mode="hero" data-case="0" data-progress="0.00">
+  <section id="hero-section" class="hero-shell">
   <main class="stage">
     <div class="frame d-fade">
       <div class="studio-backdrop" aria-hidden="true"></div>
@@ -1054,26 +1202,26 @@
   </main>
 
   <div class="ui">
-    <nav aria-label="Primary">
-      <button class="tag t1 pre" type="button">my studio</button>
+    <nav aria-label="Navigation principale">
+      <button class="tag t1 pre" type="button" id="aboutTrigger">à propos</button>
       <button class="tag t2 pre" type="button">portfolio</button>
-      <a class="tag t3 pre" href="#contacts">contacts</a>
-      <a class="tag t4 pre" href="#discuss">discuss a project</a>
+      <a class="tag t3 pre" href="https://github.com/KennethKpn" target="_blank" rel="noopener noreferrer">github</a>
+      <a class="tag t4 pre" href="mailto:yessekpanou86@gmail.com">contact</a>
     </nav>
 
-    <button class="logo" type="button" id="centerLogo">[MY BRAND NAME]</button>
+    <button class="logo" type="button" id="centerLogo">KENNETH KPN</button>
 
     <svg class="m-only m-wm pre" viewBox="0 0 1440 240" preserveAspectRatio="none" aria-hidden="true">
       <defs>
         <linearGradient id="mWmGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#ffffff" stop-opacity="1" />
+          <stop offset="0" stop-color="#f4f1ea" stop-opacity="1" />
           <stop offset=".5" stop-color="#f1f5f3" stop-opacity=".9" />
           <stop offset="1" stop-color="#d7e6de" stop-opacity=".3" />
         </linearGradient>
       </defs>
-      <text id="mWmText" x="10" y="210" textLength="1420" lengthAdjust="spacingAndGlyphs" fill="url(#mWmGrad)" font-family="'Inter Tight', sans-serif" font-weight="900" font-size="254" letter-spacing="-6">[MY BRAND NAME]</text>
+      <text id="mWmText" x="10" y="210" textLength="1420" lengthAdjust="spacingAndGlyphs" fill="url(#mWmGrad)" font-family="'Inter Tight', sans-serif" font-weight="900" font-size="254" letter-spacing="-6">KENNETH KPN</text>
     </svg>
-    <div class="m-only m-script pre" id="mScriptText" aria-hidden="true">[MY CREATIVE SPECIALTY]</div>
+    <div class="m-only m-script pre" id="mScriptText" aria-hidden="true">Craft &amp; Code</div>
     <div class="m-only m-badge pre" aria-hidden="true"></div>
 
     <div class="hint pre" aria-hidden="true">
@@ -1086,17 +1234,17 @@
       <span class="hole h2" aria-hidden="true"></span>
       <span class="hole h3" aria-hidden="true"></span>
       <span class="hole h4" aria-hidden="true"></span>
-      <h2>VELL LOOKBOOK</h2>
+      <h2>UNYVON</h2>
       <div class="rows">
-        <div>STUDIO VELL</div>
-        <div>E-COMMERCE</div>
+        <div>KENNETH KPN · UNYVON</div>
+        <div>SAAS · NEXT.JS</div>
         <div>2026</div>
       </div>
     </article>
 
     <div class="desc" aria-live="polite">
-      <div class="k">// vell lookbook</div>
-      <p>— a runway lookbook where every look steps forward on scroll and the cart follows along.</p>
+      <div class="k">01 · UNYVON</div>
+      <p>— plateforme SaaS de gestion opérationnelle conçue avec Next.js, React et TypeScript.</p>
       <div class="num">01 / 03</div>
     </div>
 
@@ -1111,70 +1259,84 @@
       <span class="c" aria-hidden="true">
         <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
       </span>
-      <span>next <br>case</span>
+      <span id="nextBtnLabel">next <br>case</span>
     </button>
   </div>
+
+  <div class="about-backdrop" id="aboutBackdrop" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" aria-hidden="true">
+    <div class="about-card">
+      <button class="about-close" type="button" id="aboutClose" aria-label="Fermer la fenêtre à propos">&times;</button>
+      <div class="about-k">IDENTITÉ · PORTFOLIO</div>
+      <h3 id="aboutTitle">KPANOU KENNETH</h3>
+      <p>Développeur Full-Stack &amp; Designer UI/UX basé à Cotonou. Je conçois des plateformes SaaS, des interfaces web soignées et des expériences interactives orientées produit.</p>
+      <div class="about-rows">
+        <div class="about-row"><span>SPECIALITÉ</span><b>Craft &amp; Code</b></div>
+        <div class="about-row"><span>STACK</span><b>Next.js · React · TypeScript</b></div>
+        <div class="about-row"><span>GITHUB</span><b>@KennethKpn</b></div>
+        <div class="about-row"><span>EMAIL</span><b>yessekpanou86@gmail.com</b></div>
+      </div>
+      <div class="about-actions">
+        <a class="about-link" href="https://github.com/KennethKpn" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="about-link" href="mailto:yessekpanou86@gmail.com">Contacter</a>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <div id="root"></div>
 
   <script>
     (() => {
       // =====================================================================
-      // 1. PERSONAL BRANDING CONFIGURATION — EDIT THESE VALUES
+      // 1. PERSONAL BRANDING CONFIGURATION
       // =====================================================================
       const BRAND_CONFIG = {
-        BRAND_NAME: '[MY BRAND NAME]',
-        DISPLAY_NAME: '[MY NAME]',
-        PROFESSIONAL_ROLE: '[MY PROFESSIONAL TITLE]',
-        SIGNATURE: '[MY CREATIVE SPECIALTY]',
-        EMAIL: '[MY EMAIL]',
-        SOCIAL_HANDLE: '[MY SOCIAL HANDLE]',
+        BRAND_NAME: 'KENNETH KPN',
+        DISPLAY_NAME: 'KPANOU Kenneth',
+        PROFESSIONAL_ROLE: 'Full-Stack Dev & UI/UX',
+        SIGNATURE: 'Craft & Code',
+        EMAIL: 'yessekpanou86@gmail.com',
+        SOCIAL_HANDLE: '@KennethKpn',
         YEAR: '2026'
       };
 
       // =====================================================================
-      // 2. ASSET & PORTFOLIO CONFIGURATION — EDIT MEDIA URLS & CASES HERE
+      // 2. ASSET & PORTFOLIO CONFIGURATION
       // =====================================================================
       const HX = u => 'https://images.higgs.ai/?default=1&output=webp&url=' + encodeURIComponent(u) + '&w=2048&q=85';
       const CF = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/';
-      const R2 = 'https://pub-86dc5b5484314368ac5436a674b0d199.r2.dev/aaaf/';
+      const R2 = 'https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/';
 
       const PORTFOLIO_CONFIG = {
         assets: {
-          // Personalized hero photograph & pixel-aligned transparent cutout (no fictional character)
           heroPlate: '/assets/aistudio/image_ec512d7d.png',
           heroCutout: '/assets/personalized/hero-cutout.png',
-
-          // Set to your personalized 16:9 ~5s 24fps MP4 URL when generated (never reuse the fictional character's video).
-          // When null, a synchronized 3D perspective laptop dive animation runs instead.
           personalizedTransitionVideo: null,
-
-          // Reusable prop-only assets (no person in frame)
           casePlate: HX(CF + 'hf_20261111_001031_4a7c3fd9-2168-4219-9736-096a17bbb0e2.png'),
           badge: 'https://images.higgs.ai/?default=1&output=webp&url=' + encodeURIComponent(CF + 'hf_20261111_001143_65c037e6-0768-4b12-9f17-17be132ce16b.png') + '&w=1200&q=85'
         },
 
-        // Provisional demonstration projects (replace video URLs, titles, and copy with your own work).
-        // Note: the upstream R2 URLs currently return HTTP 401 Unauthorized; replace with project-owned MP4s under /public/assets/.
         cases: [
           {
-            video: R2 + 'vell-lookbook.mp4',
-            title: 'VELL LOOKBOOK',
-            rows: ['PROVISIONAL DEMO // VELL', 'E-COMMERCE', '2026'],
-            key: '// vell lookbook (demo)',
-            text: '\u2014 provisional demo: a runway lookbook where every look steps forward on scroll and the cart follows along.'
+            video: R2 + 'designs/helion-dispatch-landing.mp4',
+            title: 'UNYVON',
+            rows: ['KENNETH KPN · UNYVON', 'SAAS · NEXT.JS', '2026'],
+            key: '01 · UNYVON',
+            text: '\u2014 plateforme SaaS de gestion opérationnelle conçue avec Next.js, React et TypeScript.'
           },
           {
-            video: R2 + 'vasari-vhs-hero.mp4',
-            title: 'VASARI SHELF',
-            rows: ['PROVISIONAL DEMO // VASARI', 'PORTFOLIO', '2026'],
-            key: '// vasari shelf (demo)',
-            text: '\u2014 provisional demo: a director\u2019s archive told as a shelf of tapes: pull one out and its story plays.'
+            video: R2 + 'designs/ink-reveal-hover.mp4',
+            title: 'DEVCONNECT',
+            rows: ['KENNETH KPN · DEVCONNECT', 'REACT · SUPABASE', '2026'],
+            key: '02 · DEVCONNECT',
+            text: '\u2014 réseau développeurs typé en TypeScript strict avec Supabase RLS et emails Brevo.'
           },
           {
-            video: R2 + 'living-portrait-hero.mp4',
-            title: 'MINA PORTRAIT',
-            rows: ['PROVISIONAL DEMO // MINA', 'PERSONAL SITE', '2025'],
-            key: '// mina portrait (demo)',
-            text: '\u2014 provisional demo: a 3D creator\u2019s homepage where the portrait follows your cursor and pulls faces.'
+            video: R2 + 'designs/roadster-3d-car-landing.mp4',
+            title: 'ICONLABS',
+            rows: ['KENNETH KPN · ICONLABS', 'AGENCE DIGITALE', '2026'],
+            key: '03 · ICONLABS',
+            text: '\u2014 vitrine de notre studio à Cotonou : design UI/UX, développement et stratégie.'
           }
         ]
       };
@@ -1333,6 +1495,7 @@
       const descNum = desc.querySelector('.num');
       const prevBtn = document.querySelector('.nav-case.prev');
       const nextBtn = document.querySelector('.nav-case.next');
+      const nextBtnLabel = document.getElementById('nextBtnLabel');
 
       function applyBrandConfig() {
         document.title = `${BRAND_CONFIG.BRAND_NAME} — ${BRAND_CONFIG.SIGNATURE} Portfolio`;
@@ -1490,6 +1653,10 @@
         descText.textContent = c.text;
         descNum.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(CASES.length).padStart(2, '0');
         prevBtn.classList.toggle('dim', i === 0);
+        if (nextBtnLabel) {
+          nextBtnLabel.innerHTML = 'next <br>case';
+        }
+        nextBtn.setAttribute('aria-label', 'Next case');
         document.body.dataset.case = String(i);
       }
 
@@ -1946,7 +2113,11 @@
         document.body.dataset.mode = 'hero';
         screenHit.style.display = 'none';
         screenStatus.classList.remove('show');
-        vids.forEach(v => v.pause());
+        clearAnims([ticket, descKey, descText, descNum, ...vids]);
+        vids.forEach(v => {
+          v.pause();
+          v.style.opacity = '0';
+        });
       }
 
       function renderAtProgress(rawP) {
@@ -1957,6 +2128,7 @@
         if (progress > 0.005) {
           cancelIntroHeroAnims();
           stopSway();
+          preloadCase(cur);
         }
 
         const W = window.innerWidth;
@@ -2039,6 +2211,7 @@
         screen.style.opacity = String(ch.screenOpacity.toFixed(3));
 
         if (!ch.isCaseActive) {
+          clearAnims([ticket, descKey, descText, descNum]);
           const uiY = (1 - ch.caseUiOpacity) * -28;
           ticket.style.opacity = String(ch.caseUiOpacity.toFixed(3));
           ticket.style.transform = `translateY(${uiY.toFixed(2)}px) rotate(${((1 - ch.caseUiOpacity) * -4).toFixed(2)}deg)`;
@@ -2183,6 +2356,7 @@
           introEntered = true;
           cancelIntroHeroAnims();
           renderAtProgress(progress);
+          preloadCase(0);
         });
       }
 
@@ -2298,6 +2472,32 @@
         document.body.classList.remove('busy');
       }
 
+      const aboutTrigger = document.getElementById('aboutTrigger');
+      const aboutBackdrop = document.getElementById('aboutBackdrop');
+      const aboutClose = document.getElementById('aboutClose');
+
+      function openAboutModal() {
+        if (!aboutBackdrop) return;
+        aboutBackdrop.classList.add('open');
+        aboutBackdrop.setAttribute('aria-hidden', 'false');
+        if (aboutClose) aboutClose.focus();
+      }
+
+      function closeAboutModal() {
+        if (!aboutBackdrop) return;
+        aboutBackdrop.classList.remove('open');
+        aboutBackdrop.setAttribute('aria-hidden', 'true');
+        if (aboutTrigger) aboutTrigger.focus();
+      }
+
+      if (aboutTrigger) aboutTrigger.addEventListener('click', openAboutModal);
+      if (aboutClose) aboutClose.addEventListener('click', closeAboutModal);
+      if (aboutBackdrop) {
+        aboutBackdrop.addEventListener('click', e => {
+          if (e.target === aboutBackdrop) closeAboutModal();
+        });
+      }
+
       function goNext() {
         if (progress < 0.985) {
           autoGlideTo(1.0, 1550);
@@ -2317,26 +2517,25 @@
       }
 
       // Click handlers
-      tags[0].addEventListener('click', () => {
-        if (progress > 0.01) autoGlideTo(0.0, 1050);
-      });
       tags[1].addEventListener('click', () => {
         if (progress < 0.985) autoGlideTo(1.0, 1550);
+        else swapTo((cur + 1) % CASES.length);
       });
-      tags[2].addEventListener('click', e => e.preventDefault());
-      tags[3].addEventListener('click', e => e.preventDefault());
 
       logo.addEventListener('click', () => {
-        if (progress > 0.01) autoGlideTo(0.0, 1050);
+        if (progress > 0.01) {
+          autoGlideTo(0.0, 1050);
+        }
       });
       prevBtn.addEventListener('click', goPrev);
       nextBtn.addEventListener('click', goNext);
       screenHit.addEventListener('click', goNext);
 
-      // Continuous scroll-synchronized wheel control
+      // Smooth wheel scrub for Hero dive & Case 1..3
       let wheelCaseLock = 0;
       window.addEventListener('wheel', e => {
         e.preventDefault();
+        if (aboutBackdrop && aboutBackdrop.classList.contains('open')) return;
         if (busy) return;
         const dy = e.deltaY;
         if (Math.abs(dy) < 2) return;
@@ -2344,9 +2543,9 @@
         const now = performance.now();
         if (targetProgress >= 0.985 && progress >= 0.985) {
           if (dy > 16) {
-            if (now >= wheelCaseLock) {
+            if (cur < CASES.length - 1 && now >= wheelCaseLock) {
               wheelCaseLock = now + 700;
-              goNext();
+              swapTo(cur + 1);
             }
             return;
           }
@@ -2358,7 +2557,6 @@
               }
               return;
             }
-            // Scrolling up from case 0 backs smoothly out of the screen into the dive
             glideAnim = null;
             targetProgress = clamp01(progress + dy * 0.0011);
             scheduleTick();
@@ -2372,7 +2570,7 @@
         scheduleTick();
       }, { passive: false });
 
-      // Continuous touch scrubbing + directional case swipe
+      // Continuous touch scrubbing + directional case swipe inside Hero 1 (only when at top)
       let tx = 0;
       let ty = 0;
       let lastTy = 0;
@@ -2380,7 +2578,7 @@
       let touchScrubbed = false;
 
       window.addEventListener('touchstart', e => {
-        if (e.touches.length !== 1) return;
+        if (window.scrollY > 12 || e.touches.length !== 1) return;
         tx = e.touches[0].clientX;
         ty = e.touches[0].clientY;
         lastTy = ty;
@@ -2389,7 +2587,7 @@
       }, { passive: true });
 
       window.addEventListener('touchmove', e => {
-        if (busy || e.touches.length !== 1) return;
+        if (window.scrollY > 12 || busy || e.touches.length !== 1) return;
         if (touchStartProgress >= 0.985 && cur > 0) return;
 
         const curY = e.touches[0].clientY;
@@ -2408,7 +2606,7 @@
       }, { passive: true });
 
       window.addEventListener('touchend', e => {
-        if (busy || e.changedTouches.length !== 1) return;
+        if (window.scrollY > 12 || busy || e.changedTouches.length !== 1) return;
         const dx = e.changedTouches[0].clientX - tx;
         const dy = e.changedTouches[0].clientY - ty;
 
@@ -2433,9 +2631,18 @@
         }
       }, { passive: true });
 
-      // Keyboard navigation
+      // Keyboard navigation + About modal Escape support
       window.addEventListener('keydown', e => {
+        if (aboutBackdrop && aboutBackdrop.classList.contains('open')) {
+          if (e.key === 'Escape') {
+            e.preventDefault();
+            closeAboutModal();
+          }
+          return;
+        }
         if (busy) return;
+        const activeTag = document.activeElement && document.activeElement.tagName;
+        if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT') return;
         if (progress < 0.985) {
           if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
             e.preventDefault();
@@ -2484,5 +2691,6 @@
       }, 4000);
     })();
   </script>
+  <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>

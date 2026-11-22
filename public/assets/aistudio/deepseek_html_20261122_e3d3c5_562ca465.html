@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kenji Ward — Folio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#efe8dc}
+body{overflow-x:hidden}
+
+.mgn-root{position:relative;container-type:inline-size;isolation:isolate;overflow-x:clip;background:var(--mgn-paper);color:var(--mgn-ink);font-family:var(--mgn-body);font-weight:300;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.mgn-root *,.mgn-root *::before,.mgn-root *::after{box-sizing:border-box}
+.mgn-root :where(img){max-width:none;display:block}
+.mgn-root :where(button){font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+.mgn-root :where(a){color:inherit;text-decoration:none}
+.mgn-root :focus-visible{outline:2px dashed var(--mgn-pen);outline-offset:4px;border-radius:6px}
+
+.mgn-display{font-family:var(--mgn-display);font-weight:400;line-height:.92;letter-spacing:-.012em}
+.mgn-hand{font-family:var(--mgn-hand);color:var(--mgn-pen);font-weight:500;line-height:1.02}
+.mgn-p{font-size:clamp(13px,1.08cqi,16px);line-height:1.7;color:var(--fg)}
+.mgn-muted{color:var(--muted)}
+.mgn-h2{font-size:clamp(54px,8.6cqi,150px);margin:0;color:var(--fg)}
+
+.mgn-sheet{position:relative;isolation:isolate;display:flex;flex-direction:column;justify-content:center;min-height:var(--mgn-h);padding:clamp(76px,8cqi,130px) clamp(18px,5.2cqi,92px) clamp(56px,6cqi,100px);color:var(--fg)}
+.mgn-sheet[data-tone=paper]{--fg:var(--mgn-ink);--muted:color-mix(in oklab,var(--mgn-ink) 60%,var(--mgn-paper));--rule:color-mix(in oklab,var(--mgn-ink) 16%,var(--mgn-paper));background:var(--mgn-paper)}
+.mgn-sheet[data-tone=night]{--fg:#ecebe7;--muted:color-mix(in oklab,#ecebe7 62%,var(--mgn-night));--rule:color-mix(in oklab,#ecebe7 16%,var(--mgn-night));isolation:isolate}
+.mgn-sheet>*{width:100%}
+.mgn-sheet-bg{position:absolute;inset:0;z-index:-1;background:var(--mgn-night);pointer-events:none}
+.mgn-grain{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.5;mix-blend-mode:multiply;background-image:radial-gradient(color-mix(in oklab,var(--mgn-ink) 9%,transparent) .6px,transparent .7px);background-size:5px 5px}
+.mgn-sheet[data-tone=night] .mgn-grain{mix-blend-mode:screen;background-image:radial-gradient(rgba(255,255,255,.05) .6px,transparent .7px)}
+
+.mgn-mk{position:relative;display:inline-block;white-space:normal}
+.mgn-mark{position:absolute;overflow:visible;pointer-events:none;fill:none;stroke:var(--mgn-pen);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.mgn-draw{stroke-dasharray:1;stroke-dashoffset:0}
+.mgn-ink{fill:none;stroke:var(--mgn-pen);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.mgn-write,.mgn-card-write{display:inline-block}
+.mgn-note-swap{display:inline-block;animation:mgn-swap .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes mgn-swap{from{opacity:0;transform:translateY(8px) rotate(-1deg)}}
+
+.mgn-split{display:inline}
+.mgn-w{display:inline-block;white-space:nowrap}
+.mgn-c{display:inline-block;overflow:hidden;padding:.06em .01em .12em;margin:-.06em -.01em -.12em}
+.mgn-ci{display:inline-block;will-change:transform}
+
+.mgn-hd{position:relative;display:inline-block}
+.mgn-uline{display:block;width:min(70%,320px);height:auto;aspect-ratio:300/26;margin-top:.1em}
+.mgn-uline path{fill:none;stroke:var(--mgn-pen);stroke-width:2.2;stroke-linecap:round}
+
+/* chrome */
+.mgn-top{position:sticky;top:0;height:0;z-index:50;mix-blend-mode:difference;pointer-events:none}
+.mgn-bar{position:absolute;left:0;right:0;top:0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:16px clamp(18px,5.2cqi,92px) 14px;color:#fff;font-size:12px;letter-spacing:.06em;pointer-events:auto}
+.mgn-bar-right{justify-self:end;display:flex;align-items:baseline;gap:12px}
+.mgn-bar-btn{position:relative;padding:4px 12px;letter-spacing:.06em}
+.mgn-bar-btn .mgn-mark{stroke:#fff;opacity:0;transition:opacity .25s}
+.mgn-bar-btn:hover .mgn-mark,.mgn-bar-btn:focus-visible .mgn-mark{opacity:1}
+.mgn-bar-sec{font-family:var(--mgn-hand);font-size:19px;letter-spacing:0;min-width:5ch;text-align:right}
+.mgn-progress{position:absolute;left:0;right:0;bottom:0;height:1px;background:#fff;transform-origin:0 50%;transform:scaleX(0);opacity:.6}
+.mgn-hold{position:sticky;top:0;height:0;z-index:60}
+.mgn-index{position:absolute;left:0;right:0;top:0;height:var(--mgn-h);background:var(--mgn-paper);color:var(--mgn-ink);display:flex;flex-direction:column;justify-content:safe center;padding:70px clamp(18px,5.2cqi,92px) 40px;overflow:auto;clip-path:circle(0% at 50% 0%);visibility:hidden;transition:clip-path .7s cubic-bezier(.7,0,.2,1),visibility 0s .7s}
+.mgn-index[data-open=true]{clip-path:circle(150% at 50% 0%);visibility:visible;transition:clip-path .8s cubic-bezier(.7,0,.2,1),visibility 0s}
+.mgn-index ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:column;grid-template-rows:repeat(var(--rows),auto);gap:clamp(4px,.8cqi,12px) clamp(24px,4cqi,64px)}
+.mgn-index li button{display:flex;align-items:baseline;gap:clamp(12px,2cqi,30px);font-family:var(--mgn-display);font-size:clamp(30px,4.2cqi,68px);line-height:1.04;text-align:left;color:var(--mgn-ink)}
+.mgn-index li button small{font-family:var(--mgn-hand);font-size:.38em;color:var(--mgn-pen);min-width:2.2ch}
+.mgn-index li button .mgn-mk .mgn-draw{stroke-dashoffset:1;transition:stroke-dashoffset .55s cubic-bezier(.6,0,.2,1)}
+.mgn-index li button:hover .mgn-draw,.mgn-index li button:focus-visible .mgn-draw{stroke-dashoffset:0}
+.mgn-index-close{position:absolute;top:16px;right:clamp(18px,5.2cqi,92px);font-family:var(--mgn-hand);font-size:22px;color:var(--mgn-pen)}
+.mgn-index-foot{margin-top:clamp(24px,4cqi,56px);font-size:12px;letter-spacing:.06em;color:color-mix(in oklab,var(--mgn-ink) 60%,var(--mgn-paper))}
+
+/* cover */
+.mgn-cover{display:grid;place-items:center;overflow:hidden;padding-top:60px;touch-action:pan-y}
+.mgn-canvas{position:absolute;inset:0;width:100%;height:100%;max-width:none;pointer-events:none;z-index:3}
+.mgn-cover-in{position:relative;display:flex;flex-direction:column;align-items:center}
+.mgn-title{display:flex;white-space:nowrap;font-size:clamp(78px,21.5cqi,370px);color:var(--fg);margin:0;position:relative;z-index:1}
+.mgn-l{position:relative;display:inline-block;will-change:transform}
+.mgn-lc{display:inline-block;overflow:hidden;padding:.08em .015em .16em;margin:-.08em -.015em -.16em}
+.mgn-li{display:inline-block}
+.mgn-orbit{position:absolute;left:50%;top:52%;width:0;height:0;pointer-events:none}
+.mgn-orbit svg{position:absolute;overflow:visible;left:0;top:0}
+.mgn-orbit-back{z-index:-1}
+.mgn-star{position:absolute;left:0;top:0;width:0;height:0;z-index:2}
+.mgn-star svg{position:absolute;left:-14px;top:-14px;width:28px;height:28px;overflow:visible}
+.mgn-star path{fill:var(--mgn-pen);stroke:none}
+.mgn-sig{position:absolute;right:-1%;top:-.55em;transform:rotate(-7deg);font-size:clamp(30px,4.4cqi,72px);white-space:nowrap;cursor:default;z-index:2}
+.mgn-sig-arrow{position:absolute;right:calc(100% - .55em);top:.5em;width:2.3em;height:auto;aspect-ratio:150/110;stroke-width:2.1}
+.mgn-pill-wrap{position:relative;margin-top:clamp(8px,1.2cqi,18px);align-self:flex-end;margin-right:6%}
+.mgn-pill{position:relative;display:inline-block;padding:.32em 1.1em .36em;border:1.5px solid currentColor;border-radius:999px;font-size:clamp(12px,1.35cqi,19px);font-weight:400;letter-spacing:.02em;color:var(--fg)}
+.mgn-cover-meta{position:absolute;left:clamp(18px,5.2cqi,92px);right:clamp(18px,5.2cqi,92px);bottom:clamp(20px,3cqi,40px);display:flex;justify-content:space-between;align-items:flex-end;gap:16px;font-size:12px;letter-spacing:.06em;color:var(--muted)}
+.mgn-hint{display:flex;align-items:center;gap:6px;font-family:var(--mgn-hand);font-size:22px;letter-spacing:0;color:var(--mgn-pen)}
+.mgn-hint svg{width:22px;height:40px;animation:mgn-bob 2.2s ease-in-out infinite}
+@keyframes mgn-bob{0%,100%{transform:translateY(-3px)}50%{transform:translateY(5px)}}
+
+/* hello */
+.mgn-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6cqi,110px);align-items:center;max-width:1500px;margin:0 auto}
+.mgn-traits{position:relative;width:100%;max-width:560px;aspect-ratio:500/520;margin:0 auto}
+.mgn-traits>svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.mgn-portrait{position:absolute;left:27%;top:17%;width:46%;height:66%}
+.mgn-portrait-img{position:absolute;inset:0;overflow:hidden;border-radius:4px;background:color-mix(in oklab,var(--mgn-ink) 10%,var(--mgn-paper))}
+.mgn-portrait-img img{width:100%;height:100%;max-width:none;object-fit:cover;filter:grayscale(1) contrast(1.05);transform:scale(1.04);transition:filter .7s ease,transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.mgn-portrait:hover .mgn-portrait-img img{filter:grayscale(0) contrast(1);transform:scale(1.09)}
+.mgn-trait{position:absolute;transform:translate(-50%,-50%);font-size:clamp(17px,1.9cqi,27px);white-space:nowrap}
+.mgn-hello-copy .mgn-h2{font-size:clamp(64px,10.5cqi,180px)}
+.mgn-hello-copy .mgn-p{max-width:52ch;margin-top:clamp(18px,2.4cqi,34px);text-align:justify;hyphens:auto}
+
+/* education */
+.mgn-edu{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(32px,6cqi,110px);max-width:1500px;margin:0 auto;align-items:start}
+.mgn-edu-intro{max-width:46ch;margin-top:clamp(14px,2cqi,28px)}
+.mgn-edu-list{list-style:none;padding:0;margin:clamp(26px,3.4cqi,52px) 0 0;display:grid;gap:clamp(16px,1.8cqi,26px)}
+.mgn-edu-list li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:baseline}
+.mgn-edu-list li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--fg);transform:translateY(-3px)}
+.mgn-edu-t{font-weight:500;font-size:clamp(14px,1.2cqi,18px)}
+.mgn-edu-s{font-size:clamp(12px,.98cqi,14px);color:var(--muted);margin-top:3px}
+.mgn-qr-wrap{position:relative;display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,2.4cqi,36px);align-items:center}
+.mgn-qr{position:relative;display:block;width:clamp(120px,13cqi,190px);padding:10px;background:#fff;border-radius:10px;box-shadow:0 18px 40px -22px rgba(0,0,0,.35);transform:rotate(-2deg);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.mgn-qr:hover{transform:rotate(0deg) scale(1.06)}
+.mgn-qr svg{display:block;width:100%;height:auto}
+.mgn-qr-tag{position:absolute;left:8px;top:-22px;font-family:var(--mgn-hand);font-size:17px;color:var(--mgn-pen)}
+.mgn-cvnote{position:relative;font-size:clamp(24px,2.6cqi,38px);max-width:7em}
+.mgn-cvnote svg{display:block;width:clamp(60px,6cqi,90px);height:auto;aspect-ratio:90/60;margin:0 0 6px -6px}
+.mgn-langs{margin-top:clamp(40px,5cqi,80px)}
+.mgn-langs h3{font-family:var(--mgn-display);font-weight:400;font-size:clamp(30px,3.6cqi,56px);margin:0 0 clamp(14px,1.8cqi,24px);color:var(--fg)}
+.mgn-lang{display:grid;grid-template-columns:6.5em 3.5em minmax(0,1fr);align-items:center;gap:14px;padding:10px 0;border-top:1px solid var(--rule);font-size:clamp(13px,1.05cqi,15px)}
+.mgn-lang b{font-weight:500}
+.mgn-lang svg{width:100%;height:16px;overflow:visible}
+
+/* skills */
+.mgn-skills{max-width:1500px;margin:0 auto}
+.mgn-skills-top{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(32px,6cqi,110px);align-items:end}
+.mgn-tools{position:relative;display:flex;flex-wrap:wrap;gap:clamp(10px,1.2cqi,16px);margin-top:clamp(26px,3cqi,44px);padding:14px 18px;width:max-content;max-width:100%}
+.mgn-tool{position:relative;width:clamp(48px,4.6cqi,64px);aspect-ratio:1;border-radius:24%;display:grid;place-items:center;font-weight:600;font-size:clamp(16px,1.6cqi,22px);letter-spacing:-.02em;box-shadow:0 10px 22px -14px rgba(0,0,0,.6);transition:transform .45s cubic-bezier(.2,.9,.2,1.3);font-family:var(--mgn-body)}
+.mgn-tool:hover,.mgn-tool:focus-visible,.mgn-tool[data-on=true]{transform:translateY(-8px) rotate(-6deg) scale(1.08)}
+.mgn-tool-note{min-height:2.2em;margin-top:6px;font-size:clamp(20px,2cqi,28px);padding-left:18px}
+.mgn-books{position:relative;justify-self:center;width:min(100%,360px)}
+.mgn-books>svg{display:block;width:100%;height:auto;overflow:visible}
+.mgn-books-note{position:absolute;right:-4%;top:-6%;font-size:clamp(20px,2.1cqi,30px);transform:rotate(6deg);text-align:right;width:7em}
+.mgn-skills-low{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:clamp(32px,6cqi,110px);margin-top:clamp(40px,5cqi,80px);align-items:start}
+.mgn-skill-list{list-style:none;margin:0;padding:0;columns:2;column-gap:clamp(20px,3cqi,48px)}
+.mgn-skill-list li{position:relative;padding:7px 0 7px 18px;break-inside:avoid;font-size:clamp(13px,1.1cqi,16px);border-bottom:1px solid var(--rule);transition:color .3s,padding .3s}
+.mgn-skill-list li::before{content:"";position:absolute;left:2px;top:50%;width:6px;height:6px;border-radius:50%;background:var(--fg);transform:translateY(-50%);transition:background .3s,transform .3s}
+.mgn-skill-list li:hover{padding-left:24px;color:var(--mgn-pen)}
+.mgn-skill-list li:hover::before{background:var(--mgn-pen);transform:translateY(-50%) scale(1.5)}
+.mgn-more{display:flex;align-items:center;gap:14px;margin-top:clamp(26px,3cqi,40px);font-size:clamp(20px,2cqi,28px)}
+.mgn-more svg{width:clamp(56px,5cqi,74px);height:auto;flex:none}
+
+/* projects deal */
+.mgn-deal{display:block;height:calc(var(--mgn-h) * 2.3);padding:0}
+.mgn-deal-stage{position:sticky;top:0;height:var(--mgn-h);min-height:560px;display:flex;flex-direction:column;padding:clamp(70px,7.5cqi,120px) clamp(18px,5.2cqi,92px) clamp(30px,4cqi,60px);overflow:hidden}
+.mgn-deal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
+.mgn-deal-note{position:relative;font-size:clamp(20px,2.1cqi,30px);max-width:12em;text-align:right;transform:rotate(-3deg);margin-top:.6em}
+.mgn-row{position:relative;flex:1;display:flex;justify-content:center;align-items:center;gap:clamp(14px,2.4cqi,40px);flex-wrap:nowrap;min-height:0}
+.mgn-card{position:relative;flex:none;width:clamp(78px,14.2cqi,210px);display:flex;flex-direction:column;align-items:center;will-change:transform}
+.mgn-card>button{display:block;width:100%;border-radius:16%/7.4%;transition:transform .45s cubic-bezier(.2,.9,.2,1.2)}
+.mgn-card>button:hover,.mgn-card>button:focus-visible{transform:translateY(-12px) scale(1.04)}
+.mgn-card-label{margin-top:clamp(12px,1.4cqi,20px);font-size:clamp(17px,1.9cqi,27px);white-space:nowrap}
+.mgn-card-tag{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%) rotate(-4deg);font-size:clamp(15px,1.6cqi,23px);white-space:nowrap;display:flex;flex-direction:column;align-items:center}
+.mgn-card-tag svg{width:24px;height:30px}
+.mgn-card:nth-child(even) .mgn-card-tag{transform:translateX(-50%) rotate(4deg)}
+
+/* phone */
+.mgn-phone{position:relative;width:100%;aspect-ratio:9/19.5;container-type:inline-size}
+.mgn-phone-body{position:absolute;inset:0;border-radius:15cqw;background:#121214;padding:3.4cqw;box-shadow:0 0 0 .7cqw #3a3a3f inset,0 40px 70px -30px rgba(0,0,0,.55),0 14px 24px -14px rgba(0,0,0,.4)}
+.mgn-screen{position:relative;width:100%;height:100%;border-radius:12cqw;overflow:hidden;background:#f7f6f3;color:#18181a;font-family:var(--mgn-body);font-weight:400;line-height:1.2;isolation:isolate}
+.mgn-island{position:absolute;left:50%;top:2.6cqw;width:28cqw;height:8cqw;border-radius:99px;background:#0b0b0c;transform:translateX(-50%);z-index:5}
+.mgn-status{position:absolute;left:0;right:0;top:0;height:13cqw;display:flex;justify-content:space-between;align-items:center;padding:1cqw 9cqw 0;font-size:4.2cqw;font-weight:600;z-index:4}
+.mgn-status i{display:flex;gap:1.4cqw;align-items:center}
+.mgn-status i b{display:block;width:6cqw;height:3.2cqw;border-radius:1cqw;border:.5cqw solid currentColor}
+.mgn-status i s{display:block;width:4cqw;height:3cqw;background:currentColor;clip-path:polygon(0 100%,100% 0,100% 100%)}
+.mgn-scr-img{position:absolute;width:100%;height:100%;max-width:none;object-fit:cover}
+.mgn-tabbar{position:absolute;left:5cqw;right:5cqw;bottom:4cqw;height:13cqw;border-radius:99px;background:rgba(255,255,255,.92);box-shadow:0 2cqw 6cqw rgba(0,0,0,.12);display:flex;justify-content:space-around;align-items:center;z-index:3}
+.mgn-tabbar span{width:4.4cqw;height:4.4cqw;border-radius:50%;background:#c9c8c3}
+.mgn-bars{display:grid;gap:1.8cqw}
+.mgn-bars span{display:block;height:2.4cqw;border-radius:2cqw;background:#dcdad4}
+.mgn-chip{display:inline-block;padding:1.8cqw 4cqw;border-radius:99px;font-size:3.6cqw;background:#ebe9e3;white-space:nowrap}
+
+/* case studies */
+.mgn-case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(32px,6cqi,110px);align-items:center;max-width:1560px;margin:0 auto}
+.mgn-case-wrap[data-flip=true] .mgn-case-copy{order:2}
+.mgn-eyebrow{font-size:clamp(19px,1.9cqi,27px)}
+.mgn-case-title{font-size:clamp(56px,8.2cqi,140px);margin:.12em 0 0;color:var(--fg)}
+.mgn-case-title em{font-style:normal;color:var(--mgn-pen)}
+.mgn-case-copy .mgn-p{max-width:50ch;margin-top:clamp(16px,2cqi,28px)}
+.mgn-challenge{position:relative;margin-top:clamp(22px,2.6cqi,38px);display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:start;max-width:34em}
+.mgn-challenge-l{font-size:clamp(20px,2cqi,28px);white-space:nowrap;padding:2px 8px}
+.mgn-challenge-t{font-size:clamp(13px,1.05cqi,15px);line-height:1.6;padding:4px 10px;border:1px solid var(--mgn-pen);border-radius:4px;color:var(--fg)}
+.mgn-stats{display:flex;flex-wrap:wrap;gap:clamp(18px,3cqi,44px);margin-top:clamp(26px,3cqi,44px)}
+.mgn-stat{display:flex;align-items:center;gap:12px;max-width:15em}
+.mgn-stat-n{position:relative;font-size:clamp(30px,3.4cqi,52px);padding:.06em .3em;white-space:nowrap}
+.mgn-stat-l{font-size:clamp(12px,.95cqi,14px);line-height:1.45;color:var(--muted)}
+.mgn-visit{display:inline-flex;align-items:center;gap:8px;margin-top:clamp(22px,2.6cqi,36px);font-family:var(--mgn-hand);font-size:clamp(20px,2cqi,28px);color:var(--mgn-pen)}
+.mgn-visit svg{width:34px;height:16px;transition:transform .3s}
+.mgn-visit:hover svg{transform:translateX(6px)}
+.mgn-trio{position:relative;width:100%;max-width:620px;aspect-ratio:1/1.08;margin:0 auto;perspective:1400px}
+.mgn-trio-p{position:absolute}
+.mgn-trio-p[data-slot="0"]{left:3%;top:13%;width:35%;z-index:1}
+.mgn-trio-p[data-slot="1"]{left:31%;top:2%;width:38%;z-index:3}
+.mgn-trio-p[data-slot="2"]{right:3%;top:16%;width:35%;z-index:2}
+.mgn-tilt{transform-style:preserve-3d;will-change:transform}
+.mgn-trio-p[data-slot="0"] .mgn-tilt{transform:rotate(-7deg)}
+.mgn-trio-p[data-slot="2"] .mgn-tilt{transform:rotate(6deg)}
+.mgn-case-note{position:absolute;z-index:4;font-size:clamp(19px,1.9cqi,27px);max-width:9em;line-height:1.05}
+.mgn-case-note svg{display:block;width:60px;height:46px}
+.mgn-case-wrap .mgn-case-note{left:-2%;bottom:2%;transform:rotate(-5deg)}
+.mgn-case-wrap[data-flip=true] .mgn-case-note{left:auto;right:-2%;text-align:right;transform:rotate(5deg)}
+
+/* facts */
+.mgn-facts{max-width:1400px;margin:0 auto}
+.mgn-facts-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.mgn-facts-note{font-size:clamp(21px,2.2cqi,32px);max-width:10em;transform:rotate(-4deg);margin-bottom:1.2em}
+.mgn-facts-note svg{display:block;width:70px;height:50px;margin:6px 0 0 40%}
+.mgn-fact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(30px,5cqi,80px) clamp(20px,4cqi,64px);margin-top:clamp(40px,5cqi,80px)}
+.mgn-fact{display:flex;flex-direction:column;align-items:flex-start;gap:10px;text-align:left}
+.mgn-fact:nth-child(3n+2){transform:translateY(clamp(20px,3cqi,50px))}
+.mgn-fact:nth-child(3n){transform:translateY(clamp(-10px,-1cqi,-4px))}
+.mgn-fact svg{width:clamp(64px,7cqi,104px);height:auto;aspect-ratio:1;transform-origin:50% 80%}
+.mgn-fact:hover svg,.mgn-fact:focus-visible svg{animation:mgn-wiggle .7s ease-in-out}
+@keyframes mgn-wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-9deg)}55%{transform:rotate(7deg)}80%{transform:rotate(-3deg)}}
+.mgn-fact-t{font-size:clamp(21px,2.2cqi,32px);max-width:11em}
+.mgn-fact:nth-child(odd) .mgn-fact-t{transform:rotate(-2deg)}
+.mgn-fact:nth-child(even) .mgn-fact-t{transform:rotate(1.5deg)}
+
+/* thanks */
+.mgn-thanks{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6cqi,110px);align-items:center;max-width:1500px;margin:0 auto;min-height:calc(var(--mgn-h) - 220px)}
+.mgn-avatar{position:relative;width:clamp(96px,10cqi,150px);aspect-ratio:1}
+.mgn-avatar img{width:100%;height:100%;max-width:none;object-fit:cover;border-radius:50%;filter:grayscale(1)}
+.mgn-thanks-title{font-size:clamp(58px,7.8cqi,140px);margin:clamp(18px,2.4cqi,34px) 0 0;color:var(--fg)}
+.mgn-touch{margin-top:clamp(18px,2.2cqi,30px);display:grid;gap:6px;font-size:clamp(13px,1.08cqi,16px)}
+.mgn-touch b{font-weight:600}
+.mgn-email{position:relative;justify-self:start;font-weight:400;font-size:clamp(14px,1.25cqi,18px);text-align:left;color:var(--fg)}
+.mgn-email .mgn-draw{stroke-dashoffset:1;transition:stroke-dashoffset .5s cubic-bezier(.6,0,.2,1)}
+.mgn-email:hover .mgn-draw,.mgn-email:focus-visible .mgn-draw{stroke-dashoffset:0}
+.mgn-copied{position:absolute;left:100%;top:-.9em;margin-left:10px;font-family:var(--mgn-hand);font-size:20px;color:var(--mgn-pen);white-space:nowrap;opacity:0;transform:translateY(6px) rotate(-6deg);transition:opacity .3s,transform .3s}
+.mgn-copied[data-on=true]{opacity:1;transform:translateY(0) rotate(-6deg)}
+.mgn-links{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:clamp(18px,2.4cqi,32px)}
+.mgn-links a{position:relative;font-family:var(--mgn-hand);font-size:clamp(20px,2cqi,28px);color:var(--mgn-pen)}
+.mgn-links a .mgn-draw{stroke-dashoffset:1;transition:stroke-dashoffset .45s cubic-bezier(.6,0,.2,1)}
+.mgn-links a:hover .mgn-draw,.mgn-links a:focus-visible .mgn-draw{stroke-dashoffset:0}
+.mgn-letter{font-size:clamp(21px,2.05cqi,30px);line-height:1.22;max-width:21em;justify-self:end}
+.mgn-letter p{margin:0 0 .8em}
+.mgn-signature{position:relative;display:inline-block;font-size:1.5em;margin-top:.2em;transform:rotate(-4deg)}
+.mgn-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding-top:clamp(36px,5cqi,70px);margin-top:clamp(36px,5cqi,70px);border-top:1px solid var(--rule);font-size:12px;letter-spacing:.06em;color:var(--muted);max-width:1500px;margin-left:auto;margin-right:auto}
+.mgn-foot button{font-family:var(--mgn-hand);font-size:21px;letter-spacing:0;color:var(--mgn-pen);display:flex;align-items:center;gap:6px}
+
+@container (max-width:860px){
+  .mgn-two,.mgn-edu,.mgn-skills-top,.mgn-skills-low,.mgn-case,.mgn-thanks{grid-template-columns:minmax(0,1fr)}
+  .mgn-case-wrap[data-flip=true] .mgn-case-copy{order:0}
+  .mgn-books{justify-self:start;width:min(80%,320px)}
+  .mgn-letter{justify-self:start}
+  .mgn-hello-copy .mgn-p{text-align:left;hyphens:manual}
+  .mgn-sig{right:2%}
+  .mgn-row{flex-wrap:wrap;align-content:center;gap:34px 18px}
+  .mgn-card{width:clamp(76px,25cqi,170px)}
+  .mgn-deal-head,.mgn-facts-head{flex-direction:column;align-items:flex-start}
+  .mgn-facts-head .mgn-hd{order:-1}
+  .mgn-deal-note{text-align:left}
+  .mgn-fact-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mgn-fact:nth-child(n){transform:none}
+  .mgn-fact:nth-child(even){transform:translateY(26px)}
+}
+@container (max-width:520px){
+  .mgn-bar{grid-template-columns:auto 1fr;font-size:11px}
+  .mgn-bar>:first-child{display:none}
+  .mgn-bar>:nth-child(2){justify-self:start}
+  .mgn-bar-name{display:none}
+  .mgn-skill-list{columns:1}
+  .mgn-index ol{grid-template-columns:minmax(0,1fr);grid-auto-flow:row;grid-template-rows:none}
+  .mgn-card{width:23cqi}
+  .mgn-row{gap:22px 12px}
+  .mgn-deal-stage{padding-top:64px}
+  .mgn-card-tag{display:none}
+  .mgn-lang{grid-template-columns:5.5em 3em minmax(0,1fr)}
+  .mgn-qr-wrap{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  .mgn-deal{height:auto}
+  .mgn-deal-stage{position:relative;height:auto;min-height:var(--mgn-h)}
+  .mgn-hint svg,.mgn-fact:hover svg,.mgn-note-swap{animation:none}
+  .mgn-index,.mgn-index[data-open=true]{transition:none}
+  .mgn-portrait-img img,.mgn-tool,.mgn-card>button,.mgn-qr{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="mgn-root" id="root" style="--mgn-paper:#efe8dc;--mgn-night:#1f2a2b;--mgn-ink:#2a2420;--mgn-pen:#e0613a;--mgn-h:100svh;--mgn-display:'DM Serif Display',Georgia,serif;--mgn-hand:'Caveat',cursive;--mgn-body:'Poppins',system-ui,sans-serif">
+
+  <!-- chrome -->
+  <div class="mgn-top">
+    <div class="mgn-bar">
+      <span class="mgn-bar-name">Kenji Ward</span>
+      <span>Selected Work</span>
+      <span class="mgn-bar-right">
+        <span class="mgn-bar-sec" id="barSec">cover</span>
+        <button class="mgn-bar-btn" id="indexBtn" data-pen="oval" data-seed="4" data-padx="10" data-pady="7">contents</button>
+      </span>
+    </div>
+    <div class="mgn-progress" id="progress"></div>
+  </div>
+
+  <div class="mgn-hold">
+    <div class="mgn-index" id="index" data-open="false">
+      <button class="mgn-index-close" id="indexClose">close ✕</button>
+      <ol style="--rows:4" id="indexList"></ol>
+      <div class="mgn-index-foot">Kenji Ward — Product Designer, Lisbon, 2027</div>
+    </div>
+  </div>
+
+  <!-- 1. cover -->
+  <section class="mgn-sheet mgn-cover" data-tone="night" data-sheet="cover" data-label="cover">
+    <div class="mgn-sheet-bg" data-morph="true"></div>
+    <div class="mgn-grain" aria-hidden="true"></div>
+    <canvas class="mgn-canvas" id="inkCanvas" aria-hidden="true"></canvas>
+    <div class="mgn-cover-in">
+      <h1 class="mgn-display mgn-title" id="coverTitle" aria-label="Folio — Kenji Ward, Product Designer"></h1>
+      <div class="mgn-pill-wrap">
+        <span class="mgn-pill" data-pen="oval" data-seed="9" data-padx="12" data-pady="9">Product Designer</span>
+      </div>
+    </div>
+    <div class="mgn-cover-meta">
+      <span>Lisbon — 2027</span>
+      <span class="mgn-hint" aria-hidden="true">
+        scroll
+        <svg viewBox="0 0 22 40" class="mgn-ink">
+          <path d="M11 2c-6 6 6 10 0 16s6 10 0 18" />
+          <path d="M5 31l6 7 6-7" />
+        </svg>
+      </span>
+      <span>Selected Work</span>
+    </div>
+  </section>
+
+  <!-- 2. hello -->
+  <section class="mgn-sheet" data-tone="paper" data-sheet="hello" data-label="hello">
+    <div class="mgn-grain" aria-hidden="true"></div>
+    <div class="mgn-two">
+      <div class="mgn-traits" id="traits"></div>
+      <div class="mgn-hello-copy">
+        <div class="mgn-hd"><h2 class="mgn-display mgn-h2" data-heading="Olá." data-seed="10"></h2></div>
+        <p class="mgn-p" id="bio"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. education -->
+  <section class="mgn-sheet" data-tone="night" data-sheet="education" data-label="education">
+    <div class="mgn-sheet-bg" data-morph="true"></div>
+    <div class="mgn-grain" aria-hidden="true"></div>
+    <div class="mgn-edu">
+      <div>
+        <div class="mgn-hd"><h2 class="mgn-display mgn-h2" data-heading="Education" data-seed="11"></h2></div>
+        <p class="mgn-p mgn-edu-intro mgn-muted" id="eduIntro"></p>
+        <ul class="mgn-edu-list" id="eduList"></ul>
+      </div>
+      <div>
+        <div class="mgn-qr-wrap">
+          <a class="mgn-qr" id="qrLink" target="_blank" rel="noreferrer" aria-label="Open my CV">
+            <span class="mgn-qr-tag"><span class="mgn-write">scan me</span></span>
+            <span id="qrMount"></span>
+          </a>
+          <div class="mgn-cvnote mgn-hand">
+            <svg viewBox="0 0 90 60" class="mgn-ink" aria-hidden="true" id="cvArrow"></svg>
+            <span class="mgn-write">the long version</span>
+          </div>
+        </div>
+        <div class="mgn-langs" id="langs"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. skills -->
+  <section class="mgn-sheet" data-tone="paper" data-sheet="skills" data-label="skills">
+    <div class="mgn-grain" aria-hidden="true"></div>
+    <div class="mgn-skills">
+      <div class="mgn-skills-top">
+        <div>
+          <div class="mgn-hd"><h2 class="mgn-display mgn-h2" data-heading="Skills" data-seed="12"></h2></div>
+          <div class="mgn-tools" id="tools" data-pen="oval" data-seed="13" data-padx="6" data-pady="6"></div>
+          <div class="mgn-tool-note mgn-hand" aria-live="polite"><span class="mgn-note-swap" id="toolNote">hover a tool</span></div>
+        </div>
+        <div class="mgn-books">
+          <div id="booksMount"></div>
+          <div class="mgn-books-note mgn-hand">
+            <span class="mgn-write">on my desk right now</span>
+            <svg viewBox="0 0 60 50" class="mgn-ink" aria-hidden="true" style="display:block;width:46px;height:38px;margin:4px 0 0 auto" id="booksArrow"></svg>
+          </div>
+        </div>
+      </div>
+      <div class="mgn-skills-low">
+        <div>
+          <p class="mgn-p mgn-muted" id="skillsIntro"></p>
+          <div class="mgn-more mgn-hand">
+            <span class="mgn-write">and a few more, always</span>
+            <svg viewBox="0 0 74 30" class="mgn-ink" aria-hidden="true" id="moreArrow"></svg>
+          </div>
+        </div>
+        <ul class="mgn-skill-list" id="skillList"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. projects (deal) -->
+  <section class="mgn-sheet mgn-deal" data-tone="night" data-sheet="projects" data-label="projects">
+    <div class="mgn-sheet-bg" data-morph="true"></div>
+    <div class="mgn-grain" aria-hidden="true"></div>
+    <div class="mgn-deal-stage">
+      <div class="mgn-deal-head">
+        <div class="mgn-hd"><h2 class="mgn-display mgn-h2" data-heading="Projects" data-seed="14"></h2></div>
+        <div class="mgn-deal-note mgn-hand"><span class="mgn-write">three I'm proudest of</span></div>
+      </div>
+      <div class="mgn-row" id="dealRow"></div>
+    </div>
+  </section>
+
+  <!-- 6-8. case studies -->
+  <div id="cases"></div>
+
+  <!-- 9. fun facts -->
+  <section class="mgn-sheet" data-tone="night" data-sheet="facts" data-label="fun facts">
+    <div class="mgn-sheet-bg" data-morph="true"></div>
+    <div class="mgn-grain" aria-hidden="true"></div>
+    <div class="mgn-facts">
+      <div class="mgn-facts-head">
+        <div class="mgn-hd"><h2 class="mgn-display mgn-h2" data-heading="Fun facts" data-seed="15"></h2></div>
+        <div class="mgn-facts-note mgn-hand">
+          <span class="mgn-write">off the clock</span>
+          <svg viewBox="0 0 70 50" class="mgn-ink" aria-hidden="true" id="factsArrow"></svg>
+        </div>
+      </div>
+      <div class="mgn-fact-grid" id="factGrid"></div>
+    </div>
+  </section>
+
+  <!-- 10. thanks -->
+  <section class="mgn-sheet" data-tone="paper" data-sheet="thanks" data-label="thank you">
+    <div class="mgn-grain" aria-hidden="true"></div>
+    <div class="mgn-thanks">
+      <div>
+        <div class="mgn-avatar"><img id="thanksAvatar" alt="Kenji Ward" loading="lazy" decoding="async" /></div>
+        <div class="mgn-hd"><h2 class="mgn-display mgn-thanks-title" data-heading="Obrigado" data-seed="16"></h2></div>
+        <div class="mgn-touch">
+          <b>Say hello — Lisbon, 2027</b>
+          <button class="mgn-email" id="emailBtn" data-pen="under" data-seed="17" data-padx="1" data-pady="7">
+            kenji@example.com<span class="mgn-copied" id="copied">copied!</span>
+          </button>
+        </div>
+        <div class="mgn-links" id="links"></div>
+      </div>
+      <div class="mgn-letter mgn-hand" id="letter"></div>
+    </div>
+    <div class="mgn-foot">
+      <span>Kenji Ward — Folio, 2027</span>
+      <button id="toTop">back to top ↑</button>
+    </div>
+  </section>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  /* ---------------------------------------------------------------- helpers */
+
+  var NS = "http://www.w3.org/2000/svg";
+  var q = function (s, r) { return (r || document).querySelector(s); };
+  var qa = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  function clamp(v, a, b) { return Math.min(b, Math.max(a, v)); }
+
+  function rand(seed) {
+    var s = (Math.floor(seed * 9973) ^ 0x9e3779b9) >>> 0;
+    return function () {
+      s = (s + 0x6d2b79f5) >>> 0;
+      var t = s;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function r1(n) { return (Math.round(n * 10) / 10).toString(); }
+
+  function smoothPath(pts) {
+    if (pts.length < 2) return "";
+    var d = "M" + r1(pts[0][0]) + " " + r1(pts[0][1]);
+    for (var i = 0; i < pts.length - 1; i++) {
+      var p0 = pts[i - 1] || pts[i];
+      var p1 = pts[i];
+      var p2 = pts[i + 1];
+      var p3 = pts[i + 2] || p2;
+      var c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6];
+      var c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+      d += "C" + r1(c1[0]) + " " + r1(c1[1]) + " " + r1(c2[0]) + " " + r1(c2[1]) + " " + r1(p2[0]) + " " + r1(p2[1]);
+    }
+    return d;
+  }
+
+  function ovalPath(w, h, seed) {
+    var R = rand(seed);
+    var cx = w / 2, cy = h / 2;
+    var rx = Math.max(4, w / 2 - 3), ry = Math.max(4, h / 2 - 3);
+    var start = -2.5 + R() * 0.6;
+    var sweep = Math.PI * 2 * (1.1 + R() * 0.08);
+    var n = 30, pts = [];
+    for (var i = 0; i <= n; i++) {
+      var t = i / n;
+      var a = start + sweep * t;
+      var k = 1.04 - 0.09 * t + (R() - 0.5) * 0.03;
+      pts.push([cx + Math.cos(a) * rx * k, cy + Math.sin(a) * ry * k + (t - 0.5) * 2]);
+    }
+    return smoothPath(pts);
+  }
+
+  function underlinePath(w, h, seed) {
+    var R = rand(seed);
+    var y = h - 4;
+    var pts = [], n = 8;
+    for (var i = 0; i <= n; i++) pts.push([2 + ((w - 4) * i) / n, y + Math.sin(i * 1.3 + R() * 2) * 1.4 - i * 0.25]);
+    var back = 0.35 + R() * 0.25;
+    var end = pts[pts.length - 1];
+    return smoothPath(pts) +
+      "Q" + r1(end[0] + 3) + " " + r1(end[1] + 1.5) + " " + r1(end[0] - 6) + " " + r1(y + 2.6) +
+      "L" + r1(w * (1 - back)) + " " + r1(y + 3.2 + R());
+  }
+
+  function boxPath(w, h, seed) {
+    var R = rand(seed);
+    var j = function () { return (R() - 0.5) * 4; };
+    var o = 6;
+    return "M" + r1(-o + j()) + " " + r1(2 + j()) + "L" + r1(w + o + j()) + " " + r1(j()) +
+      "M" + r1(w - 2 + j()) + " " + r1(-o + j()) + "L" + r1(w + j()) + " " + r1(h + o + j()) +
+      "M" + r1(w + o + j()) + " " + r1(h - 2 + j()) + "L" + r1(-o + j()) + " " + r1(h + j()) +
+      "M" + r1(2 + j()) + " " + r1(h + o + j()) + "L" + r1(j()) + " " + r1(-o + j());
+  }
+
+  function arrowPaths(a, b, bend, head) {
+    head = head || 9;
+    var dx = b[0] - a[0], dy = b[1] - a[1];
+    var len = Math.hypot(dx, dy) || 1;
+    var c = [(a[0] + b[0]) / 2 - (dy / len) * len * bend, (a[1] + b[1]) / 2 + (dx / len) * len * bend];
+    var shaft = "M" + r1(a[0]) + " " + r1(a[1]) + "Q" + r1(c[0]) + " " + r1(c[1]) + " " + r1(b[0]) + " " + r1(b[1]);
+    var ang = Math.atan2(b[1] - c[1], b[0] - c[0]);
+    var s = 0.5;
+    var h1 = [b[0] - Math.cos(ang - s) * head, b[1] - Math.sin(ang - s) * head];
+    var h2 = [b[0] - Math.cos(ang + s) * head, b[1] - Math.sin(ang + s) * head];
+    return {
+      shaft: shaft,
+      head: "M" + r1(h1[0]) + " " + r1(h1[1]) + "L" + r1(b[0]) + " " + r1(b[1]) + "L" + r1(h2[0]) + " " + r1(h2[1])
+    };
+  }
+
+  function underlineMorph(w, seed) {
+    var R = rand(seed);
+    var n = 14, zig = [], swoosh = [];
+    for (var i = 0; i <= n; i++) {
+      var t = i / n;
+      zig.push([4 + (w - 8) * t, 12 + (i % 2 ? -7 : 7) * (0.6 + R() * 0.5)]);
+      swoosh.push([4 + (w - 8) * t, 15 - Math.sin(t * Math.PI) * 6 - t * 4]);
+    }
+    return { from: smoothPath(zig), to: smoothPath(swoosh) };
+  }
+
+  function sparklePath(cx, cy, r) {
+    var k = r * 0.22;
+    return "M" + r1(cx) + " " + r1(cy - r) +
+      "C" + r1(cx + k * 0.4) + " " + r1(cy - k) + " " + r1(cx + k) + " " + r1(cy - k * 0.4) + " " + r1(cx + r) + " " + r1(cy) +
+      "C" + r1(cx + k) + " " + r1(cy + k * 0.4) + " " + r1(cx + k * 0.4) + " " + r1(cy + k) + " " + r1(cx) + " " + r1(cy + r) +
+      "C" + r1(cx - k * 0.4) + " " + r1(cy + k) + " " + r1(cx - k) + " " + r1(cy + k * 0.4) + " " + r1(cx - r) + " " + r1(cy) +
+      "C" + r1(cx - k) + " " + r1(cy - k * 0.4) + " " + r1(cx - k * 0.4) + " " + r1(cy - k) + " " + r1(cx) + " " + r1(cy - r) + "Z";
+  }
+
+  function heartPath(cx, cy, r) {
+    var s = r / 10;
+    var p = function (x, y) { return r1(cx + x * s) + " " + r1(cy + y * s); };
+    return "M" + p(0, -3.5) +
+      "C" + p(2, -9) + " " + p(10, -8) + " " + p(10, -2) +
+      "C" + p(10, 3) + " " + p(4, 6.5) + " " + p(0, 10) +
+      "C" + p(-4, 6.5) + " " + p(-10, 3) + " " + p(-10, -2) +
+      "C" + p(-10, -8) + " " + p(-2, -9) + " " + p(0, -3.5) + "Z";
+  }
+
+  /** Interpolate two path strings that share the same command structure. */
+  function lerpPath(a, b, t) {
+    var na = a.match(/-?\d*\.?\d+/g), nb = b.match(/-?\d*\.?\d+/g);
+    if (!na || !nb || na.length !== nb.length) return t < 0.5 ? a : b;
+    var i = 0;
+    return a.replace(/-?\d*\.?\d+/g, function () {
+      var v = parseFloat(na[i]) * (1 - t) + parseFloat(nb[i]) * t;
+      i++;
+      return (Math.round(v * 100) / 100).toString();
+    });
+  }
+
+  function parseMarks(s) {
+    var out = [], re = /\*([^*]+)\*|\[([^\]]+)\]/g, last = 0, m;
+    while ((m = re.exec(s))) {
+      if (m.index > last) out.push({ text: s.slice(last, m.index), mark: "" });
+      out.push(m[1] != null ? { text: m[1], mark: "under" } : { text: m[2], mark: "oval" });
+      last = m.index + m[0].length;
+    }
+    if (last < s.length) out.push({ text: s.slice(last), mark: "" });
+    return out;
+  }
+
+  function formatCount(v, decimals) {
+    return decimals > 0 ? v.toFixed(decimals) : Math.round(v).toLocaleString("en-US");
+  }
+
+  function pileOffset(i, n) {
+    var R = rand(i + 7);
+    return { x: (R() - 0.5) * 40, y: (R() - 0.5) * 30 - (n - i) * 2, r: (R() - 0.5) * 28 };
+  }
+
+  function orbitPoint(t, rx, ry, tilt) {
+    var a = t * Math.PI * 2;
+    var x0 = Math.cos(a) * rx, y0 = Math.sin(a) * ry;
+    var c = Math.cos(tilt), s = Math.sin(tilt);
+    return { x: x0 * c - y0 * s, y: x0 * s + y0 * c, front: Math.sin(a) > 0 };
+  }
+
+  function handLine(x1, x2, y, seed) {
+    var R = rand(seed);
+    var n = Math.max(2, Math.round((x2 - x1) / 22));
+    var pts = [];
+    for (var i = 0; i <= n; i++) pts.push([x1 + ((x2 - x1) * i) / n, y + (R() - 0.5) * 3]);
+    return smoothPath(pts);
+  }
+
+  function isLight(hex) {
+    var m = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(String(hex).trim());
+    if (!m) return false;
+    var h = m[1].length === 3 ? m[1].split("").map(function (c) { return c + c; }).join("") : m[1];
+    var v = parseInt(h, 16);
+    var lum = (0.299 * ((v >> 16) & 255) + 0.587 * ((v >> 8) & 255) + 0.114 * (v & 255)) / 255;
+    return lum > 0.62;
+  }
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+
+  function photo(url, w) {
+    if (!url) return "";
+    if (!/^https:\/\/images\.unsplash\.com\//.test(url) || url.indexOf("?") >= 0) return url;
+    return url + "?auto=format&fit=crop&w=" + w + "&q=72";
+  }
+
+  /* -------------------------------------------------------------- QR code */
+
+  var QR_EXP = [], QR_LOG = [];
+  (function initGF() {
+    var x = 1;
+    for (var i = 0; i < 255; i++) {
+      QR_EXP[i] = x; QR_LOG[x] = i; x <<= 1;
+      if (x & 256) x ^= 0x11d;
+    }
+    for (var j = 255; j < 512; j++) QR_EXP[j] = QR_EXP[j - 255];
+  })();
+
+  function gfMul(a, b) { return a && b ? QR_EXP[QR_LOG[a] + QR_LOG[b]] : 0; }
+
+  function rsRemainder(data, n) {
+    var gen = [1];
+    for (var i = 0; i < n; i++) {
+      var next = new Array(gen.length + 1).fill(0);
+      for (var j = 0; j < gen.length; j++) {
+        next[j] ^= gen[j];
+        next[j + 1] ^= gfMul(gen[j], QR_EXP[i]);
+      }
+      gen = next;
+    }
+    var res = new Array(n).fill(0);
+    for (var k = 0; k < data.length; k++) {
+      var f = data[k] ^ res[0];
+      res.shift(); res.push(0);
+      for (var m = 0; m < n; m++) res[m] ^= gfMul(gen[m + 1], f);
+    }
+    return res;
+  }
+
+  function utf8(s) {
+    var out = [];
+    for (var i = 0; i < s.length; i++) {
+      var c = s.codePointAt(i);
+      if (c > 0xffff) i++;
+      if (c < 0x80) out.push(c);
+      else if (c < 0x800) out.push(0xc0 | (c >> 6), 0x80 | (c & 63));
+      else if (c < 0x10000) out.push(0xe0 | (c >> 12), 0x80 | ((c >> 6) & 63), 0x80 | (c & 63));
+      else out.push(0xf0 | (c >> 18), 0x80 | ((c >> 12) & 63), 0x80 | ((c >> 6) & 63), 0x80 | (c & 63));
+    }
+    return out;
+  }
+
+  var QR_M = [[0, 0, 0], [16, 10, 1], [28, 16, 1], [44, 26, 1], [32, 18, 2], [43, 24, 2], [27, 16, 4]];
+
+  function qrMask(m, x, y) {
+    switch (m) {
+      case 0: return (x + y) % 2 === 0;
+      case 1: return y % 2 === 0;
+      case 2: return x % 3 === 0;
+      case 3: return (x + y) % 3 === 0;
+      case 4: return (Math.floor(x / 3) + Math.floor(y / 2)) % 2 === 0;
+      case 5: return ((x * y) % 2) + ((x * y) % 3) === 0;
+      case 6: return (((x * y) % 2) + ((x * y) % 3)) % 2 === 0;
+      default: return (((x + y) % 2) + ((x * y) % 3)) % 2 === 0;
+    }
+  }
+
+  function qrPenalty(g) {
+    var n = g.length, p = 0, dark = 0;
+    for (var a = 0; a < n; a++) {
+      for (var h = 0; h < 2; h++) {
+        var horiz = h === 0;
+        var run = 1;
+        for (var b = 1; b <= n; b++) {
+          var same = b < n && (horiz ? g[a][b] === g[a][b - 1] : g[b][a] === g[b - 1][a]);
+          if (same) run++;
+          else { if (run >= 5) p += run - 2; run = 1; }
+        }
+        for (var s = 0; s + 10 < n; s++) {
+          var str = "";
+          for (var k = 0; k < 11; k++) str += (horiz ? g[a][s + k] : g[s + k][a]) ? "1" : "0";
+          if (str === "10111010000" || str === "00001011101") p += 40;
+        }
+      }
+    }
+    for (var y = 0; y < n; y++) {
+      for (var x = 0; x < n; x++) {
+        if (g[y][x]) dark++;
+        if (x < n - 1 && y < n - 1 && g[y][x] === g[y][x + 1] && g[y][x] === g[y + 1][x] && g[y][x] === g[y + 1][x + 1]) p += 3;
+      }
+    }
+    p += Math.floor(Math.abs((dark * 20) / (n * n) - 10)) * 10;
+    return p;
+  }
+
+  function qrMatrix(text) {
+    var bytes = utf8(text);
+    var ver = 1;
+    while (ver <= 6 && 12 + bytes.length * 8 > QR_M[ver][0] * QR_M[ver][2] * 8) ver++;
+    if (ver > 6) return null;
+    var per = QR_M[ver][0], ecn = QR_M[ver][1], blocks = QR_M[ver][2];
+    var cap = per * blocks;
+    var bits = [];
+    var put = function (v, len) { for (var i = len - 1; i >= 0; i--) bits.push((v >>> i) & 1); };
+    put(4, 4);
+    put(bytes.length, 8);
+    for (var bi = 0; bi < bytes.length; bi++) put(bytes[bi], 8);
+    put(0, Math.min(4, cap * 8 - bits.length));
+    while (bits.length % 8) bits.push(0);
+    var data = [];
+    for (var i = 0; i < bits.length; i += 8) data.push(parseInt(bits.slice(i, i + 8).join(""), 2));
+    for (var pad = 0xec; data.length < cap; pad ^= 0xec ^ 0x11) data.push(pad);
+
+    var dataBlocks = [], ecBlocks = [];
+    for (var b2 = 0; b2 < blocks; b2++) {
+      var chunk = data.slice(b2 * per, (b2 + 1) * per);
+      dataBlocks.push(chunk);
+      ecBlocks.push(rsRemainder(chunk, ecn));
+    }
+    var stream = [];
+    for (var ci = 0; ci < per; ci++) for (var di = 0; di < dataBlocks.length; di++) stream.push(dataBlocks[di][ci]);
+    for (var ei = 0; ei < ecn; ei++) for (var dj = 0; dj < ecBlocks.length; dj++) stream.push(ecBlocks[dj][ei]);
+
+    var size = 17 + ver * 4;
+    var mods = [], fn = [];
+    for (var yy = 0; yy < size; yy++) {
+      mods.push(new Array(size).fill(false));
+      fn.push(new Array(size).fill(false));
+    }
+    var set = function (x, y, v) {
+      if (x < 0 || y < 0 || x >= size || y >= size) return;
+      mods[y][x] = v; fn[y][x] = true;
+    };
+    var finders = [[3, 3], [size - 4, 3], [3, size - 4]];
+    for (var fi = 0; fi < finders.length; fi++) {
+      var fx = finders[fi][0], fy = finders[fi][1];
+      for (var dy = -4; dy <= 4; dy++) {
+        for (var dx = -4; dx <= 4; dx++) {
+          var d = Math.max(Math.abs(dx), Math.abs(dy));
+          set(fx + dx, fy + dy, d !== 2 && d !== 4);
+        }
+      }
+    }
+    for (var ti = 8; ti < size - 8; ti++) {
+      set(6, ti, ti % 2 === 0);
+      set(ti, 6, ti % 2 === 0);
+    }
+    if (ver > 1) {
+      var cc = size - 7;
+      for (var ay = -2; ay <= 2; ay++) {
+        for (var ax = -2; ax <= 2; ax++) set(cc + ax, cc + ay, Math.max(Math.abs(ax), Math.abs(ay)) !== 1);
+      }
+    }
+    var drawFormat = function (mask) {
+      var dd = mask, rem = dd;
+      for (var i2 = 0; i2 < 10; i2++) rem = (rem << 1) ^ ((rem >>> 9) * 0x537);
+      var f = ((dd << 10) | rem) ^ 0x5412;
+      var bit = function (i3) { return ((f >>> i3) & 1) === 1; };
+      for (var i4 = 0; i4 <= 5; i4++) set(8, i4, bit(i4));
+      set(8, 7, bit(6));
+      set(8, 8, bit(7));
+      set(7, 8, bit(8));
+      for (var i5 = 9; i5 < 15; i5++) set(14 - i5, 8, bit(i5));
+      for (var i6 = 0; i6 < 8; i6++) set(size - 1 - i6, 8, bit(i6));
+      for (var i7 = 8; i7 < 15; i7++) set(8, size - 15 + i7, bit(i7));
+      set(8, size - 8, true);
+    };
+    drawFormat(0);
+
+    var idx = 0;
+    for (var right = size - 1; right >= 1; right -= 2) {
+      if (right === 6) right = 5;
+      for (var vert = 0; vert < size; vert++) {
+        for (var jj = 0; jj < 2; jj++) {
+          var x2 = right - jj;
+          var y2 = ((right + 1) & 2) === 0 ? size - 1 - vert : vert;
+          if (!fn[y2][x2] && idx < stream.length * 8) {
+            mods[y2][x2] = ((stream[idx >>> 3] >>> (7 - (idx & 7))) & 1) === 1;
+            idx++;
+          }
+        }
+      }
+    }
+
+    var best = mods, bestScore = Infinity;
+    for (var m2 = 0; m2 < 8; m2++) {
+      drawFormat(m2);
+      var g2 = mods.map(function (row, y3) {
+        return row.map(function (v, x3) { return fn[y3][x3] ? v : v !== qrMask(m2, x3, y3); });
+      });
+      var score = qrPenalty(g2);
+      if (score < bestScore) { bestScore = score; best = g2; }
+    }
+    return best;
+  }
+
+  function qrSVG(text) {
+    var g = qrMatrix(text);
+    if (!g) return "";
+    var n = g.length, d = "";
+    for (var y = 0; y < n; y++) {
+      for (var x = 0; x < n; x++) if (g[y][x]) d += "M" + x + " " + y + "h1v1h-1z";
+    }
+    return '<svg viewBox="-2 -2 ' + (n + 4) + " " + (n + 4) + '" shape-rendering="crispEdges" role="img" aria-label="QR code">' +
+      '<path d="' + d + '" fill="#141416"/></svg>';
+  }
+
+  /* ---------------------------------------------------------------- doodles */
+
+  var DOODLES = {
+    guitar: ["M25 33c-7-2-13 3-13 10 0 8 7 13 14 13 7 0 11-5 12-10 1-4 4-5 6-8 3-4 1-9-3-10-4-1-6 1-8 3-2 2-3 4-8 2z", "M30 44a4.5 4.5 0 1 1-9 0a4.5 4.5 0 1 1 9 0", "M33 38L51 20", "M36 41L54 23", "M50 15l7 7-3 3-7-7z", "M19 51L55 18"],
+    dumbbell: ["M21 32h22", "M9 23h6v18H9z", "M15 19h6v26h-6z", "M49 23h6v18h-6z", "M43 19h6v26h-6z", "M5 32h4M55 32h4"],
+    music: ["M23 51c-3 0-6-2-6-4.5s3-4.5 6-4.5 6 2 6 4.5-3 4.5-6 4.5z", "M46 45c-3 0-6-2-6-4.5s3-4.5 6-4.5 6 2 6 4.5-3 4.5-6 4.5z", "M29 47V17", "M52 41V11", "M29 17L52 11", "M29 24L52 18"],
+    plane: ["M7 31L57 10L45 53L32 39Z", "M32 39L57 10", "M32 39v12l6-7", "M5 46c5 3 10 3 15 0", "M9 54c4 2 8 2 11 0"],
+    coffee: ["M14 27h30v11c0 9-6 15-15 15S14 47 14 38z", "M44 31c6 0 8 3 8 6s-3 6-8 6", "M9 57h40", "M22 21c-3-3 3-6 0-10", "M30 21c-3-3 3-6 0-10", "M38 21c-3-3 3-6 0-10"],
+    camera: ["M12 21h40a4 4 0 0 1 4 4v23a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4V25a4 4 0 0 1 4-4z", "M22 21l4-7h12l4 7", "M42 37a10 10 0 1 1-20 0a10 10 0 1 1 20 0", "M37 37a5 5 0 1 1-10 0a5 5 0 1 1 10 0", "M47 27h4"],
+    plant: ["M20 40h24l-3 17H23z", "M17 40h30", "M32 40V21", "M32 31c-9 0-15-6-15-15 9 0 15 6 15 15z", "M32 25c7 0 13-5 13-13-8 0-13 5-13 13z"],
+    book: ["M32 18c-6-4-14-5-24-4v34c10-1 18 0 24 4 6-4 14-5 24-4V14c-10-1-18 0-24 4z", "M32 18v34", "M14 24c4 0 8 0 12 2", "M14 31c4 0 8 0 12 2", "M38 26c4-2 8-2 12-2", "M38 33c4-2 8-2 12-2"],
+    headphones: ["M12 40v-8a20 20 0 0 1 40 0v8", "M10 38h6v15h-6a2 2 0 0 1-2-2V40a2 2 0 0 1 2-2z", "M48 38h6a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-6z"],
+    globe: ["M54 32a22 22 0 1 1-44 0a22 22 0 1 1 44 0", "M32 10c-9 6-9 38 0 44", "M32 10c9 6 9 38 0 44", "M11 25h42", "M11 39h42"],
+    cat: ["M14 24l4-13 10 8h8l10-8 4 13c3 5 4 10 2 15-3 9-12 13-20 13s-17-4-20-13c-2-5-1-10 2-15z", "M24 32v3", "M40 32v3", "M29 41l3 2 3-2", "M6 38l13 2M6 45l13-1", "M58 38l-13 2M58 45l-13-1"],
+    pencil: ["M12 52l4-13 27-27 9 9-27 27z", "M16 39l9 9", "M38 17l9 9", "M12 52l9-4", "M5 58c10-3 20 2 30-1"],
+    mountain: ["M5 53L24 22l10 16 8-10 17 25z", "M50 16a6 6 0 1 1-12 0a6 6 0 1 1 12 0", "M18 32l6 5 5-5"]
+  };
+
+  function doodleSVG(kind) {
+    var paths = kind === "heart" ? [heartPath(32, 32, 22)] : (DOODLES[kind] || DOODLES.pencil);
+    return '<svg viewBox="0 0 64 64" class="mgn-ink" aria-hidden="true">' +
+      paths.map(function (d) { return '<path class="mgn-draw" pathLength="1" d="' + d + '"/>'; }).join("") + "</svg>";
+  }
+
+  /* ------------------------------------------------------------------ data */
+
+  var U = "https://images.unsplash.com/photo-";
+
+  var P = {
+    name: "Kenji Ward",
+    role: "Product Designer",
+    year: "2027",
+    location: "Lisbon",
+    title: "Folio",
+    docLabel: "Selected Work",
+    portrait: U + "1534528741775-53994a69daeb",
+    traits: ["curious", "systems thinker", "calm", "kind", "precise", "playful"],
+    greeting: "Olá.",
+    bio: "I design calm software for busy people. Four years at a fintech taught me that *trust is a design material*, and that the best interface is often [the one you remove]. Outside work I run, sketch strangers on trams and bake terrible bread.",
+    educationIntro: "Self-taught, then formally taught — in that order.",
+    education: [
+      { title: "M.A. Interaction Design", place: "Umeå Institute of Design", period: "2022", circled: true },
+      { title: "B.Sc. Computer Science", place: "Universidade de Lisboa", period: "2019" },
+      { title: "Accessibility Specialist (CPACC)", place: "IAAP", period: "2023" }
+    ],
+    cvUrl: "https://example.com/kenji-ward",
+    cvNote: "the long version",
+    languages: [
+      { name: "Portuguese", level: "native", value: 1 },
+      { name: "English", level: "C2", value: 0.95 },
+      { name: "Japanese", level: "A2", value: 0.3 }
+    ],
+    tools: [
+      { name: "Figma", mark: "figma", bg: "#1e1e1e", fg: "#ffffff", note: "components all the way down" },
+      { name: "Framer", mark: "Fr", bg: "#0055ff", fg: "#ffffff", note: "for prototypes that feel real" },
+      { name: "Swift", mark: "Sw", bg: "#f05138", fg: "#ffffff", note: "I can ship a SwiftUI screen" }
+    ],
+    toolNote: "hover a tool",
+    books: [
+      { title: "Thinking in Systems", color: "#1f2a2b" },
+      { title: "Shape Up", color: "#e0613a" },
+      { title: "Inclusive Design Patterns", color: "#efe8dc" }
+    ],
+    booksNote: "on my desk right now",
+    projectsNote: "three I'm proudest of",
+    projects: [
+      {
+        name: "Ledger",
+        tagline: "Money, minus the anxiety.",
+        kind: "Fintech · iOS & Android",
+        year: "2026",
+        summary: "A spending app for freelancers whose income arrives in lumps. We replaced budgets with [a calm weekly allowance] and moved every scary number *one tap deeper*.",
+        challenge: "Explain irregular income without a single pie chart.",
+        stats: [
+          { value: 38, suffix: "%", label: "fewer support tickets" },
+          { value: 4.8, decimals: 1, label: "App Store rating" }
+        ],
+        images: [U + "1506126613408-eca07ce68773", U + "1505576399279-565b52d4ac71", U + "1544367567-0f2fcb009e0b"],
+        screens: ["stats", "cover", "detail"],
+        accent: "#1f6f6b",
+        tag: "shipped"
+      },
+      {
+        name: "Atelier",
+        tagline: "Studio space by the hour.",
+        kind: "Marketplace · Web",
+        year: "2025",
+        summary: "Booking for shared art studios. Painters wanted to *see the light* before paying, so every listing leads with [photos at three times of day].",
+        note: "the light-slider was a hallway idea",
+        images: [U + "1460661419201-fd4cecdf8a8b", U + "1541961017774-22349e4a1262", U + "1513364776144-60967b0f800f"],
+        screens: ["feed", "cover", "detail"],
+        accent: "#e0613a",
+        tag: "side project"
+      },
+      {
+        name: "Chapter",
+        tagline: "Book clubs that actually meet.",
+        kind: "Community · Mobile",
+        year: "2024",
+        summary: "Scheduling is where book clubs die. Chapter proposes [three dates everyone can make] and keeps the discussion *spoiler-safe by page number*.",
+        images: [U + "1481627834876-b7833e8f5570", U + "1532012197267-da84d127e765", U + "1495446815901-a7297e633e8d"],
+        screens: ["detail", "feed", "cover"],
+        accent: "#8a5a2b",
+        tag: "research-led"
+      }
+    ],
+    factsNote: "off the clock",
+    facts: [
+      { doodle: "camera", text: "I shoot everything on a 1982 Olympus" },
+      { doodle: "mountain", text: "Climbed Pico, Azores, in the fog" },
+      { doodle: "plant", text: "Thirty-one plants, zero casualties (this year)" },
+      { doodle: "headphones", text: "Bossa nova only, when I'm in flow" }
+    ],
+    thanks: "Obrigado",
+    email: "kenji@example.com",
+    links: [
+      { label: "Read.cv", href: "https://read.cv" },
+      { label: "GitHub", href: "https://github.com" }
+    ],
+    letter: "Thanks for reading this far — that already says a lot about you.\n\nIf you're building something that should feel quiet and trustworthy, I'd love to hear about it.",
+    skillsIntro: "Understanding and applying visual and interaction design principles, with accessibility and inclusive design as a starting point, not a checklist.",
+    skills: ["UX Research", "Information Architecture", "Competitor Analysis", "Design Systems", "Personas", "Moodboards", "Empathy Maps", "Wireframes", "User Journeys", "High-fidelity Prototypes", "User Flows", "Mock-ups"]
+  };
+
+  var ORBIT_TILT = (-18 * Math.PI) / 180;
+
+  var TRAIT_SPOTS = [
+    { at: [104, 40], a: [122, 60], b: [150, 94], bend: 0.22 },
+    { at: [398, 38], a: [380, 58], b: [352, 94], bend: -0.22 },
+    { at: [64, 226], a: [84, 248], b: [126, 262], bend: -0.3 },
+    { at: [438, 300], a: [418, 282], b: [374, 270], bend: -0.28 },
+    { at: [112, 488], a: [130, 468], b: [158, 438], bend: 0.25 },
+    { at: [392, 490], a: [372, 470], b: [342, 440], bend: -0.25 }
+  ];
+
+  /* ------------------------------------------------------------- rendering */
+
+  function splitHTML(text) {
+    return '<span class="mgn-split">' + text.split(" ").map(function (w) {
+      return '<span class="mgn-w">' + Array.from(w).map(function (c) {
+        return '<span class="mgn-c"><span class="mgn-ci">' + esc(c) + "</span></span>";
+      }).join("") + "</span>";
+    }).join(" ") + "</span>";
+  }
+
+  function markedHTML(text, seed) {
+    return parseMarks(text).map(function (m, i) {
+      if (!m.mark) return esc(m.text);
+      var kind = m.mark === "oval" ? "oval" : "under";
+      var px = m.mark === "oval" ? 9 : 1;
+      var py = m.mark === "oval" ? 4 : 7;
+      return '<span class="mgn-mk" data-pen="' + kind + '" data-seed="' + (seed + i) +
+        '" data-padx="' + px + '" data-pady="' + py + '">' + esc(m.text) + "</span>";
+    }).join("");
+  }
+
+  function statusHTML(light) {
+    return '<div class="mgn-status" style="color:' + (light ? "#fff" : "#18181a") + '">' +
+      "<span>9:41</span><i><s></s><b></b></i></div>";
+  }
+
+  function tabbarHTML(accent, on) {
+    var out = '<div class="mgn-tabbar">';
+    for (var k = 0; k < 4; k++) {
+      out += k === on
+        ? '<span style="background:' + accent + ';width:11cqw;border-radius:99px"></span>'
+        : "<span></span>";
+    }
+    return out + "</div>";
+  }
+
+  function screenHTML(kind, p, shift) {
+    var accent = p.accent || "#7d84ef";
+    var n = Math.max(1, p.images.length);
+    var im = function (k) { return photo(p.images[(shift + k) % n] || "", 520); };
+    var A = function (s) { return 'position:absolute;' + s; };
+
+    if (kind === "cover") {
+      return '<div class="mgn-screen">' +
+        '<img class="mgn-scr-img" src="' + im(0) + '" alt="" loading="lazy" decoding="async" draggable="false">' +
+        '<div style="' + A("inset:0") + 'background:linear-gradient(180deg,rgba(0,0,0,.3) 0%,rgba(0,0,0,0) 26%,rgba(0,0,0,.08) 48%,rgba(0,0,0,.84) 100%)"></div>' +
+        statusHTML(true) +
+        '<div style="' + A("left:8cqw;right:8cqw;bottom:9cqw") + 'color:#fff">' +
+          '<div style="font-family:var(--mgn-display);font-size:15cqw;line-height:.95">' + esc(p.name) + "</div>" +
+          '<div style="font-size:4.4cqw;opacity:.86;margin-top:3cqw;line-height:1.35">' + esc(p.tagline || p.kind || "") + "</div>" +
+          '<div style="margin-top:7cqw;height:13cqw;border-radius:99px;background:' + accent + ';display:grid;place-items:center;font-size:4.4cqw;font-weight:600">Get started</div>' +
+          '<div style="display:flex;gap:1.6cqw;justify-content:center;margin-top:5cqw">' +
+            [0, 1, 2].map(function (k) {
+              return '<span style="width:' + (k ? "1.8cqw" : "6cqw") + ';height:1.8cqw;border-radius:99px;background:' + (k ? "rgba(255,255,255,.5)" : "#fff") + '"></span>';
+            }).join("") +
+          "</div>" +
+        "</div></div>";
+    }
+
+    if (kind === "detail") {
+      return '<div class="mgn-screen">' +
+        '<div style="' + A("left:0;right:0;top:0;height:58%") + '">' +
+          '<img class="mgn-scr-img" src="' + im(0) + '" alt="" loading="lazy" decoding="async">' +
+        "</div>" +
+        statusHTML(true) +
+        '<div style="' + A("top:15cqw;left:6cqw;right:6cqw") + 'display:flex;justify-content:space-between;z-index:2">' +
+          ["‹", "♡"].map(function (c) {
+            return '<span style="width:10cqw;height:10cqw;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;font-size:5.4cqw;color:#18181a">' + c + "</span>";
+          }).join("") +
+        "</div>" +
+        '<div style="' + A("left:0;right:0;bottom:0;height:50%") + 'background:#fff;border-radius:9cqw 9cqw 0 0;padding:5cqw 7cqw 0">' +
+          '<div style="width:12cqw;height:1.4cqw;border-radius:99px;background:#ddd;margin:0 auto 5cqw"></div>' +
+          '<div style="font-size:7.2cqw;font-weight:600;line-height:1.1">' + esc(p.name) + "</div>" +
+          '<div style="font-size:3.6cqw;color:#8a8984;margin-top:1.4cqw">' + esc(p.kind || p.tagline || "") + "</div>" +
+          '<div style="display:flex;align-items:center;gap:2cqw;margin-top:3.4cqw;font-size:4.2cqw">' +
+            '<span style="color:' + accent + ';letter-spacing:.1em">★★★★★</span>' +
+            '<span style="color:#8a8984;font-size:3.4cqw">4.9 · 2.1k</span>' +
+          "</div>" +
+          '<div class="mgn-bars" style="margin-top:4cqw"><span></span><span style="width:88%"></span><span style="width:64%"></span></div>' +
+          '<div style="' + A("left:7cqw;right:7cqw;bottom:7cqw") + 'height:13cqw;border-radius:99px;background:' + accent + ';color:#fff;display:grid;place-items:center;font-size:4.4cqw;font-weight:600">Continue</div>' +
+        "</div></div>";
+    }
+
+    if (kind === "stats") {
+      var pct = 68;
+      var C = 2 * Math.PI * 40;
+      var bars = [42, 66, 50, 92, 72, 34, 80];
+      return '<div class="mgn-screen">' +
+        statusHTML(false) +
+        '<div style="' + A("left:7cqw;right:7cqw;top:15cqw") + '">' +
+          '<div style="font-size:3.8cqw;color:#8a8984">This week</div>' +
+          '<div style="font-size:7.4cqw;font-weight:600;margin-top:.6cqw">Your progress</div>' +
+          '<div style="position:relative;width:52cqw;height:52cqw;margin:6cqw auto 0">' +
+            '<svg viewBox="0 0 100 100" style="width:100%;height:100%;transform:rotate(-90deg)">' +
+              '<circle cx="50" cy="50" r="40" fill="none" stroke="#e6e4de" stroke-width="10"></circle>' +
+              '<circle cx="50" cy="50" r="40" fill="none" stroke="' + accent + '" stroke-width="10" stroke-linecap="round" stroke-dasharray="' + ((C * pct) / 100).toFixed(2) + " " + C.toFixed(2) + '"></circle>' +
+            "</svg>" +
+            '<div style="position:absolute;inset:0;display:grid;place-content:center;text-align:center">' +
+              '<div style="font-size:10cqw;font-weight:600">' + pct + "%</div>" +
+              '<div style="font-size:3.4cqw;color:#8a8984">of your goal</div>' +
+            "</div>" +
+          "</div>" +
+          '<div style="display:flex;align-items:flex-end;gap:2.6cqw;height:22cqw;margin-top:7cqw">' +
+            bars.map(function (h, k) {
+              return '<span style="flex:1;height:' + h + "%;border-radius:2cqw;background:" + accent + ";opacity:" + (k === 3 ? 1 : 0.3) + '"></span>';
+            }).join("") +
+          "</div>" +
+          '<div style="display:flex;justify-content:space-between;font-size:3cqw;color:#8a8984;margin-top:1.6cqw;padding:0 1cqw">' +
+            ["M", "T", "W", "T", "F", "S", "S"].map(function (d) { return "<span>" + d + "</span>"; }).join("") +
+          "</div>" +
+          [0, 1].map(function (k) {
+            return '<div style="display:flex;gap:3cqw;align-items:center;margin-top:5cqw">' +
+              '<div style="position:relative;width:12cqw;height:12cqw;border-radius:3cqw;overflow:hidden;flex:none">' +
+                '<img class="mgn-scr-img" src="' + im(k + 1) + '" alt="" loading="lazy" decoding="async">' +
+              "</div>" +
+              '<div class="mgn-bars" style="flex:1">' +
+                '<span style="width:' + (k ? "62%" : "78%") + ';background:#cfccc5"></span><span style="width:44%"></span>' +
+              "</div></div>";
+          }).join("") +
+        "</div>" +
+        tabbarHTML(accent, 2) +
+        "</div>";
+    }
+
+    /* feed */
+    return '<div class="mgn-screen">' +
+      statusHTML(false) +
+      '<div style="' + A("left:7cqw;right:7cqw;top:15cqw") + '">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center">' +
+          "<div>" +
+            '<div style="font-size:3.8cqw;color:#8a8984">Good morning</div>' +
+            '<div style="font-size:7.4cqw;font-weight:600;margin-top:.6cqw">' + esc(p.name) + "</div>" +
+          "</div>" +
+          '<span style="width:10cqw;height:10cqw;border-radius:50%;background:' + accent + ';opacity:.9"></span>' +
+        "</div>" +
+        '<div style="display:flex;align-items:center;gap:2.4cqw;height:11cqw;border-radius:99px;background:#ebe9e3;margin-top:5cqw;padding:0 4cqw;font-size:3.6cqw;color:#8a8984">' +
+          '<span style="width:3.6cqw;height:3.6cqw;border-radius:50%;border:.6cqw solid #8a8984"></span>Search</div>' +
+        '<div style="display:flex;gap:2cqw;margin-top:4cqw">' +
+          ["For you", "New", "Saved"].map(function (c, k) {
+            return '<span class="mgn-chip"' + (k ? "" : ' style="background:' + accent + ';color:#fff"') + ">" + c + "</span>";
+          }).join("") +
+        "</div>" +
+        '<div style="position:relative;height:66cqw;border-radius:7cqw;overflow:hidden;margin-top:4.6cqw">' +
+          '<img class="mgn-scr-img" src="' + im(0) + '" alt="" loading="lazy" decoding="async">' +
+          '<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.7))"></div>' +
+          '<div style="position:absolute;left:5cqw;right:5cqw;bottom:4.6cqw;color:#fff">' +
+            '<div style="font-size:5.4cqw;font-weight:600">' + esc((p.tagline || "").split(/[,.]/)[0] || p.name) + "</div>" +
+            '<div style="font-size:3.4cqw;opacity:.8;margin-top:1cqw">Picked for you</div>' +
+          "</div>" +
+        "</div>" +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:3cqw;margin-top:3cqw">' +
+          [1, 2].map(function (k) {
+            return '<div style="position:relative;height:34cqw;border-radius:5cqw;overflow:hidden">' +
+              '<img class="mgn-scr-img" src="' + im(k) + '" alt="" loading="lazy" decoding="async"></div>';
+          }).join("") +
+        "</div>" +
+      "</div>" +
+      tabbarHTML(accent, 0) +
+      "</div>";
+  }
+
+  function phoneHTML(p, kind, shift) {
+    return '<div class="mgn-phone" role="img" aria-label="' + esc(p.name + " — " + kind + " screen") + '">' +
+      '<div class="mgn-phone-body">' + screenHTML(kind, p, shift || 0) + '<span class="mgn-island"></span></div>' +
+      "</div>";
+  }
+
+  /* ------------------------------------------------------------ build DOM */
+
+  function buildCoverTitle() {
+    var host = q("#coverTitle");
+    var chars = Array.from(P.title);
+    var orbitAt = P.title.toLowerCase().lastIndexOf("o");
+    if (orbitAt < 0) orbitAt = chars.length - 1;
+    var start = orbitPoint(0.15, 92, 30, ORBIT_TILT);
+    var html = "";
+    chars.forEach(function (c, i) {
+      html += '<span class="mgn-l"><span class="mgn-lc"><span class="mgn-li">' +
+        (c === " " ? "&nbsp;" : esc(c)) + "</span></span>";
+      if (i === orbitAt) {
+        html += '<span class="mgn-orbit">' +
+          '<svg class="mgn-orbit-back mgn-ink" viewBox="-100 -100 200 200" style="width:1.32em;height:1.32em;left:-.66em;top:-.66em">' +
+            '<g transform="rotate(-18)"><path class="mgn-draw" pathLength="1" d="M-92 0A92 30 0 0 1 92 0"/></g>' +
+          "</svg>" +
+          '<svg class="mgn-ink" viewBox="-100 -100 200 200" style="width:1.32em;height:1.32em;left:-.66em;top:-.66em;z-index:2">' +
+            '<g transform="rotate(-18)"><path class="mgn-draw" pathLength="1" d="M92 0A92 30 0 0 1 -92 0"/></g>' +
+            '<g class="mgn-star-g" transform="translate(' + r1(start.x) + " " + r1(start.y) + ')">' +
+              '<g class="mgn-star-s"><path class="mgn-star-path" d="' + sparklePath(0, 0, 13) + '" style="fill:var(--mgn-pen);stroke:none"/></g>' +
+            "</g>" +
+          "</svg>" +
+        "</span>";
+      }
+      html += "</span>";
+    });
+    html += '<span class="mgn-sig mgn-hand" id="sig">' +
+      '<svg class="mgn-sig-arrow mgn-ink" viewBox="0 0 150 110" aria-hidden="true">' +
+        '<path class="mgn-draw" pathLength="1" d="M146 14C128 34 104 30 101 17C98 4 120 2 117 24C114 48 70 74 24 96"/>' +
+        '<path class="mgn-draw" pathLength="1" d="M30 80L22 97L41 99"/>' +
+      "</svg>" +
+      '<span class="mgn-write">' + esc(P.name) + "</span>" +
+    "</span>";
+    host.innerHTML = html;
+  }
+
+  function buildTraits() {
+    var host = q("#traits");
+    var list = P.traits.slice(0, TRAIT_SPOTS.length);
+    var arrows = list.map(function (_, i) {
+      var s = TRAIT_SPOTS[i];
+      var ap = arrowPaths(s.a, s.b, s.bend, 8);
+      return '<path class="mgn-draw" pathLength="1" d="' + ap.shaft + '"/>' +
+        '<path class="mgn-draw" pathLength="1" d="' + ap.head + '"/>';
+    }).join("");
+    var labels = list.map(function (t, i) {
+      var s = TRAIT_SPOTS[i];
+      return '<span class="mgn-trait mgn-hand" style="left:' + (s.at[0] / 5) + "%;top:" + (s.at[1] / 5.2) + '%">' +
+        '<span class="mgn-write">' + esc(t) + "</span></span>";
+    }).join("");
+
+    host.innerHTML =
+      '<div class="mgn-portrait" id="portrait">' +
+        '<div class="mgn-portrait-img"><img src="' + photo(P.portrait, 720) + '" alt="' + esc(P.name) + '" loading="lazy" decoding="async"></div>' +
+        '<div data-pen="box" data-seed="21" data-padx="10" data-pady="10" style="position:absolute;inset:0"></div>' +
+        '<div data-pen="box" data-seed="22" data-padx="16" data-pady="16" style="position:absolute;inset:0"></div>' +
+      "</div>" +
+      '<div id="traitLayer" style="position:absolute;inset:0;pointer-events:none">' +
+        '<svg viewBox="0 0 500 520" class="mgn-ink" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%">' + arrows + "</svg>" +
+        labels +
+      "</div>";
+  }
+
+  function buildEducation() {
+    q("#eduIntro").textContent = P.educationIntro;
+
+    var list = q("#eduList");
+    list.innerHTML = P.education.map(function (e, i) {
+      var title = e.circled
+        ? '<span class="mgn-mk" data-pen="oval" data-seed="' + (30 + i) + '" data-padx="12" data-pady="7">' + esc(e.title) + "</span>"
+        : esc(e.title);
+      var sub = [e.place, e.period].filter(Boolean).join(" · ");
+      return "<li><div><div class=\"mgn-edu-t\">" + title + "</div>" +
+        '<div class="mgn-edu-s">' + esc(sub) + "</div></div></li>";
+    }).join("");
+
+    var link = q("#qrLink");
+    link.href = P.cvUrl;
+    link.setAttribute("aria-label", "Open my CV: " + P.cvUrl);
+    q("#qrMount").innerHTML = qrSVG(P.cvUrl);
+
+    var ap = arrowPaths([84, 50], [10, 16], -0.3, 9);
+    q("#cvArrow").innerHTML =
+      '<path class="mgn-draw" pathLength="1" d="' + ap.shaft + '"/>' +
+      '<path class="mgn-draw" pathLength="1" d="' + ap.head + '"/>';
+
+    var langs = q("#langs");
+    langs.innerHTML = "<h3>Languages</h3>" + P.languages.map(function (l, i) {
+      var v = clamp(l.value, 0.02, 1);
+      var d = handLine(2, 2 + 196 * v, 8.5, 40 + i);
+      return '<div class="mgn-lang"><b>' + esc(l.name) + "</b>" +
+        '<span class="mgn-muted">' + esc(l.level) + "</span>" +
+        '<svg viewBox="0 0 200 16" preserveAspectRatio="none" role="img" aria-label="' +
+          esc(l.name + ": " + Math.round(v * 100) + "%") + '">' +
+          '<path d="M2 9H198" style="stroke:var(--rule);stroke-width:1.2;fill:none"/>' +
+          '<path class="mgn-draw" pathLength="1" d="' + d + '" style="stroke:var(--mgn-pen);stroke-width:2.4;fill:none;stroke-linecap:round"/>' +
+        "</svg></div>";
+    }).join("");
+  }
+
+  function buildSkills() {
+    var tools = q("#tools");
+    var buttons = P.tools.map(function (t, i) {
+      var inner = t.mark === "figma"
+        ? '<svg viewBox="0 0 38 57" width="44%" aria-hidden="true">' +
+            '<path d="M19 0H9.5a9.5 9.5 0 0 0 0 19H19z" fill="#f24e1e"/>' +
+            '<path d="M19 0h9.5a9.5 9.5 0 0 1 0 19H19z" fill="#ff7262"/>' +
+            '<path d="M9.5 19a9.5 9.5 0 0 0 0 19H19V19z" fill="#a259ff"/>' +
+            '<circle cx="28.5" cy="28.5" r="9.5" fill="#1abcfe"/>' +
+            '<path d="M9.5 38a9.5 9.5 0 1 0 9.5 9.5V38z" fill="#0acf83"/>' +
+          "</svg>"
+        : esc(t.mark);
+      return '<button class="mgn-tool" data-i="' + i + '" aria-label="' + esc(t.name) + '" ' +
+        'style="background:' + t.bg + ";color:" + t.fg + '">' + inner + "</button>";
+    }).join("");
+    tools.innerHTML = buttons + '<span class="mgn-mark-host" style="position:absolute;inset:0;pointer-events:none" data-pen="oval" data-seed="13" data-padx="6" data-pady="6"></span>';
+
+    var note = q("#toolNote");
+    qa(".mgn-tool", tools).forEach(function (b) {
+      var i = +b.dataset.i;
+      var show = function () {
+        P.tools.forEach(function (_, k) { qa(".mgn-tool", tools)[k].removeAttribute("data-on"); });
+        b.setAttribute("data-on", "true");
+        note.textContent = P.tools[i].name + (P.tools[i].note ? " — " + P.tools[i].note : "");
+        note.classList.remove("mgn-note-swap");
+        void note.offsetWidth;
+        note.classList.add("mgn-note-swap");
+      };
+      b.addEventListener("pointerenter", show);
+      b.addEventListener("focus", show);
+      b.addEventListener("click", show);
+      b.addEventListener("blur", function () {
+        b.removeAttribute("data-on");
+        note.textContent = P.toolNote;
+      });
+    });
+    tools.addEventListener("pointerleave", function () {
+      qa(".mgn-tool", tools).forEach(function (x) { x.removeAttribute("data-on"); });
+      note.textContent = P.toolNote;
+    });
+
+    q("#booksMount").innerHTML = bookStack(P.books);
+    var ba = arrowPaths([10, 44], [46, 8], -0.3, 9);
+    q("#booksArrow").innerHTML =
+      '<path class="mgn-draw" pathLength="1" d="' + ba.shaft + '"/>' +
+      '<path class="mgn-draw" pathLength="1" d="' + ba.head + '"/>';
+
+    q("#skillsIntro").textContent = P.skillsIntro;
+    q("#skillList").innerHTML = P.skills.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("");
+
+    var ma = arrowPaths([4, 22], [66, 12], -0.25, 8);
+    q("#moreArrow").innerHTML =
+      '<path class="mgn-draw" pathLength="1" d="' + ma.shaft + '"/>' +
+      '<path class="mgn-draw" pathLength="1" d="' + ma.head + '"/>';
+  }
+
+  function bookStack(books) {
+    var list = books.slice(0, 7);
+    var R = rand(5);
+    var bh = 30;
+    var base = list.length * bh + 64;
+    var out = '<svg viewBox="0 0 ' + 260 + " " + (base + 6) + '" aria-hidden="true">';
+    out += '<g class="mgn-ink"><path class="mgn-draw" pathLength="1" d="' + handLine(6, 254, base + 2, 3) + '"/></g>';
+    for (var i = 0; i < list.length; i++) {
+      var b = list[i];
+      var w = 168 + R() * 56;
+      var x = (260 - w) / 2 + (R() - 0.5) * 22;
+      var y = base - (i + 1) * bh;
+      var rot = (R() - 0.5) * 5;
+      var dark = !isLight(b.color);
+      var title = b.title.toUpperCase();
+      out += '<g transform="rotate(' + rot.toFixed(2) + " " + (x + w / 2).toFixed(1) + " " + (y + bh / 2).toFixed(1) + ')">';
+      out += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + (bh - 3) + '" rx="3" fill="' + b.color + '" stroke="rgba(0,0,0,.28)" stroke-width="0.7"/>';
+      out += '<rect x="' + (x + 9) + '" y="' + y + '" width="4" height="' + (bh - 3) + '" fill="' + (dark ? "rgba(255,255,255,.22)" : "rgba(0,0,0,.12)") + '"/>';
+      out += '<rect x="' + (x + w - 13) + '" y="' + y + '" width="4" height="' + (bh - 3) + '" fill="' + (dark ? "rgba(255,255,255,.22)" : "rgba(0,0,0,.12)") + '"/>';
+      out += '<text x="' + (x + w / 2) + '" y="' + (y + bh / 2 + 2) + '" text-anchor="middle" font-size="9" fill="' +
+        (dark ? "#f4f2ec" : "#232325") + '" textLength="' + Math.min(w - 42, title.length * 6.2) +
+        '" lengthAdjust="spacingAndGlyphs" style="font-family:var(--mgn-body);font-weight:500;letter-spacing:.06em">' + esc(title) + "</text>";
+      out += "</g>";
+    }
+    var cupY = base - list.length * bh - 52;
+    out += '<g class="mgn-ink" transform="translate(104 ' + cupY + ')">' +
+      '<path class="mgn-draw" pathLength="1" d="M10 22h30v10c0 8-6 13-15 13S10 40 10 32z"/>' +
+      '<path class="mgn-draw" pathLength="1" d="M40 25c6 0 7 3 7 5s-2 6-7 6"/>' +
+      '<path class="mgn-draw" pathLength="1" d="M19 16c-3-3 3-6 0-10M29 16c-3-3 3-6 0-10"/>' +
+      "</g>";
+    return out + "</svg>";
+  }
+
+  function buildDeal() {
+    var row = q("#dealRow");
+    row.innerHTML = P.projects.map(function (p, i) {
+      var tag = p.tag
+        ? '<span class="mgn-card-tag mgn-hand">' +
+            '<svg viewBox="0 0 24 30" class="mgn-ink" aria-hidden="true">' +
+              '<path class="mgn-draw" pathLength="1" d="M12 2C6 8 18 12 12 20"/>' +
+              '<path class="mgn-draw" pathLength="1" d="M7 21l5 6 5-6"/>' +
+            "</svg>" +
+            '<span class="mgn-write">' + esc(p.tag) + "</span>" +
+          "</span>"
+        : "";
+      return '<div class="mgn-card" data-index="' + i + '">' + tag +
+        '<button data-goto="case-' + i + '" aria-label="Open the ' + esc(p.name) + ' case study">' +
+          phoneHTML(p, "cover", 0) +
+        "</button>" +
+        '<span class="mgn-card-label mgn-hand"><span class="mgn-write">' + esc(p.name) + "</span></span>" +
+      "</div>";
+    }).join("");
+  }
+
+  function caseHTML(p, i) {
+    var tone = i % 2 === 0 ? "paper" : "night";
+    var flip = i % 2 === 1;
+    var screens = p.screens || ["cover", "feed", "detail"];
+    var stats = (p.stats || []).map(function (s) {
+      var dec = s.decimals || 0;
+      return '<div class="mgn-stat">' +
+        '<div class="mgn-stat-n mgn-hand" data-pen="oval" data-seed="' + (200 + i) + '" data-padx="10" data-pady="8" ' +
+          'data-count="' + s.value + '" data-decimals="' + dec + '" data-suffix="' + esc(s.suffix || "") + '">' +
+          formatCount(s.value, dec) + esc(s.suffix || "") +
+        "</div>" +
+        '<div class="mgn-stat-l">' + esc(s.label) + "</div>" +
+      "</div>";
+    }).join("");
+
+    var trio = [0, 1, 2].map(function (k) {
+      return '<div class="mgn-trio-p" data-slot="' + k + '" data-depth="' + [0.7, 1, 0.4][k] + '">' +
+        '<div class="mgn-tilt">' + phoneHTML(p, screens[k] || "cover", k) + "</div></div>";
+    }).join("");
+
+    var note = "";
+    if (p.note) {
+      var na = arrowPaths([4, 40], [42, 8], 0.3, 9);
+      note = '<div class="mgn-case-note mgn-hand">' +
+        '<svg viewBox="0 0 60 46" class="mgn-ink" aria-hidden="true">' +
+          '<path class="mgn-draw" pathLength="1" d="' + na.shaft + '"/>' +
+          '<path class="mgn-draw" pathLength="1" d="' + na.head + '"/>' +
+        "</svg>" +
+        '<span class="mgn-write">' + esc(p.note) + "</span>" +
+      "</div>";
+    }
+
+    return '<section class="mgn-sheet mgn-case-wrap" data-tone="' + tone + '" data-sheet="case-' + i + '" ' +
+      'data-label="case studies" data-flip="' + flip + '">' +
+      (tone === "night" ? '<div class="mgn-sheet-bg" data-morph="true"></div>' : "") +
+      '<div class="mgn-grain" aria-hidden="true"></div>' +
+      '<div class="mgn-case">' +
+        '<div class="mgn-case-copy">' +
+          '<div class="mgn-hand mgn-eyebrow">' + esc(p.kind || "") + (p.year ? " — " + esc(p.year) : "") + "</div>" +
+          '<h2 class="mgn-display mgn-case-title">' + esc(p.name) + "<em>.</em></h2>" +
+          '<p class="mgn-p">' + markedHTML(p.summary, 300 + i) + "</p>" +
+          (p.challenge
+            ? '<div class="mgn-challenge">' +
+                '<span class="mgn-challenge-l mgn-hand"><span class="mgn-write">the challenge</span></span>' +
+                '<span class="mgn-challenge-t">' + esc(p.challenge) + "</span>" +
+              "</div>"
+            : "") +
+          (stats ? '<div class="mgn-stats">' + stats + "</div>" : "") +
+        "</div>" +
+        '<div class="mgn-trio">' + trio + note + "</div>" +
+      "</div>" +
+    "</section>";
+  }
+
+  function buildCases() {
+    q("#cases").innerHTML = P.projects.map(caseHTML).join("");
+  }
+
+  function buildFacts() {
+    q("#factGrid").innerHTML = P.facts.map(function (f, i) {
+      return '<div class="mgn-fact">' + doodleSVG(f.doodle) +
+        '<span class="mgn-fact-t mgn-hand"><span class="mgn-write">' + esc(f.text) + "</span></span></div>";
+    }).join("");
+    var fa = arrowPaths([6, 6], [50, 40], -0.3, 9);
+    q("#factsArrow").innerHTML =
+      '<path class="mgn-draw" pathLength="1" d="' + fa.shaft + '"/>' +
+      '<path class="mgn-draw" pathLength="1" d="' + fa.head + '"/>';
+  }
+
+  function buildThanks() {
+    q("#thanksAvatar").src = photo(P.portrait, 400);
+    q("#letter").innerHTML = P.letter.split("\n\n").map(function (t) {
+      return "<p>" + esc(t) + "</p>";
+    }).join("") + '<span class="mgn-signature mgn-hand mgn-write">Kenji</span>';
+    q("#links").innerHTML = P.links.map(function (l) {
+      return '<a href="' + esc(l.href) + '" target="_blank" rel="noreferrer" data-pen="under" data-seed="77" data-padx="1" data-pady="7">' +
+        esc(l.label) + "</a>";
+    }).join("");
+  }
+
+  function buildHeadings() {
+    qa("[data-heading]").forEach(function (el) {
+      var text = el.dataset.heading;
+      var seed = +(el.dataset.seed || 1);
+      var m = underlineMorph(300, seed);
+      el.innerHTML = splitHTML(text);
+      var svg = document.createElementNS(NS, "svg");
+      svg.setAttribute("class", "mgn-uline");
+      svg.setAttribute("viewBox", "0 0 300 26");
+      svg.setAttribute("aria-hidden", "true");
+      svg.innerHTML = '<path class="mgn-morph mgn-draw" pathLength="1" d="' + m.to +
+        '" data-from="' + m.from + '" data-to="' + m.to + '"/>';
+      el.parentElement.appendChild(svg);
+    });
+  }
+
+  /* ------------------------------------------------------------ pen marks */
+
+  function penPath(kind, w, h, seed) {
+    if (kind === "oval") return ovalPath(w, h, seed);
+    if (kind === "under") return underlinePath(w, h, seed);
+    return boxPath(w, h, seed);
+  }
+
+  function renderPenMarks() {
+    qa("[data-pen]").forEach(function (el) {
+      var kind = el.dataset.pen || "oval";
+      var seed = +(el.dataset.seed || 1);
+      var padX = +(el.dataset.padx || (kind === "oval" ? 9 : kind === "under" ? 1 : 10));
+      var padY = +(el.dataset.pady || (kind === "oval" ? 4 : kind === "under" ? 7 : 10));
+      var cs = window.getComputedStyle(el);
+      if (cs.position === "static") el.style.position = "relative";
+      if (cs.display === "inline") el.style.display = "inline-block";
+      var w = el.offsetWidth, h = el.offsetHeight;
+      if (!w || !h) return;
+      var old = el.querySelector(":scope > svg.mgn-mark");
+      if (old) old.parentNode.removeChild(old);
+      var W = Math.max(1, w + padX * 2);
+      var H = Math.max(1, h + padY * 2);
+      var d = penPath(kind, W, H, seed);
+      var vb = kind === "box" ? (-padX + " " + -padY + " " + W + " " + H) : ("0 0 " + W + " " + H);
+      var svg = document.createElementNS(NS, "svg");
+      svg.setAttribute("class", "mgn-mark");
+      svg.setAttribute("aria-hidden", "true");
+      svg.setAttribute("viewBox", vb);
+      svg.style.left = -padX + "px";
+      svg.style.top = -padY + "px";
+      svg.style.width = W + "px";
+      svg.style.height = H + "px";
+      var path = document.createElementNS(NS, "path");
+      path.setAttribute("class", "mgn-draw");
+      path.setAttribute("pathLength", "1");
+      path.setAttribute("d", d);
+      svg.appendChild(path);
+      el.appendChild(svg);
+    });
+  }
+
+  /* -------------------------------------------------------------- build all */
+
+  buildCoverTitle();
+  buildTraits();
+  buildEducation();
+  buildSkills();
+  buildDeal();
+  buildCases();
+  buildFacts();
+  buildThanks();
+  buildHeadings();
+  q("#bio").innerHTML = markedHTML(P.bio, 100);
+
+  renderPenMarks();
+
+  var resizeTimer = 0;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(renderPenMarks, 180);
+  });
+
+  /* ---------------------------------------------------------------- motion */
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (window.gsap) {
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+    /* top bar progress + current section */
+    gsap.to("#progress", {
+      scaleX: 1, ease: "none",
+      scrollTrigger: { start: 0, end: "max", scrub: 0.3 }
+    });
+
+    var barSec = q("#barSec");
+    qa("[data-sheet]").forEach(function (sheet) {
+      ScrollTrigger.create({
+        trigger: sheet,
+        start: "top 45%",
+        end: "bottom 45%",
+        onToggle: function (self) {
+          if (self.isActive && sheet.dataset.label) barSec.textContent = sheet.dataset.label;
+        }
+      });
+    });
+
+    /* index list */
+    var NAV = [
+      { label: "cover", sel: '[data-sheet="cover"]' },
+      { label: "hello", sel: '[data-sheet="hello"]' },
+      { label: "education", sel: '[data-sheet="education"]' },
+      { label: "skills", sel: '[data-sheet="skills"]' },
+      { label: "projects", sel: '[data-sheet="projects"]' },
+      { label: "case studies", sel: '[data-sheet="case-0"]' },
+      { label: "fun facts", sel: '[data-sheet="facts"]' },
+      { label: "thank you", sel: '[data-sheet="thanks"]' }
+    ];
+
+    var indexEl = q("#index");
+    var indexList = q("#indexList");
+
+    indexList.innerHTML = NAV.map(function (n, i) {
+      return "<li><button data-target=\"" + n.sel + "\">" +
+        "<small>" + (i < 9 ? "0" : "") + (i + 1) + "</small>" +
+        '<span class="mgn-mk">' + esc(n.label) + '<svg class="mgn-mark" aria-hidden="true" style="left:-8px;top:-4px;width:calc(100% + 16px);height:calc(100% + 8px)" viewBox="0 0 100 40" preserveAspectRatio="none">' +
+        '<path class="mgn-draw" pathLength="1" d="' + underlinePath(100, 40, i + 3) + '"/></svg></span>' +
+        "</button></li>";
+    }).join("");
+
+    function openIndex(open) {
+      indexEl.setAttribute("data-open", open ? "true" : "false");
+    }
+
+    function goTo(el) {
+      if (!el) return;
+      gsap.to(window, { duration: 1, ease: "power3.inOut", scrollTo: { y: el, offsetY: 0 } });
+    }
+
+    q("#indexBtn").addEventListener("click", function () { openIndex(indexEl.getAttribute("data-open") !== "true"); });
+    q("#indexClose").addEventListener("click", function () { openIndex(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") openIndex(false); });
+
+    indexList.addEventListener("click", function (e) {
+      var btn = e.target.closest("button[data-target]");
+      if (!btn) return;
+      openIndex(false);
+      var target = q(btn.dataset.target);
+      setTimeout(function () { goTo(target); }, 120);
+    });
+
+    q("#toTop").addEventListener("click", function () { goTo(q('[data-sheet="cover"]')); });
+
+    /* deal cards -> case study */
+    q("#dealRow").addEventListener("click", function (e) {
+      var btn = e.target.closest("button[data-goto]");
+      if (!btn) return;
+      goTo(q('[data-sheet="' + btn.dataset.goto + '"]'));
+    });
+
+    /* copy email */
+    var emailBtn = q("#emailBtn");
+    var copied = q("#copied");
+    emailBtn.addEventListener("click", function () {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(P.email).then(function () {
+          copied.setAttribute("data-on", "true");
+          setTimeout(function () { copied.removeAttribute("data-on"); }, 1600);
+        });
+      }
+    });
+
+    /* reduced motion: stop here (everything is already visible) */
+    if (reduced) {
+      ScrollTrigger.refresh();
+      return;
+    }
+
+    /* ---------- 1. pen marks draw themselves in ---------- */
+    qa(".mgn-sheet").forEach(function (sheet) {
+      var paths = qa(".mgn-draw", sheet).filter(function (p) {
+        return !p.closest(".mgn-email, .mgn-links");
+      });
+      if (!paths.length) return;
+      gsap.set(paths, { strokeDashoffset: 1 });
+      ScrollTrigger.create({
+        trigger: sheet,
+        start: "top 80%",
+        once: true,
+        onEnter: function () {
+          gsap.to(paths, { strokeDashoffset: 0, duration: 1.05, ease: "power2.inOut", stagger: 0.03 });
+        }
+      });
+    });
+
+    /* ---------- 2. handwriting writes itself ---------- */
+    qa(".mgn-sheet").forEach(function (sheet) {
+      var writes = qa(".mgn-write", sheet);
+      if (!writes.length) return;
+      gsap.set(writes, { clipPath: "inset(-25% 100% -25% 0%)" });
+      ScrollTrigger.create({
+        trigger: sheet,
+        start: "top 78%",
+        once: true,
+        onEnter: function () {
+          gsap.to(writes, { clipPath: "inset(-25% 0% -25% 0%)", duration: 1.1, ease: "power2.inOut", stagger: 0.08 });
+        }
+      });
+    });
+
+    /* ---------- 3. heading underline: zig-zag -> swoosh ---------- */
+    qa(".mgn-morph").forEach(function (path) {
+      var from = path.getAttribute("data-from");
+      var to = path.getAttribute("data-to");
+      path.setAttribute("d", from);
+      var o = { v: 0 };
+      ScrollTrigger.create({
+        trigger: path.closest(".mgn-sheet"),
+        start: "top 85%",
+        end: "top 25%",
+        scrub: 0.6,
+        onUpdate: function (self) {
+          path.setAttribute("d", lerpPath(from, to, self.progress));
+        }
+      });
+      void o;
+    });
+
+    /* ---------- 4. cover: letters rise, then drift ---------- */
+    var letters = qa(".mgn-li");
+    gsap.set(letters, { yPercent: 118 });
+    gsap.to(letters, { yPercent: 0, duration: 1.25, ease: "power4.out", stagger: 0.06, delay: 0.2 });
+
+    gsap.to(".mgn-l", {
+      x: function (i) { return (i % 2 ? 1 : -1) * (26 + i * 9); },
+      y: function (i) { return (i % 3 - 1) * (18 + i * 6); },
+      rotate: function (i) { return (i % 2 ? 1 : -1) * (2 + i * 0.8); },
+      opacity: 0.15,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".mgn-cover",
+        start: "top top",
+        end: "bottom top",
+        scrub: 0.6
+      }
+    });
+
+    /* ---------- 5. star orbits, morphs into a heart ---------- */
+    var starG = q(".mgn-star-g");
+    var starPath = q(".mgn-star-path");
+    if (starG) {
+      var proxy = { t: 0.15 };
+      gsap.to(proxy, {
+        t: 1.15, duration: 9, repeat: -1, ease: "none",
+        onUpdate: function () {
+          var p = orbitPoint(proxy.t % 1, 92, 30, ORBIT_TILT);
+          starG.setAttribute("transform", "translate(" + r1(p.x) + " " + r1(p.y) + ")");
+          var sc = p.front ? 1.08 : 0.86;
+          starG.setAttribute("opacity", p.front ? 1 : 0.75);
+          void sc;
+        }
+      });
+    }
+
+    var sig = q("#sig");
+    if (sig && starPath) {
+      var sparkle = sparklePath(0, 0, 13);
+      var heart = heartPath(0, 0, 13);
+      var mt = { v: 0 };
+      sig.addEventListener("pointerenter", function () {
+        gsap.to(mt, {
+          v: 1, duration: 0.6, ease: "power3.out", overwrite: "auto",
+          onUpdate: function () { starPath.setAttribute("d", lerpPath(sparkle, heart, mt.v)); }
+        });
+      });
+      sig.addEventListener("pointerleave", function () {
+        gsap.to(mt, {
+          v: 0, duration: 0.6, ease: "power3.out", overwrite: "auto",
+          onUpdate: function () { starPath.setAttribute("d", lerpPath(sparkle, heart, mt.v)); }
+        });
+      });
+    }
+
+    /* ---------- 6. ink trail on the cover ---------- */
+    (function inkTrail() {
+      var cv = q("#inkCanvas");
+      var host = cv && cv.parentElement;
+      if (!cv || !host) return;
+      var ctx = cv.getContext("2d");
+      if (!ctx) return;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var resize = function () {
+        cv.width = Math.round(host.clientWidth * dpr);
+        cv.height = Math.round(host.clientHeight * dpr);
+      };
+      resize();
+      if (window.ResizeObserver) new ResizeObserver(resize).observe(host);
+      var pen = "#e0613a";
+      var LIFE = 950;
+      var pts = [];
+      var raf = 0;
+      var draw = function () {
+        raf = 0;
+        var now = performance.now();
+        while (pts.length && now - pts[0].t > LIFE) pts.shift();
+        ctx.clearRect(0, 0, cv.width, cv.height);
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.strokeStyle = pen;
+        for (var i = 1; i < pts.length; i++) {
+          var a = pts[i - 1], b = pts[i];
+          if (b.gap) continue;
+          var life = 1 - (now - b.t) / LIFE;
+          ctx.globalAlpha = clamp(life, 0, 1) * 0.9;
+          ctx.lineWidth = (0.5 + 2.1 * life) * dpr;
+          ctx.beginPath();
+          ctx.moveTo(a.x * dpr, a.y * dpr);
+          ctx.lineTo(b.x * dpr, b.y * dpr);
+          ctx.stroke();
+        }
+        if (pts.length) raf = requestAnimationFrame(draw);
+      };
+      host.addEventListener("pointermove", function (e) {
+        var r = host.getBoundingClientRect();
+        var now = performance.now();
+        var last = pts[pts.length - 1];
+        pts.push({ x: e.clientX - r.left, y: e.clientY - r.top, t: now, gap: !last || now - last.t > 90 });
+        if (!raf) raf = requestAnimationFrame(draw);
+      });
+    })();
+
+    /* ---------- 7. night sheets grow out of a rounded card ---------- */
+    qa(".mgn-sheet-bg[data-morph]").forEach(function (bg) {
+      gsap.fromTo(bg,
+        { borderRadius: 34, scale: 0.88 },
+        {
+          borderRadius: 0, scale: 1, ease: "none",
+          scrollTrigger: {
+            trigger: bg.closest(".mgn-sheet"),
+            start: "top bottom",
+            end: "top 25%",
+            scrub: true
+          }
+        });
+    });
+
+    /* ---------- 8. hello: pointer parallax ---------- */
+    (function helloParallax() {
+      var layer = q("#traitLayer");
+      var pic = q("#portrait");
+      var host = q("#traits");
+      if (!host || !layer || !pic) return;
+      host.addEventListener("pointermove", function (e) {
+        if (e.pointerType === "touch") return;
+        var r = host.getBoundingClientRect();
+        var dx = (e.clientX - r.left) / r.width - 0.5;
+        var dy = (e.clientY - r.top) / r.height - 0.5;
+        gsap.to(layer, { x: dx * 18, y: dy * 14, duration: 0.8, ease: "power3.out", overwrite: "auto" });
+        gsap.to(pic, { x: -dx * 8, y: -dy * 6, duration: 0.8, ease: "power3.out", overwrite: "auto" });
+      });
+      host.addEventListener("pointerleave", function () {
+        gsap.to([layer, pic], { x: 0, y: 0, duration: 1, ease: "power3.out", overwrite: "auto" });
+      });
+    })();
+
+    /* ---------- 9. the deal ---------- */
+    (function deal() {
+      var section = q(".mgn-deal");
+      var cards = qa(".mgn-card", section);
+      if (!section || !cards.length) return;
+      cards.forEach(function (c, i) {
+        var o = pileOffset(i, cards.length);
+        gsap.set(c, { x: o.x, y: o.y, rotate: o.r });
+      });
+      gsap.to(cards, {
+        x: 0, y: 0, rotate: 0, duration: 1, stagger: 0.14, ease: "power2.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.6
+        }
+      });
+    })();
+
+    /* ---------- 10. case-study phones: parallax + tilt ---------- */
+    qa(".mgn-trio-p").forEach(function (el) {
+      var depth = +(el.dataset.depth || 1);
+      gsap.to(el, {
+        y: -60 * depth, ease: "none",
+        scrollTrigger: {
+          trigger: el.closest(".mgn-sheet"),
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true
+        }
+      });
+    });
+
+    qa(".mgn-tilt").forEach(function (inner) {
+      var slot = +inner.parentElement.dataset.slot;
+      var baseRot = slot === 0 ? -7 : slot === 2 ? 6 : 0;
+      gsap.set(inner, { rotation: baseRot, transformPerspective: 900 });
+      var move = function (e) {
+        if (e.pointerType === "touch") return;
+        var r = inner.getBoundingClientRect();
+        var dx = (e.clientX - r.left) / r.width - 0.5;
+        var dy = (e.clientY - r.top) / r.height - 0.5;
+        gsap.to(inner, {
+          rotationY: dx * 22, rotationX: -dy * 16, rotation: baseRot,
+          duration: 0.6, ease: "power3.out", overwrite: "auto"
+        });
+      };
+      var leave = function () {
+        gsap.to(inner, { rotationY: 0, rotationX: 0, rotation: baseRot, duration: 1, ease: "elastic.out(1,0.5)", overwrite: "auto" });
+      };
+      inner.addEventListener("pointermove", move);
+      inner.addEventListener("pointerleave", leave);
+    });
+
+    /* ---------- 11. stats count up ---------- */
+    qa("[data-count]").forEach(function (el) {
+      var target = parseFloat(el.dataset.count);
+      var dec = +(el.dataset.decimals || 0);
+      var suf = el.dataset.suffix || "";
+      var o = { v: 0 };
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top 88%",
+        once: true,
+        onEnter: function () {
+          gsap.to(o, {
+            v: target, duration: 1.6, ease: "power2.out",
+            onUpdate: function () { el.textContent = formatCount(o.v, dec) + suf; }
+          });
+        }
+      });
+    });
+
+    /* refresh once fonts / images settle */
+    window.addEventListener("load", function () { ScrollTrigger.refresh(); });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+    }
+    ScrollTrigger.refresh();
+  }
+})();
+</script>
+</body>
+</html>

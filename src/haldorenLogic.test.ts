@@ -6,7 +6,9 @@ import {
   computeDivePlaybackRate,
   computeDiveChoreography,
   nextCaseIndex,
+  advanceCaseOrExit,
   prevCaseAction,
+  shouldHeroInterceptWheel,
 } from './haldorenLogic';
 
 test('desktop hero pose covers 1440x900 top-anchored', () => {
@@ -54,11 +56,21 @@ test('dive playbackRate eases in, peaks near 4.2x mid-move, and stays >= 1.2x', 
   assert.ok(end >= 1.2 && end <= 1.81);
 });
 
-test('case navigation wraps forward and returns to hero on prev from first case', () => {
+test('case navigation advances to scrollNext at last case and returns to hero on prev from first case', () => {
   assert.equal(nextCaseIndex(0, 3), 1);
   assert.equal(nextCaseIndex(2, 3), 0);
+  assert.deepEqual(advanceCaseOrExit(0, 3), { action: 'swap', index: 1 });
+  assert.deepEqual(advanceCaseOrExit(2, 3), { action: 'scrollNext', index: 2 });
   assert.deepEqual(prevCaseAction(0), { action: 'toHero', index: 0 });
   assert.deepEqual(prevCaseAction(2), { action: 'swap', index: 1 });
+});
+
+test('shouldHeroInterceptWheel hands control smoothly to page scroll at Case 3 downward or below fold', () => {
+  assert.equal(shouldHeroInterceptWheel(0, 0, 0, 3, 24), true);
+  assert.equal(shouldHeroInterceptWheel(0, 0, 0, 3, -24), false);
+  assert.equal(shouldHeroInterceptWheel(0, 1, 2, 3, 24), false);
+  assert.equal(shouldHeroInterceptWheel(0, 1, 2, 3, -24), true);
+  assert.equal(shouldHeroInterceptWheel(320, 1, 2, 3, -24), false);
 });
 
 test('scroll-synchronized choreography runs cleanly across 0%, 20%, 40%, 60%, 80%, 100%', () => {
@@ -69,21 +81,18 @@ test('scroll-synchronized choreography runs cleanly across 0%, 20%, 40%, 60%, 80
   const c80 = computeDiveChoreography(0.8);
   const c100 = computeDiveChoreography(1);
 
-  // 0% Hero state
   assert.equal(c0.heldLaptopOpacity, 1);
   assert.equal(c0.laptop3dOpacity, 0);
   assert.equal(c0.casePlateOpacity, 0);
   assert.equal(c0.screenOpacity, 0);
   assert.equal(c0.isCaseActive, false);
 
-  // 20% Character gesture & side-profile lift
   assert.ok(c20.headTurnDeg > 3.5);
   assert.ok(c20.armLiftDeg < -8);
   assert.equal(c20.heldLaptopOpacity, 0);
   assert.equal(c20.laptop3dOpacity, 1);
   assert.equal(c20.casePlateOpacity, 0);
 
-  // 40% - 80% Smooth monotonic yaw rotation to square (0) with character/desk gone and zero premature casePlate ghosting
   assert.equal(c40.charOpacity, 0);
   assert.equal(c60.studioBgOpacity, 0);
   assert.ok(c40.laptopYawDeg > c20.laptopYawDeg && c40.laptopYawDeg < 0);
@@ -94,7 +103,6 @@ test('scroll-synchronized choreography runs cleanly across 0%, 20%, 40%, 60%, 80
   assert.equal(c60.casePlateOpacity, 0);
   assert.equal(c80.casePlateOpacity, 0);
 
-  // 100% Centered case locked inside screen
   assert.equal(c100.laptopYawDeg, 0);
   assert.equal(c100.laptopScale, 1);
   assert.equal(c100.casePlateOpacity, 1);
@@ -102,8 +110,6 @@ test('scroll-synchronized choreography runs cleanly across 0%, 20%, 40%, 60%, 80
   assert.equal(c100.caseUiOpacity, 1);
   assert.equal(c100.isCaseActive, true);
 
-  // Clamping out-of-range inputs
   assert.equal(computeDiveChoreography(-0.5).progress, 0);
   assert.equal(computeDiveChoreography(2.0).progress, 1);
 });
-
